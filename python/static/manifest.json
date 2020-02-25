@@ -1,0 +1,27 @@
+{
+  "short_name": "SSRS Launcher",
+
+  "name": "SSRS Launcher",
+
+  "icons": [{
+    "src": "{{ url_for('static', filename='icon_128.png') }}",
+    "type": "image/png",
+    "sizes": "128x128"
+  }, {
+    "src": "{{ url_for('static', filename='icon_152.png') }}",
+    "type": "image/png",
+    "sizes": "152x152"
+  }, {
+    "src": "{{ url_for('static', filename='icon_144.png') }}",
+    "type": "image/png",
+    "sizes": "144x144"
+  }, {
+    "src": "{{ url_for('static', filename='icon_192.png') }}",
+    "type": "image/png",
+    "sizes": "192x192"
+  }],
+
+  "display": "standalone",
+
+  "background_color": "#c23737"
+}

@@ -1,0 +1,170 @@
+<html>
+  <head>
+    <!-- Title, CSS, JavaScript, jQuery and tab icon -->
+    <title>SSRS Launcher</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.3.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <link rel="shortcut icon" href="{{ url_for('static',filename='icon_tab.png') }}">
+
+    <!-- iOS Progressive Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="SSRS Launcher">
+    <link rel="apple-touch-icon" href="{{ url_for('static',filename='icon_144.png') }}">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_iphone5.png') }}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_iphone5_l.png') }}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_iphone6.png') }}" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_iphone6_l.png') }}" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_iphoneplus.png') }}" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_iphoneplus_l.png') }}" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_iphonex.png') }}" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_iphonex_l.png') }}" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_ipad.png') }}" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_ipad_l.png') }}" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_ipadpro1.png') }}" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_ipadpro1_l.png') }}" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_ipadpro2.png') }}" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="{{ url_for('static',filename='splash_ipadpro2_l.png') }}" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)">
+
+    <!-- Android Progressive Web App -->
+    <link rel="manifest" href="{{ url_for('static',filename='manifest.json') }}">
+
+  </head>
+  <body>
+
+  <ul>
+    <li><a class="active" onClick="window.location.reload()"><img src="{{ url_for('static', filename='icon_SSRS.png') }}" class="SSRS-icon">
+  </a></li>
+    <li><a onclick="show_manual()">Manual</a></li>
+    <li><a onclick="show_automatic()">Automatic</a></li>
+    <li><a onclick="show_settings()">Settings</a></li>
+    <li><a id = "show_video_button" onclick="show_video()">Video</a></li>
+  </ul>
+
+  <div id="top_down_buttons" class="flex-container-column">
+
+    <div id="manual_automatic_buttons_up" class="flex-container-top">
+
+      <div id="div_video">
+        <!--<img src=http://192.168.0.62:8080/stream/video.mjpeg id="video" onclick="hide_video()" style="width: 100%; margin:0 5px">--> <!--IP Address of the streaming video-->
+        <img src="{{ url_for('static', filename='Video.png') }}" id="video" class="video-launcher" onclick="hide_video()" style="width: 100%; margin:0 5px;">
+      </div>
+
+      <div id="manual_pitch_buttons" class="button-group">
+        <h2>Pitch</h2>
+        <button type="button" class="button" id="script_pitch_up">Up</button>
+        <button type="button" class="button" id="script_pitch_down">Down</button>
+        <div class="button-group-horizontal">
+          <input type=number name=pitch_position class="form-2" min="0" max="90"><p>°</p>
+          <button type="button" class="button button-encoder button-go" id="script_pitch_position">Go</button>
+        </div>
+      </div>
+
+      <div id="manual_rotation_buttons" class="button-group">
+        <h2>Rotation</h2>
+        <button type="button" class="button" id="script_rotation_right">Right</button>
+        <button type="button" class="button" id="script_rotation_left">Left</button>
+        <div class="button-group-horizontal">
+          <input type=number name=rotation_position class="form-3" min="-180" max="180"><p>°</p>
+          <button type="button" class="button button-encoder button-go" id="script_rotation_position">Go</button>
+        </div>
+      </div>
+
+      <div id="manual_lift_buttons" class="button-group">
+        <h2>Lift</h2>
+        <button type="button" class="button" id="script_lift_up">Up</button>
+        <button type="button" class="button" id="script_lift_down">Down</button>
+        <div class="button-group-horizontal">
+          <input type=number name=lift_position class="form-3" min="0" max="130"><p>cm</p>
+          <button type="button" class="button button-encoder button-go" id="script_lift_position">Go</button>
+        </div>
+      </div>
+
+      <div id="manual_launch_buttons" class="button-group">
+        <h2>Launch</h2>
+        <button type="button" class="button" id="script_launch_forwards">Forwards</button>
+        <button type="button" class="button" id="script_launch_backwards">Backwards</button>
+        <div class="button-group-horizontal">
+          <input type=number name=launch_position class="form-2" min="0" max="111"><p>cm</p>
+          <button type="button" class="button button-encoder button-go" id="script_launch_position">Go</button>
+        </div>
+      </div>
+
+
+      <div id="automatic_position_buttons" class="button-group">
+        <button type="button" class="button button-encoder" id="script_standby">Stand-by</button>
+        <button type="button" class="button button-encoder" id="script_prepare">Prepare</button>
+        <button type="button" class="button button-encoder" id="script_launch">Launch</button>
+        <button type="button" class="button button-encoder" id="script_mount">Mount</button>
+      </div>
+
+      <div id="automatic_launch_buttons" class="button-group">
+        <!--
+	<button type="button" class="button button-encoder" id="script_automatic_launch">Automatic<br>launch</button>
+	-->
+	<button type="button" class="button" id="script_stop">STOP</button>
+      </div>
+
+      <div id="settings_launch" class="button-group">
+        <h2>Prepare and launch settings</h2>
+        <div class="button-group-horizontal">
+          <input type=number name=pitch_position_prepare class="form-2" min="0" max="90"><p>°</p>
+          <button type="button" class="button button-go" id="script_change_pitch">Change pitch</button>
+        </div>
+        <div class="button-group-horizontal">
+          <input type=number name=lift_position_prepare class="form-2" min="0" max="130"><p>cm</p>
+          <button type="button" class="button button-go" id="script_change_lift">Change lift</button>
+        </div>
+        <div class="button-group-horizontal">
+          <input type=number name=rotation_position_prepare class="form-2" min="-180" max="180"><p>°</p>
+          <button type="button" class="button button-go" id="script_change_rotation">Change rotation</button>
+        </div>
+        <div class="button-group-horizontal">
+          <input type=number name=speed class="form-2" min="1" max="10"><p>m/s</p>
+          <button type="button" class="button button-go" id="script_change_speed">Change speed</button>
+        </div>
+	<div class="button-group-horizontal">
+          <input type=number name=acceleration class="form-2" min="1" max="48"><p>m/s<sup>2</sup></p>
+          <button type="button" class="button button-go" id="script_change_acceleration">Change acceleration</button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div id="manual_buttons_down" class="flex-container">
+
+      <div id="manual_positions_buttons" class="button-group">
+        <h2>Positions</h2>
+        <div>
+          <div id="manual_pitch_lift_buttons_positions" class="button-group-horizontal">
+            <button type="button" class="button button-encoder" id="script_max_pitch">Max pitch</button>
+            <button type="button" class="button button-encoder" id="script_min_pitch">Min pitch</button>
+            <button type="button" class="button button-encoder" id="script_max_lift">Max lift</button>
+            <button type="button" class="button button-encoder" id="script_min_lift">Min lift</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="manual_option_buttons" class="button-group" style="flex-grow: 0.5">
+        <h2>Options</h2>
+        <div class="button-group-horizontal" style="width:100%;">
+          <button type="button" class="button" id="script_home">Home</button>
+          <button type="button" class="button" id="script_reset_encoders">Reset<br>encoders</button>
+          <div id=battery_button_voltage class="button-group-horizontal">
+            <button type="button" class="button" id="script_battery_voltage">Battery<br>voltage</button>
+            <span id=voltage></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+</body>
+
+</html>

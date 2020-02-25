@@ -1,0 +1,5 @@
+sudo apt-get install xrdp
+(probar)
+sudo apt-get remove xrdp vnc4server tightvncserver
+sudo apt-get install tightvncserver
+sudo apt-get install xrdp

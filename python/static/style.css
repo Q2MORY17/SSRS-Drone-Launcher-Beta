@@ -1,0 +1,293 @@
+body {
+-webkit-touch-callout: none;                /* Prevent callout to copy image, etc when tap to hold */
+-webkit-text-size-adjust: none;             /* Prevent webkit from resizing text to fit */
+-webkit-user-select: none;                  /* Prevent copy paste, to allow, change 'none' to 'text' */
+
+background-color: #C0C0C0;
+
+height: 100%;
+width: 100%;
+margin: 0;
+
+font-family:
+-apple-system, BlinkMacSystemFont,          /* Safari Max/iOs, Chrome */
+"Segoe UI", Roboto, Oxygen,                 /* Windows, Android,  */
+Ubuntu, Cantarell, "Fira Sans",             /* Ubuntu, Gnome, Firefox OS */
+"Droid Sans", "Helvetica Neue", sans-serif; /* Old Android */
+
+position: fixed;                            /* Prevent overscrolling */
+overflow: hidden;
+}
+
+
+#automatic_position_buttons,                /* Hides automatic buttons by default (this can be changed so manual is hidden) */
+#automatic_launch_buttons,
+#settings_launch {
+    display: none;
+}
+
+#show_video_button {                        /* Hides "Show video" button */
+    display: none;
+}
+
+#manual_automatic_buttons_up,
+#manual_buttons_down,
+#automatic_buttons_down {
+  justify-content: space-around;
+  margin-bottom: 0px;
+}
+
+.video-launcher {
+  width: 100%;
+  max-width: 480px;
+  margin:0 5px;
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+.video-launcher {
+  width: 100%;
+  max-width: 480px;
+  margin:0 0px;
+  padding-top: 10px;
+  padding-right: 200px;
+  padding-bottom: 20px;
+  padding-left: 200px;
+}
+}
+
+.SSRS-icon{
+  width:120;
+  height:30;
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+.SSRS-icon{
+  width:190;
+  height:50;
+}
+}
+
+h2 {
+margin-bottom:0px;
+margin-top:5px;
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+h2 {
+margin-bottom:0px;
+margin-top:10px;
+font-size: 40px;
+}
+}
+
+p {
+  font-size:20px;
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+p {
+  font-size:35px;
+}
+}
+
+.form-2{
+  width:55px;
+  height:30px;
+  font-size: 24px;
+}
+
+.form-3{
+  width:70px;
+  height:30px;
+  font-size: 24px;
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+.form-2{
+  width:95px;
+  height:50px;
+  font-size: 42px;
+}
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+.form-3{
+  width:115px;
+  height:50px;
+  font-size: 42px;
+}
+}
+
+.flex-container {
+  display: flex;
+  /* background-color: DodgerBlue; */
+  flex-wrap: nowrap;
+  flex: 35%;
+  align-items: center; /* align vertical */
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 35%;
+  align-items: center; /* align vertical */
+  /* background-color: DodgerBlue; */
+}
+}
+
+.flex-container-column {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  height: 88%;
+  overflow: hidden; /* or overflow: hidden; */
+  /* background-color: DodgerBlue; */
+}
+
+.flex-container-top {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  flex: auto;
+  /* background-color: DodgerBlue; */
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+.flex-container-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  flex: auto;
+  /* background-color: DodgerBlue; */
+}
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 4px;
+  /* background-color: #f1f1f1; */
+}
+
+.button-group-horizontal {
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 4px;
+  /* background-color: #f1f1f1; */
+}
+
+.button {
+  display: inline-block;
+  padding: 8px 20px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #f44336;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin: 18px 5px;
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+.button {
+  display: inline-block;
+  padding: 16px 30px;
+  font-size: 40px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #f44336;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  margin: 18px 5px;
+}
+}
+
+.button:hover {
+  background-color: #8B0000 !important;     /* So the disabled buttons don't override this configuration */
+}
+
+.button:active {
+  background-color: #8B0000 !important;     /* So the disabled buttons don't override this configuration */
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.button-go{
+  padding: 8px 12px;
+  margin: 18px 0px;
+}
+
+#voltage{
+  font-size:30px;
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+#voltage{
+  font-size:50px;
+}
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-size: 20px;
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    font-size: 34px;
+}
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 12px 25px;
+    text-decoration: none;
+}
+
+@media screen and (orientation:portrait) {  /* Only for portrait mode */
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 25px;
+    text-decoration: none;
+}
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #f44336;
+}
