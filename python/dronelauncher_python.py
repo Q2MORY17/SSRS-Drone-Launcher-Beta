@@ -40,7 +40,7 @@ rotation_ready=10.0           #Rotation degress for the launch (temporary)
 lift_pulses=19000             #Encoder pulses from the lifting colum
 lift_length=130.0             #cm
 lift_speed_pulses=420         #Pulses per second
-lift_speed_manual=127         #From 0 to 127
+lift_speed_manual=127         #From 0 to 127 - 7 bits
 lift_ready=lift_length        #Lift lenght for the launch (temporary)
 
 launch_pulses=14800           #Encoder pulses from the launch motor
