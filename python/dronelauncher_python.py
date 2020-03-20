@@ -1,27 +1,29 @@
-#DRONE LAUNCHER
-
-
+"""
+DRONE LAUNCHER
+    all functions in this file depend on methods described in the Roboclaw class
+    in the roboclaw_3 library provided by BASICMICRO, the roboclaw makers.
+    ----------------------------------------------------------------------------
+    entries precedeed by a + are log entries for issues and are NOT to be erased
+    so to keep an accurate account of bugs.
+"""
 #Import modules
-
 from flask import Flask, render_template, request, jsonify
 from roboclaw_3 import Roboclaw
 import time
 import socket
 
-
 #Open serial port
-
 #Linux comport name
 #rc = Roboclaw("/dev/ttyACM0",115200)
 #Windows comport name
 rc = Roboclaw("COM8",115200)
 rc.Open()
 
-#Declare variables
-
+#Look for the appropriate local network. based on the Raspberry Pi IP address - RPi Terminal -> Hostname -I or ifconfig
 host=(([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")] or [[(s.connect(("8.8.8.8", 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) + ["no IP found"])[0]
 port=5000
 
+#Declare variables
 address = 0x80                #Controller 1, M1=Pitch, M2=Rotation
 address_2 = 0x81              #Controller 2, M1=Lift, M2=Launch
 
@@ -61,37 +63,57 @@ launch_connect=2190           #Belt position for touching the upper part
 
 encoders_ready = 0            #At the beggining, the encoders are not ready
 
-
 #Create an instance of the Flask class for the web app
-
 app = Flask(__name__)
 app.debug = True
 
-
 #Render HTML template
-
 @app.route("/")
 def index():
     return render_template('dronelauncher_web.html')
 
-
-#Motor controller functions
-
+#Motor controller functions UNCOMMENT FOLLOWING TWO LINES IF USING ROBOCLAWS
 #rc.ForwardM2(address, rotation_speed_manual)
 #rc.ForwardM2(address,0) #Both commands are used to avoid rotation
 
 @app.route('/app_pitch_up', methods=['POST'])
 def function_pitch_up():
+    """
+    This function uses the Backward motion described in roboclaw_3 on the PITCH actuator.
+    It does so for UP because the actuator coupling is inverted.
+    i.e: 24V connected to ground and ground to 24V. This was done by design according
+    to Daniel Beltra. He reported that the right way around had no results.
+    ---------------------------------------------------------------------------------
+    + At this stage we assume it is a bad coupling on the manufacturing side
+    but it is pending further investigation. (ENTRY: 2020-03-20 QD)
+    """
     rc.BackwardM1(address, pitch_speed_manual)
     return (''), 204 #Returns an empty response
 
 @app.route('/app_pitch_down', methods=['POST'])
 def function_pitch_down():
+    """
+    This function uses the Forward motion described in roboclaw_3 on the PITCH actuator.
+    It does so for DOWN because the actuator coupling is inverted.
+    i.e: 24V connected to ground and ground to 24V. This was done by design according
+    to Daniel Beltra. He reported that the right way around had no results.
+    ---------------------------------------------------------------------------------
+    + At this stage we assume it is a bad coupling on the manufacturing side
+    but it is pending further investigation. (ENTRY: 2020-03-20 QD)
+    """
     rc.ForwardM1(address, pitch_speed_manual)
     return (''), 204
 
 @app.route('/app_pitch_position', methods=['POST'])
 def function_pitch_position():
+    """
+    This function uses current encoder position relative to a desired encoder 
+    position entered by the user. Depending on its current position, activates
+    the up or down motion to reach the desired position and stop.
+    ---------------------------------------------------------------------------------
+    + This particular function does not stop as intended for the same wiring mishaps
+    it is also pending further investigation. (ENTRY: 2020-03-20 QD)
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
     pitch_position = request.form.get('pitch_position', type=int)
@@ -114,6 +136,9 @@ def function_pitch_position():
 
 @app.route('/app_pitch_stop', methods=['POST'])
 def function_pitch_stop():
+    """
+    Pitch FORCE stop
+    """
     rc.ForwardM1(address,0)
     return (''), 204
 
@@ -121,16 +146,29 @@ def function_pitch_stop():
 
 @app.route('/app_rotation_right', methods=['POST'])
 def function_rotation_right():
+    """
+    This function uses the Forward motion described in roboclaw_3 on the ROTATION
+    motor to proceed left
+    """
     rc.ForwardM2(address, rotation_speed_manual)
     return (''), 204
 
 @app.route('/app_rotation_left', methods=['POST'])
 def function_rotation_left():
+    """
+    This function uses the Backwards motion described in roboclaw_3 on the ROTATION
+    motor to proceed right
+    """
     rc.BackwardM2(address, rotation_speed_manual)
     return (''), 204
 
 @app.route('/app_rotation_position', methods=['POST'])
 def function_rotation_position():
+    """
+    This function uses current encoder position relative to a desired encoder 
+    position entered by the user. Depending on its current position, activates
+    the left or right motion to reach the desired position and stop.
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
     rotation_position = request.form.get('rotation_position', type=int)
@@ -153,6 +191,9 @@ def function_rotation_position():
 
 @app.route('/app_rotation_stop', methods=['POST'])
 def function_rotation_stop():
+    """
+    Rotation FORCE stop
+    """
     rc.ForwardM2(address,0)
     return (''), 204
 
@@ -160,16 +201,27 @@ def function_rotation_stop():
 
 @app.route('/app_lift_up', methods=['POST'])
 def function_lift_up():
+    """
+    This function uses the Forward motion described in roboclaw_3 on the LIFT/COLUMN motor to proceed UP
+    """
     rc.ForwardM1(address_2, lift_speed_manual)
     return (''), 204
 
 @app.route('/app_lift_down', methods=['POST'])
 def function_lift_down():
+    """
+    This function uses the Backward motion described in roboclaw_3 on the LIFT/COLUMN motor to proceed DOWN
+    """
     rc.BackwardM1(address_2, lift_speed_manual)
     return (''), 204
 
 @app.route('/app_lift_position', methods=['POST'])
 def function_lift_position():
+    """
+    This function uses current encoder position relative to a desired encoder 
+    position entered by the user. Depending on its current position, activates
+    the up or down motion to reach the desired position and stop.
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
     lift_position = request.form.get('lift_position', type=int)
@@ -192,6 +244,9 @@ def function_lift_position():
 
 @app.route('/app_lift_stop', methods=['POST'])
 def function_lift_stop():
+    """
+    Lift/Column FORCE stop
+    """
     rc.ForwardM1(address_2,0)
     return (''), 204
 
@@ -199,18 +254,29 @@ def function_lift_stop():
 
 @app.route('/app_launch_forwards', methods=['POST'])
 def function_launch_forwards():
+    """
+    This function uses the Forward motion described in roboclaw_3 on the LAUNCH motor to proceed Outwards
+    """
     rc.ForwardM2(address_2, launch_speed_manual)
     #rc.SpeedM2(address_2,launch_speed_pulses_slow) #Using the speed control instead of the duty cycle because the friction changes in the tube
     return (''), 204
 
 @app.route('/app_launch_backwards', methods=['POST'])
 def function_launch_backwards():
+    """
+    This function uses the Backward motion described in roboclaw_3 on the LAUNCH motor to proceed Inwards
+    """
     rc.BackwardM2(address_2, launch_speed_manual)
     #rc.SpeedM2(address_2,-launch_speed_pulses_slow) #Using the speed control instead of the duty cycle because the friction changes in the tube
     return (''), 204
 
 @app.route('/app_launch_position', methods=['POST'])
 def function_launch_position():
+    """
+    This function uses current encoder position relative to a desired encoder 
+    position entered by the user. Depending on its current position, activates
+    the Outwards or Inwards motion to reach the desired position and stop.
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
     launch_position = request.form.get('launch_position', type=int)
@@ -249,6 +315,9 @@ def function_launch_position():
 
 @app.route('/app_launch_stop', methods=['POST'])
 def function_launch_stop():
+    """
+    launch FORCE stop
+    """
     rc.ForwardM2(address_2,0)
     return (''), 204
 
@@ -256,6 +325,9 @@ def function_launch_stop():
 
 @app.route('/app_max_pitch', methods=['POST'])
 def function_max_pitch():
+    """
+    This function evaluates current (encoder) pitch position relative to the max position and proceeds to it.
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
     pitch_objective = pitch_pulses
@@ -272,6 +344,14 @@ def function_max_pitch():
 
 @app.route('/app_min_pitch', methods=['POST'])
 def function_min_pitch():
+    """
+    This function evaluates current (encoder) pitch position relative to the min position and proceeds to it.
+    --------------------------------------------------------------
+    + As for other pitch functions, this is malfunctioning as it seems
+    to not interpret encoder once it is in motion. maybe the bad coupling
+    referenced in other log means that the motors and the robocalws are 
+    communicating on the wrong channel - LOG OPEN (ENTRY 2020-03-20 QD)
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
     pitch_objective = 0
@@ -288,6 +368,9 @@ def function_min_pitch():
 
 @app.route('/app_max_lift', methods=['POST'])
 def function_max_lift():
+    """
+    This function evaluates current (encoder) column position relative to the max position and proceeds to it.
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
     lift_objective = lift_pulses
@@ -304,6 +387,9 @@ def function_max_lift():
 
 @app.route('/app_min_lift', methods=['POST'])
 def function_min_lift():
+    """
+    This function evaluates current (encoder) column position relative to the min position and proceeds to it.
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
     lift_objective = 0
@@ -322,6 +408,17 @@ def function_min_lift():
 
 @app.route('/app_home', methods=['POST'])
 def function_home():
+    """
+    This function uses Backwards functions from the roboclaw_3 class
+    and limiters on the launcher to return to base (absolut 0) position
+    PITCH       90 Degrees
+    LIFT        120 cm
+    LAUNCH      BACK OF CASE
+    -------------------------------------------------------------------
+    + In the current state, the drone's launcher holder falls back all
+    the way and would interact with the limiter. potentially harmless to the system
+    but should be tested (ENTRY 2020-03-20)
+    """
     rc.BackwardM1(address, pitch_speed_manual)
     rc.BackwardM1(address_2, lift_speed_manual)
     rc.BackwardM2(address_2, launch_speed_manual)
@@ -331,6 +428,14 @@ def function_home():
 
 @app.route('/app_reset_encoders', methods=['POST'])
 def function_reset_encoders():
+    """
+    reset encoders function should only be used if the GUI requests it.
+    It usually requests it when the launcher has returned to home and the User
+    wishes to use it again. Then the system requests refreshed encoders.
+    --------------------------------------------------------------------
+    + Unclear if pressing reset encoders at any time can create some positioning
+    issue if the system was not in home position (ENTRY 2020-03-20)
+    """
     #rc.ResetEncoders(address)
     #rc.ResetEncoders(address_2)
     global encoders_ready
@@ -339,14 +444,21 @@ def function_reset_encoders():
 
 @app.route('/app_battery_voltage', methods=['POST'])
 def function_battery_voltage():
+    """
+    This function collect the data from the roboclaw class and makes it ready to
+    display on the GUI. This function template can be repeated to display other
+    values such as temperature and current (also available as part of roboclaw class)
+    """
     voltage = round(0.1*rc.ReadMainBatteryVoltage(address)[1],2)
     return jsonify(voltage=voltage)
 
 
 
 @app.route('/app_stop', methods=['POST'])
-
 def function_stop():
+    """
+    FORCE STOP all operations
+    """
     rc.ForwardM1(address,0)
     rc.ForwardM2(address,0)
     rc.ForwardM1(address_2,0)
@@ -357,6 +469,10 @@ def function_stop():
 
 @app.route('/app_standby', methods=['POST'])
 def function_standby():
+    """
+    This function is technically a more complex and customizable version of the HOME function.
+    All systems return to home position
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
 
