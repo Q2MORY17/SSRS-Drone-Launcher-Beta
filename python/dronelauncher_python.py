@@ -12,6 +12,11 @@ from roboclaw_3 import Roboclaw
 import time
 import socket
 
+"""
+#1 SET UP AND VARIABLES
+---------------------------------------------------------------------------------------------------------------------
+"""
+
 #Open serial port
 #Linux comport name
 #rc = Roboclaw("/dev/ttyACM0",115200)
@@ -75,6 +80,12 @@ def index():
 #Motor controller functions UNCOMMENT FOLLOWING TWO LINES IF USING ROBOCLAWS
 #rc.ForwardM2(address, rotation_speed_manual)
 #rc.ForwardM2(address,0) #Both commands are used to avoid rotation
+
+"""
+#2 MANUAL FUNCTIONS
+------------------------------------------------------------------------------------------------------
+"""
+
 
 @app.route('/app_pitch_up', methods=['POST'])
 def function_pitch_up():
@@ -465,13 +476,18 @@ def function_stop():
     rc.ForwardM2(address_2,0)
     return (''), 204
 
-
+"""
+# 3 AUTOMATED FUNCTIONS
+--------------------------------------------------------------------------------------------------------
+"""
 
 @app.route('/app_standby', methods=['POST'])
 def function_standby():
     """
     This function is technically a more complex and customizable version of the HOME function.
     All systems return to home position
+    ------------------------------------------------------------------------------------------
+    THIS IS 1 OF 3 FUNCTIONS PASSED TO ARCHIPELAGO FOR INTEGRATED OPERATIONS WITH DRONE
     """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
@@ -521,6 +537,18 @@ def function_standby():
 
 @app.route('/app_prepare', methods=['POST'])
 def function_prepare():
+    """
+    This function takes position target from the variable list and operates the launcher
+    from any random position back to it.
+    The variables can be updated for a different position using the change_..() functions
+    The updates do not override this files variables but rather keeps the updates on the
+    local machine used for the command.
+    -------------------------------------------------------------------------------------
+    + PITCH could present a problem here and should. The routine should be tested to report
+    actual results (ENTRY 2020-03-23)
+    + ATTEMPT to change variables on one device and test prepare on another to see that the above
+    "theoretical" statement is correct. (ENTRY 2020-03-23)
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
 
@@ -577,6 +605,14 @@ def function_prepare():
 
 @app.route('/app_launch', methods=['POST'])
 def function_launch():
+    """
+    This function operates the launch motor + belt 
+    speed can be updated from change_...() functions
+    ------------------------------------------------------------------------
+    + This function caused a problem during testing as the mechanical parts of the
+    prototype were not able to "connect" and therefore could not operate above a 
+    certain speed (ENTRY 2020-03-23 QD)
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
 
@@ -603,6 +639,11 @@ def function_launch():
 
 @app.route('/app_mount', methods=['POST'])
 def function_mount():
+    """
+    This function ensures that the drone holder comes to the top of the launching rails
+    The column goes to lower position
+    The Launching platform goes to 0 degrees
+    """
     if encoders_ready == 0: #Not execute if the encoders are not ready
         return (''), 403
 
@@ -780,9 +821,21 @@ def function_mount():
 ##
 ##    return (''), 204
 
+"""
+#4 VARIABLE UPDATES
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+"""
 
 @app.route('/app_change_pitch', methods=['POST'])
 def function_change_pitch():
+    """
+    This function updates the pitch variable pitch_ready
+    There is no RESET variable available and no visibility of
+    new variables, potentially making the system erractic if multiple
+    users are not aware of updates
+    -------------------------------------------------------------------------
+    + MUST be tested (ENTRY 2020-03-23 QD)
+    """
     pitch_position_prepare = request.form.get('pitch_position_prepare', type=int)
     if pitch_position_prepare > pitch_length or pitch_position_prepare < 0:
         return (''), 400
@@ -792,6 +845,14 @@ def function_change_pitch():
 
 @app.route('/app_change_lift', methods=['POST'])
 def function_change_lift():
+    """
+    This function updates the pitch variable lift_ready
+    There is no RESET variable available and no visibility of
+    new variables, potentially making the system erractic if multiple
+    users are not aware of updates
+    -------------------------------------------------------------------------
+    + MUST be tested (ENTRY 2020-03-23 QD)
+    """
     lift_position_prepare = request.form.get('lift_position_prepare', type=int)
     if lift_position_prepare > lift_length or lift_position_prepare < 0:
         return (''), 400
@@ -801,6 +862,14 @@ def function_change_lift():
 
 @app.route('/app_change_rotation', methods=['POST'])
 def function_change_rotation():
+    """
+    This function updates the pitch variable rotation_ready
+    There is no RESET variable available and no visibility of
+    new variables, potentially making the system erractic if multiple
+    users are not aware of updates
+    -------------------------------------------------------------------------
+    + MUST be tested (ENTRY 2020-03-23 QD)
+    """
     rotation_position_prepare = request.form.get('rotation_position_prepare', type=int)
     if rotation_position_prepare > rotation_length or rotation_position_prepare < 0:
         return (''), 400
@@ -810,6 +879,14 @@ def function_change_rotation():
 
 @app.route('/app_change_speed', methods=['POST'])
 def function_change_speed():
+    """
+    This function updates the pitch variable speed_ready
+    There is no RESET variable available and no visibility of
+    new variables, potentially making the system erractic if multiple
+    users are not aware of updates
+    -------------------------------------------------------------------------
+    + MUST be tested (ENTRY 2020-03-23 QD)
+    """
     speed = request.form.get('speed', type=int)
     if speed > launch_max_speed or speed < launch_min_speed:
         return (''), 400
@@ -826,6 +903,14 @@ def function_change_speed():
 
 @app.route('/app_change_acceleration', methods=['POST'])
 def function_change_acceleration():
+    """
+    This function updates the pitch variable acceleration_ready
+    There is no RESET variable available and no visibility of
+    new variables, potentially making the system erractic if multiple
+    users are not aware of updates
+    -------------------------------------------------------------------------
+    + MUST be tested (ENTRY 2020-03-23 QD)
+    """
     acceleration = request.form.get('acceleration', type=int)
     if acceleration > launch_max_acceleration or acceleration < launch_min_acceleration:
         return (''), 400
@@ -837,6 +922,11 @@ def function_change_acceleration():
 
 @app.route('/app_disable_buttons', methods=['POST'])
 def function_disable_buttons():
+    """
+    Whenever code is commented off such as a function,
+    this function deactivates the button so the code does not 
+    throw errors between the main code and the GUI
+    """
     return jsonify(encoders_ready=encoders_ready)
 
 
