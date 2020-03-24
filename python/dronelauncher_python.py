@@ -8,7 +8,7 @@ DRONE LAUNCHER
 """
 #Import modules
 from flask import Flask, render_template, request, jsonify
-from roboclaw_3 import Roboclaw
+from roboclaw_3 import Roboclaw # This throws a warning but it works fine
 import time
 import socket
 
