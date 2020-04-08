@@ -1,2 +1,5 @@
-# Transfer2python3
- Here I will try to rebuild codes from python 2 to python 3
+# SSRS Drone Launcher [BETA]
+### formerly Transfer2python3
+
+Here is shared:
++ the up-to-date python file (which, we believe, work)
