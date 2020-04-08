@@ -637,6 +637,7 @@ def function_launch():
 
     return (''), 204
 
+
 @app.route('/app_mount', methods=['POST'])
 def function_mount():
     """
