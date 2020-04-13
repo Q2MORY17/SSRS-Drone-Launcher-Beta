@@ -75,8 +75,12 @@ class launcher(object):
             + FORWARD for the launcher belt
         """
         try:
-            rc.BackwardM1(self.address, self.pitch_speed_manual)
-            return (''), 204 #Returns an empty response - Flask
+            if self.channel == 1:
+                rc.ForwardM1(self.address, self.speed_manual)
+                # return (''), 204 #Returns an empty response - Flask
+            else:
+                rc.ForwardM2(self.address, self.speed_manual)
+                # return (''), 204 #Returns an empty response - Flask
         except:
             logger.info("I go up")
     
@@ -88,8 +92,11 @@ class launcher(object):
             + BACKWARDS for the launcher belt
         """
         try:
-            rc.ForwardM1(self.address, self.pitch_speed_manual)
-            return (''), 204
+            if self.channel == 1:
+                rc.BackwardM1(self.address, self.speed_manual)
+            # return (''), 204
+            else:
+                rc.BackwardM2(self.address, self.speed_manual)
         except:
             logger.info("I go down")
     
