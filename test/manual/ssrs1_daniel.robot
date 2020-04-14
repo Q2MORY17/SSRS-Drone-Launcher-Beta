@@ -15,24 +15,30 @@ ${PORT} =		5000
 *** Keywords ***
 Begin Web Test
 #      Run Process ./ssrs1_daniel_start_server.sh  shell=yes   --option  argument
-      Run Process  ./ssrs1_daniel_start_server.sh  shell=yes
+      Start Process  ./ssrs1_daniel_start_server.sh  shell=yes
 
       Open Browser	${URL}  	${BROWSER}
       Maximize Browser Window
 
 End Web Test
+	Terminate Process
 	Close Browser
 
 Server Is Up 
 	Wait Until Page Contains Element	xpath://button[@id="script_pitch_up"]
 	Page Should Contain	Pitch
+	Click Button		xpath://button[@id="script_reset_encoders"]
 
-User Click Button Pitch Up
+User Clicks Button Pitch Up
 	Click Button	xpath://button[@id="script_pitch_up"]
 
-User Click Button Pitch Down
+User Clicks Button Pitch Down
 	Click Button	xpath://button[@id="script_pitch_down"]
 
+User Enters Value In Field
+	Click Element	xpath://input[@class="form-2" and @name="pitch_position"]
+	Input Text	xpath://input[@class="form-2" and @name="pitch_position"]  23
+	Click Button	xpath://button[@id="script_pitch_position"]
 
 User Expects The Pitch To Increase
 	
@@ -41,24 +47,22 @@ User Expects The Pitch To Increase
 Pitch Up
 	[Documentation]		Clicking the pitch:up button
 	[Tags]			pitch_up
-	# Set Selenium Speed	1 seconds		
-     	Given Server is up
-	When User Clicks Button Pitch Up 
-	Then User Expects The Pitch To Increase
+     	Server Is Up
+	User Clicks Button Pitch Up 
+#	User Expects The Pitch To Increase
 	
 Pitch Down
-	[Documentation]		Clicking the pitch:up button
-	[Tags]			pitch_up
-	# Set Selenium Speed	1 seconds		
-     	Given Server is up
-	When User clicks buttin pitch:up 
-	Then User Expects the pitch to decrease
+	[Documentation]		Clicking The Pitch Down Button
+	[Tags]			pitch_down
+     	Server Is Up
+	User Clicks Button Pitch Down
+#	User Expects the pitch to decrease
 
 Pitch Value
-	[Documentation]		Clicking the pitch:up button
-	[Tags]			pitch_up
+	[Documentation]		Clicking The Pitch Value 
+	[Tags]			pitch_value
 	# Set Selenium Speed	1 seconds		
-     	Given Server is up
-	When User clicks buttin pitch:up 
-	Then User Expects the pitch to increase
+     	Server Is Up
+	User Enters Value In Field
+#	User Expects The Pitch To Change
 
