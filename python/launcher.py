@@ -52,9 +52,9 @@ class launcher(object):
     Master_M1 = motor(0x80, 1, 355000, 90.0, 7000, 127, 70.0)   # pitch
     Master_M2 = motor(0x80, 2, 950000, 180.0, 16000, 15, 10.0)  # rotation
     Slave_M1 = motor(0x81, 1, 19000, 130.0, 420, 127, 130.0)    # lift
-    Slave_M2 = motor(0x81, 2, 14800, 111.0, 6*13400, 12, 0.0)    # launch has more variables...
-    """ Slave_2_M1 = motor(0x82, 1, 355000, 90.0, 7000, 127, 70.0) # case left
-    Slave_2_M2 = motor(0x82, 2, 355000, 90.0, 7000, 127, 70.0) # case right """
+    Slave_M2 = motor(0x81, 2, 14800, 111.0, 6*13400, 12, 0.0)   # launch has more variables...
+    Slave_2_M1 = motor(0x82, 1, 5000, 0.0, 200, 127, 5.0)  # case left
+    Slave_2_M2 = motor(0x82, 2, 5000, 0.0, 200, 127, 5.0)  # case right 
 
     """launch_acceleration=(launch_speed_pulses**2)/13400 #Acceleration during launch (pulses/second2)
     launch_max_speed=10           #Maximum launch speed
@@ -155,3 +155,4 @@ SSRS_launcher = launcher()
 SSRS_launcher.manual_up()
 SSRS_launcher.manual_down()
 SSRS_launcher.manual_position()
+print(SSRS_launcher.Master_M1.address)
