@@ -1,6 +1,6 @@
 """
 This code is being worked on @INFOTIV
-AIM: write standalone code that does not require a flask interface
+AIM: Separate backend and frontend and make the code more readable. 
 CODER: Luan
 """
 # Libraries
@@ -8,50 +8,30 @@ from flask import Flask, render_template, request, jsonify
 from roboclaw_3 import Roboclaw # This throws a warning but it works fine
 import time
 import socket
+from enum import Enum
 
     # TODO: merge functions like "pitch_up, down, position and stop" into one function, which takes a parameter instead
-launch = Launcher(Roboclaw("COM8",115200))
 
-launch.setup()
-launch.lift_control("up")
 
 class PitchCMD(Enum):
-    up = "up"
-    down = "down"
-    position = "position"
-    stop = "stop"
-
-    def __str__(self):
-        return self.value
+    up = 1
+    down = 2
+    stop = 3
 
 class LiftCMD(Enum):
-    up = "up"
-    down = "down"
-    position = "position"
-    stop = "stop"
-
-    def __str__(self):
-        return self.value
+    up = 1
+    down = 2
+    stop = 3
 
 class LaunchCMD(Enum):
-    up = "up"
-    down = "down"
-    position = "position"
-    stop = "stop"
-
-    def __str__(self):
-        return self.value
-
+    up = 1
+    down = 2
+    stop = 3
 
 class RotationCMD(Enum):
-    right = "right"
-    left = "left"
-    position = "position"
-    stop = "stop"
-
-    def __str__(self):
-        return self.value
-
+    right = 1
+    left = 2
+    stop = 3
 
 class Launcher:
     def __init__(self, rc: Roboclaw):
@@ -108,26 +88,43 @@ class Launcher:
 
         self.encoders_ready = 0            #At the beggining, the encoders are not ready
 
-    def encoder_ready(self):
+    def encoder_ready_check(self):
         #Check if encoder is ready
         if self.encoders_ready == 0:
             return False
         else:
             return True
 
-    def set_pitch_position(self):
-        #TODO:
-        if self.encoder_ready:
-            pass
-            # set position cases
+# ---------------------------------------------------------------------------------
+# ----------------- Pitch Functions -----------------------------------------------
+# ---------------------------------------------------------------------------------
 
+    def set_pitch_position(self, pitch_position):
+        if self.encoder_ready_check():
+            # Checks conditions
+            if pitch_position > self.lift_length or pitch_position < 0:
+                #TODO: return error
+                pass
+            elif pitch_position == 0:
+                pitch_objective = 0
+            else:
+                pitch_objective = int(self.pitch_pulses / (self.pitch_length / self.pitch_position))
+                
+            pitch_increment = pitch_objective - self.rc.ReadEncM1(self.address)[1]
+
+            if pitch_increment >= 0:
+                self.rc.SpeedDistanceM1(self.address, self.pitch_speed_pulses,pitch_increment, 1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
+                rc.SpeedDistanceM1(address,0,0,0) #To avoid deceleration
+            else:
+                self.rc.SpeedDistanceM1(self.address, -self.pitch_speed_pulses, -pitch_increment, 1)
+                rc.SpeedDistanceM1(self.address,0,0,0) #To avoid deceleration
         else:
-            #return error?
+            #return Error?
             pass
 
     def pitch_control(self, cmd: PitchCMD):
         '''
-        Takes in a command (up, down, position or stop) and controlls the pitch accordingly
+        Takes in a command (up, down or stop) and controlls the pitch accordingly
         '''
         if  cmd == PitchCMD.up:
             self.rc.BackwardM1(self.address, self.pitch_speed_manual)
@@ -138,45 +135,77 @@ class Launcher:
         if cmd == PitchCMD.stop:
             self.rc.ForwardM1(self.address, 0)
 
-    def set_rotation_position(self):
-        #TODO: rebase
-        if self.encoder_ready:
-            pass
-            # set position cases
+# ---------------------------------------------------------------------------------
+# ------------------------ Rotation functions--------------------------------------
+# ---------------------------------------------------------------------------------
 
+    def set_rotation_position(self, rotation_position):
+        if self.encoder_ready_check():
+            # Checks conditions
+            if rotation_position > self.lift_length or rotation_position < 0:
+                #TODO: return error
+                pass
+            elif rotation_position == 0:
+                rotation_objective = 0
+            else:
+                rotation_objective = int((self.rotation_pulses / (self.rotation_length / self.rotation_position))/2)
+                
+            rotation_increment = rotation_objective - self.rc.ReadEncM2(self.address)[1]
+
+            if rotation_increment >= 0:
+                self.rc.SpeedDistanceM2(self.address, self.rotation_speed_pulses,rotation_increment, 1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
+                self.rc.SpeedDistanceM2(self.address,0,0,0) #To avoid deceleration
+            else:
+                self.rc.SpeedDistanceM2(self.address, -self.rotation_speed_pulses, -rotation_increment, 1)
+                rc.SpeedDistanceM2(self.address,0,0,0) #To avoid deceleration
         else:
-            #return error?
+            #return Error?
             pass
 
 
     def rotation_control(self, cmd: RotationCMD):
         '''
-        Takes in a command (right, left, position or stop) and controlls the rotation accordingly
+        Takes in a command (right, left or stop) and controlls the rotation accordingly
         '''
         if cmd == RotationCMD.right:
             self.rc.ForwardM1(self.address_2, self.lift_speed_manual)
         if cmd == RotationCMD.left:
             self.rc.BackwardM2(self.address, self.rotation_speed_manual)
-        if cmd == RotationCMD.position:
-            self.set_rotation_position()
         if cmd == RotationCMD.stop:
             self.rc.ForwardM2(self.address,0)
 
+# ---------------------------------------------------------------------------------
+# ------------------------ Lift functions--------------------------------------
+# ---------------------------------------------------------------------------------
+    def set_lift_position(self, lift_position):
+        if self.encoder_ready_check():
+            # Checks conditions
+            if lift_position > self.lift_length or lift_position < 0:
+                #TODO: return error
+                pass
+            elif lift_position == 0:
+                lift_objective = 0
+            else:
+                lift_objective = int(self.lift_pulses / (self.lift_length / self.lift_position))
+                
+            lift_increment = lift_objective - self.rc.ReadEncM1(self.address_2)[1]
 
-    def set_lift_position(self):
-        #TODO: rebase
-        if self.encoder_ready:
-            pass
-            # set position cases
-
+            if lift_increment >= 0:
+                self.rc.SpeedDistanceM1(self.address_2, self.lift_speed_pulses,lift_increment, 1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
+                self.rc.SpeedDistanceM1(self.address_2,0,0,0) #To avoid deceleration
+                # set position cases
+            else:
+                self.rc.SpeedDistanceM1(self.address_2, -self.lift_speed_pulses, -lift_increment, 1)
+                rc.SpeedDistanceM1(self.address_2,0,0,0) #To avoid deceleration
         else:
-            #return error?
+            #return Error?
             pass
+
 
 
     def lift_control(self, cmd: LiftCMD):
         '''
-        Takes in a command (up, down, position or stop) and controlls the lift accordingly
+        Takes in a command (up, down or stop) and controlls the lift accordingly
         '''
         if cmd == LiftCMD.up:
             self.rc.ForwardM1(self.address_2, self.lift_speed_manual)
@@ -187,14 +216,33 @@ class Launcher:
         if cmd == LiftCMD.stop:
             self.rc.ForwardM1(self.address_2, 0)
 
-    def set_launch_position(self):
-        #TODO: rebase
-        if self.encoder_ready:
-            pass
-            # set position cases
 
+# ---------------------------------------------------------------------------------
+# ------------------------ Launch functions--------------------------------------
+# ---------------------------------------------------------------------------------
+
+    def set_launch_position(self, launch_position):
+        if self.encoder_ready_check():
+            # Checks conditions
+            if launch_position > self.launch_length or launch_position < 0:
+                #TODO: return error
+                pass
+            elif lift_position == 0:
+                lift_objective = 0
+            else:
+                lift_objective = int(self.lift_pulses / (self.lift_length / self.lift_position))
+                
+            lift_increment = lift_objective - self.rc.ReadEncM1(self.address_2)[1]
+
+            if lift_increment >= 0:
+                self.rc.SpeedDistanceM1(self.address_2, self.lift_speed_pulses,lift_increment, 1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
+                self.rc.SpeedDistanceM1(self.address_2,0,0,0) #To avoid deceleration
+                # set position cases
+            else:
+                self.rc.SpeedDistanceM1(self.address_2, -self.lift_speed_pulses, -lift_increment, 1)
+                rc.SpeedDistanceM1(self.address_2,0,0,0) #To avoid deceleration
         else:
-            #return error?
+            #return Error?
             pass
 
     def launch_control(self, cmd: LaunchCMD):
@@ -214,7 +262,7 @@ class Launcher:
 
     def max_pitch(self):
         
-        if self.encoder_ready():
+        if self.encoder_ready_check():
             pitch_increment = self.pitch_pulses - self.rc.ReadEncM1(address)[1]
             if pitch_increment >= 0:
                 self.rc.SpeedDistanceM1(self.address,self.pitch_speed_pulses,pitch_increment,1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
@@ -283,3 +331,12 @@ class Launcher:
 
     def disable_buttons(self):
         pass
+
+
+
+launch = Launcher(Roboclaw("COM8",115200))
+
+launch
+
+
+launch.set_lift_position(30)
