@@ -1,3 +1,4 @@
+
 *** Settings ***
 Documentation    Global documentation
 #Resource         ./resources/keywords.robot
@@ -7,16 +8,17 @@ Library		 Process
 Test Setup       Begin Web Test
 Test Teardown    End Web Test
 
+
 *** Variables ***
 ${BROWSER} =		firefox
 ${URL} =    		http://192.168.0.4:5000
-${IP} = 		return ip	
+${IP} = 		return_ip	
 ${PORT} =		5000
+
+	
 *** Keywords ***
 Begin Web Test
-#      Run Process ./ssrs1_daniel_start_server.sh  shell=yes   --option  argument
       Start Process  ./ssrs1_daniel_start_server.sh  shell=yes
-
       Open Browser	${URL}  	${BROWSER}
       Maximize Browser Window
 
@@ -41,28 +43,42 @@ User Enters Value In Field
 	Click Button	xpath://button[@id="script_pitch_position"]
 
 User Expects The Pitch To Increase
-	
+	Page Should Contain	Pitch	# Placeholder for Gherkin
+
+User Expects The Pitch To Decrease
+	Page Should Contain	Pitch	# Placeholder for Gherkin
+
+User Expects The Pitch To Change
+	Page Should Contain	Pitch	# Placeholder for Gherkin
+
+
+
 *** Test Cases ***
 
 Pitch Up
-	[Documentation]		Clicking the pitch:up button
+	[Documentation]		Clicking the pitch up button
 	[Tags]			pitch_up
-     	Server Is Up
-	User Clicks Button Pitch Up 
-#	User Expects The Pitch To Increase
+     	Given Server Is Up
+	When User Clicks Button Pitch Up 
+	Then User Expects The Pitch To Increase
 	
 Pitch Down
-	[Documentation]		Clicking The Pitch Down Button
+	[Documentation]		Clicking the pitch down button
 	[Tags]			pitch_down
-     	Server Is Up
-	User Clicks Button Pitch Down
-#	User Expects the pitch to decrease
+     	Given Server Is Up
+	When User Clicks Button Pitch Down
+	Then User Expects The Pitch To Decrease
 
 Pitch Value
-	[Documentation]		Clicking The Pitch Value 
+	[Documentation]		Change pitch value then press GO!
 	[Tags]			pitch_value
-	# Set Selenium Speed	1 seconds		
-     	Server Is Up
-	User Enters Value In Field
-#	User Expects The Pitch To Change
+     	Given Server Is Up
+	When User Enters Value In Field
+	Then User Expects The Pitch To Change
 
+Another Test
+	[Documentation]		Nonsens!
+	[Tags]			nonsens
+	${URL} =  return_ip
+	hello	world
+	${VARIABLE}=  return_ip

@@ -1,2 +1,3 @@
-.idea
-./test/manual/results/*
+idea
+test/manual/results/*.*
+#*
