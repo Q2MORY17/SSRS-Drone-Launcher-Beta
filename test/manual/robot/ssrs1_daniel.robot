@@ -3,7 +3,7 @@
 Documentation    Global documentation
 #Resource         ./resources/keywords.robot
 Library          SeleniumLibrary
-Library		 ./library/drone_library.py
+Library		 ./library/getip.py
 Library		 Process
 Test Setup       Begin Web Test
 Test Teardown    End Web Test
@@ -75,10 +75,3 @@ Pitch Value
      	Given Server Is Up
 	When User Enters Value In Field
 	Then User Expects The Pitch To Change
-
-Another Test
-	[Documentation]		Nonsens!
-	[Tags]			nonsens
-	${URL} =  return_ip
-	hello	world
-	${VARIABLE}=  return_ip
