@@ -38,7 +38,7 @@ class Launcher:
         #setup variables
         #Open serial port
         #Linux comport name
-        self.rc = Roboclaw("/dev/ttyACM0",115200)
+        self.rc = Roboclaw("/dev/ttyACM1",115200)
         #Windows comport name
         #self.rc = Roboclaw("COM8",115200)
         self.rc.Open()
@@ -85,7 +85,7 @@ class Launcher:
         self.launch_bottom=0               #Drone position at the back part of the capsule
         self.launch_connect=2190           #Belt position for touching the upper part
 
-        self.encoders_ready = 0            #At the beggining, the encoders are not ready
+        self.encoders_ready = 1            #At the beggining, the encoders are not ready
 
     def encoder_ready_check(self):
         #Check if encoder is ready
@@ -110,29 +110,29 @@ class Launcher:
             elif pitch_position == 0:
                 pitch_objective = 0
             else:
-                pitch_objective = int(self.pitch_pulses / (self.pitch_length / self.pitch_position))
+                pitch_objective = int(self.pitch_pulses / (self.pitch_length / pitch_position))
                 
             pitch_increment = pitch_objective - self.rc.ReadEncM1(self.address)[1]
 
             if pitch_increment >= 0:
                 self.rc.SpeedDistanceM1(self.address, self.pitch_speed_pulses,pitch_increment, 1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
-                rc.SpeedDistanceM1(address,0,0,0) #To avoid deceleration
+                self.rc.SpeedDistanceM1(self.address,0,0,0) #To avoid deceleration
             else:
                 self.rc.SpeedDistanceM1(self.address, -self.pitch_speed_pulses, -pitch_increment, 1)
-                rc.SpeedDistanceM1(self.address,0,0,0) #To avoid deceleration
+                self.rc.SpeedDistanceM1(self.address,0,0,0) #To avoid deceleration
         else:
             #return Error?
             pass
 
-    def pitch_control(self, cmd):
+    def pitch_control(self, cmd: PitchCMD):
         '''
         Takes in a command (up, down or stop) and controlls the pitch accordingly
         '''
-        if  cmd == 'up':
+        if  cmd == PitchCMD.up:
             self.rc.BackwardM1(self.address, self.pitch_speed_manual)
         if cmd == PitchCMD.down:
             self.rc.ForwardM1(self.address, self.pitch_speed_manual)
-        if cmd == 'stop':
+        if cmd == PitchCMD.stop:
             self.rc.ForwardM1(self.address, 0)
 
 # ---------------------------------------------------------------------------------
@@ -140,42 +140,48 @@ class Launcher:
 # ---------------------------------------------------------------------------------
 
     def set_rotation_position(self, rotation_position):
+        print({rotation_position})
         '''
         sets the rotation position of the launcher by the given rotation_position parameter.
+        NOT USED YET. ONLY ON REAL LAUNCHER
         '''
         if self.encoder_ready_check():
+            print({rotation_position})
             # Checks conditions
             if rotation_position > self.lift_length or rotation_position < 0:
-                #TODO: return error
-                pass
+                raise ValueError("out of bounds")
+                
             elif rotation_position == 0:
                 rotation_objective = 0
             else:
-                rotation_objective = int((self.rotation_pulses / (self.rotation_length / self.rotation_position))/2)
-                
+                rotation_objective = int((self.rotation_pulses / (self.rotation_length / rotation_position))/2)
+            print({rotation_objective})    
             rotation_increment = rotation_objective - self.rc.ReadEncM2(self.address)[1]
-
+            print({rotation_increment})
             if rotation_increment >= 0:
                 self.rc.SpeedDistanceM2(self.address, self.rotation_speed_pulses,rotation_increment, 1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
                 self.rc.SpeedDistanceM2(self.address,0,0,0) #To avoid deceleration
             else:
                 self.rc.SpeedDistanceM2(self.address, -self.rotation_speed_pulses, -rotation_increment, 1)
-                rc.SpeedDistanceM2(self.address,0,0,0) #To avoid deceleration
+                self.rc.SpeedDistanceM2(self.address,0,0,0) #To avoid deceleration
         else:
             #return Error?
             pass
 
 
-    def rotation_control(self, cmd):
+    def rotation_control(self, cmd: RotationCMD):
         '''
         Takes in a command (right, left or stop) and controlls the rotation accordingly
         '''
-        if cmd == 'right':
+        if cmd == RotationCMD.right:
             self.rc.ForwardM1(self.address_2, self.rotation_speed_manual)
-        if cmd == 'left':
+            self.rc.ForwardM2(self.address_2, self.rotation_speed_manual)
+        if cmd == RotationCMD.left:
             self.rc.BackwardM1(self.address_2, self.rotation_speed_manual)
-        if cmd == 'stop':
+            self.rc.BackwardM2(self.address_2, self.rotation_speed_manual)
+        if cmd == RotationCMD.stop:
             self.rc.ForwardM1(self.address_2,0)
+            self.rc.ForwardM2(self.address_2,0)
 
 # ---------------------------------------------------------------------------------
 # ------------------------ Lift functions--------------------------------------
