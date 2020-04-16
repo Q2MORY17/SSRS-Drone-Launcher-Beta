@@ -8,7 +8,7 @@ DRONE LAUNCHER
 """
 #Import modules
 from flask import Flask, render_template, request, jsonify
-from roboclaw_3 import Roboclaw # This throws a warning but it works fine
+from python.roboclaw_3 import Roboclaw # Used to be without python. but is needed in testing
 import time
 import socket
 
@@ -118,7 +118,7 @@ def function_pitch_down():
 @app.route('/app_pitch_position', methods=['POST'])
 def function_pitch_position():
     """
-    This function uses current encoder position relative to a desired encoder 
+    This function uses current encoder position relative to a desired encoder
     position entered by the user. Depending on its current position, activates
     the up or down motion to reach the desired position and stop.
     ---------------------------------------------------------------------------------
@@ -176,7 +176,7 @@ def function_rotation_left():
 @app.route('/app_rotation_position', methods=['POST'])
 def function_rotation_position():
     """
-    This function uses current encoder position relative to a desired encoder 
+    This function uses current encoder position relative to a desired encoder
     position entered by the user. Depending on its current position, activates
     the left or right motion to reach the desired position and stop.
     """
@@ -229,7 +229,7 @@ def function_lift_down():
 @app.route('/app_lift_position', methods=['POST'])
 def function_lift_position():
     """
-    This function uses current encoder position relative to a desired encoder 
+    This function uses current encoder position relative to a desired encoder
     position entered by the user. Depending on its current position, activates
     the up or down motion to reach the desired position and stop.
     """
@@ -284,7 +284,7 @@ def function_launch_backwards():
 @app.route('/app_launch_position', methods=['POST'])
 def function_launch_position():
     """
-    This function uses current encoder position relative to a desired encoder 
+    This function uses current encoder position relative to a desired encoder
     position entered by the user. Depending on its current position, activates
     the Outwards or Inwards motion to reach the desired position and stop.
     """
@@ -360,7 +360,7 @@ def function_min_pitch():
     --------------------------------------------------------------
     + As for other pitch functions, this is malfunctioning as it seems
     to not interpret encoder once it is in motion. maybe the bad coupling
-    referenced in other log means that the motors and the robocalws are 
+    referenced in other log means that the motors and the robocalws are
     communicating on the wrong channel - LOG OPEN (ENTRY 2020-03-20 QD)
     """
     if encoders_ready == 0: #Not execute if the encoders are not ready
@@ -606,11 +606,11 @@ def function_prepare():
 @app.route('/app_launch', methods=['POST'])
 def function_launch():
     """
-    This function operates the launch motor + belt 
+    This function operates the launch motor + belt
     speed can be updated from change_...() functions
     ------------------------------------------------------------------------
     + This function caused a problem during testing as the mechanical parts of the
-    prototype were not able to "connect" and therefore could not operate above a 
+    prototype were not able to "connect" and therefore could not operate above a
     certain speed (ENTRY 2020-03-23 QD)
     """
     if encoders_ready == 0: #Not execute if the encoders are not ready
@@ -636,6 +636,7 @@ def function_launch():
     rc.SpeedDistanceM2(address_2,0,0,0) #To avoid deceleration
 
     return (''), 204
+
 
 @app.route('/app_mount', methods=['POST'])
 def function_mount():
@@ -924,7 +925,7 @@ def function_change_acceleration():
 def function_disable_buttons():
     """
     Whenever code is commented off such as a function,
-    this function deactivates the button so the code does not 
+    this function deactivates the button so the code does not
     throw errors between the main code and the GUI
     """
     return jsonify(encoders_ready=encoders_ready)

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 idea
 test/manual/results/*.*
 #*
+=======
+.idea
+/__pycache__
+>>>>>>> master

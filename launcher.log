@@ -1,0 +1,22 @@
+2020-04-13 12:44:20,525:__main__:INFO:I go up
+2020-04-13 12:58:58,808:__main__:INFO:I go up
+2020-04-13 12:58:58,809:__main__:INFO:I go down
+2020-04-13 12:59:59,811:__main__:INFO:I go up
+2020-04-13 12:59:59,812:__main__:INFO:I go down
+2020-04-13 13:01:14,141:__main__:INFO:I go up
+2020-04-13 13:01:14,141:__main__:INFO:I go down
+2020-04-13 13:03:33,369:__main__:INFO:I go up
+2020-04-13 13:03:33,369:__main__:INFO:I go down
+2020-04-13 13:03:33,370:__main__:INFO:I go to a certain position
+2020-04-14 09:57:49,568:__main__:INFO:I go up
+2020-04-14 09:57:49,569:__main__:INFO:I go down
+2020-04-14 09:57:49,569:__main__:INFO:I go to a certain position
+2020-04-14 13:14:28,815:__main__:INFO:I go up
+2020-04-14 13:14:28,816:__main__:INFO:I go down
+2020-04-14 13:14:28,816:__main__:INFO:I go to a certain position
+2020-04-14 19:32:37,342:__main__:INFO:I go up
+2020-04-14 19:32:37,342:__main__:INFO:I go down
+2020-04-14 19:32:37,343:__main__:INFO:I go to a certain position
+2020-04-14 19:33:44,413:__main__:INFO:I go up
+2020-04-14 19:33:44,413:__main__:INFO:I go down
+2020-04-14 19:33:44,413:__main__:INFO:I go to a certain position
