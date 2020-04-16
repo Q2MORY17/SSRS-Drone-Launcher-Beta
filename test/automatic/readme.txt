@@ -1,1 +1,0 @@
-# Here we will create tests for the automatic launch functionality

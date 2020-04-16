@@ -1,7 +1,7 @@
 
 *** Settings ***
 Documentation    Global documentation
-#Resource         ./resources/keywords.robot
+# Resource         ./resources/keywords.robot
 Library          SeleniumLibrary
 Library		 ./library/getip.py
 Library		 Process
@@ -12,13 +12,13 @@ Test Teardown    End Web Test
 *** Variables ***
 ${BROWSER} =		firefox
 ${URL} =    		http://192.168.0.4:5000
-${IP} = 		return_ip	
+# ${IP} = 		return_ip	
 ${PORT} =		5000
 
 	
 *** Keywords ***
 Begin Web Test
-      Start Process  ./ssrs1_daniel_start_server.sh  shell=yes
+      Start Process  ./resources/start_server.sh  shell=yes
       Open Browser	${URL}  	${BROWSER}
       Maximize Browser Window
 
