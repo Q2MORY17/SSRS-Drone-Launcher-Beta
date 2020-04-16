@@ -8,7 +8,7 @@ DRONE LAUNCHER
 """
 #Import modules
 from flask import Flask, render_template, request, jsonify
-from python.roboclaw_3 import Roboclaw # Used to be without python. but is needed in testing
+from roboclaw_3 import Roboclaw # Used to be without python. but is needed in testing
 import time
 import socket
 

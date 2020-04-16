@@ -100,6 +100,10 @@ class Launcher:
 # ---------------------------------------------------------------------------------
 
     def set_pitch_position(self, pitch_position):
+        '''
+        sets the pitch position of the launcher by the given pitch_position parameter.
+
+        '''
         if self.encoder_ready_check():
             # Checks conditions
             if pitch_position > self.lift_length or pitch_position < 0:
@@ -140,6 +144,10 @@ class Launcher:
 # ---------------------------------------------------------------------------------
 
     def set_rotation_position(self, rotation_position):
+        '''
+        sets the rotation position of the launcher by the given rotation_position parameter.
+
+        '''
         if self.encoder_ready_check():
             # Checks conditions
             if rotation_position > self.lift_length or rotation_position < 0:
@@ -178,6 +186,10 @@ class Launcher:
 # ------------------------ Lift functions--------------------------------------
 # ---------------------------------------------------------------------------------
     def set_lift_position(self, lift_position):
+        '''
+        sets the lift position of the launcher by the given lift_position parameter.
+
+        '''
         if self.encoder_ready_check():
             # Checks conditions
             if lift_position > self.lift_length or lift_position < 0:
@@ -201,8 +213,6 @@ class Launcher:
             #return Error?
             pass
 
-
-
     def lift_control(self, cmd: LiftCMD):
         '''
         Takes in a command (up, down or stop) and controlls the lift accordingly
@@ -220,41 +230,57 @@ class Launcher:
 # ---------------------------------------------------------------------------------
 # ------------------------ Launch functions--------------------------------------
 # ---------------------------------------------------------------------------------
-
+    
     def set_launch_position(self, launch_position):
+        '''
+        sets the launch position of the launcher by the given launch_position parameter.
+
+        '''
         if self.encoder_ready_check():
             # Checks conditions
             if launch_position > self.launch_length or launch_position < 0:
                 #TODO: return error
                 pass
-            elif lift_position == 0:
-                lift_objective = 0
             else:
-                lift_objective = int(self.lift_pulses / (self.lift_length / self.lift_position))
-                
-            lift_increment = lift_objective - self.rc.ReadEncM1(self.address_2)[1]
+                launch_objective = self.launch_bottom
+                launch_increment = launch_objective - self.rc.ReadEncM2(self.address_2)[1]
 
-            if lift_increment >= 0:
-                self.rc.SpeedDistanceM1(self.address_2, self.lift_speed_pulses,lift_increment, 1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
-                self.rc.SpeedDistanceM1(self.address_2,0,0,0) #To avoid deceleration
-                # set position cases
+            if launch_increment >= 0:
+                self.rc.SpeedDistanceM2(self.address_2, self.launch_speed_pulses_slow, launch_increment, 1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
+                self.rc.SpeedDistanceM2(self.address_2,0,0,0) #To avoid deceleration
             else:
-                self.rc.SpeedDistanceM1(self.address_2, -self.lift_speed_pulses, -lift_increment, 1)
-                rc.SpeedDistanceM1(self.address_2,0,0,0) #To avoid deceleration
+                self.rc.SpeedDistanceM2(self.address_2, -self.launch_speed_pulses_slow, -launch_increment, 1)
+                self.rc.SpeedDistanceM2(self.address_2,0,0,0) #To avoid deceleration
+
+            buffer_2 = (0,0,0)
+            while(buffer_2[2]!=0x80):	#Loop until all movements are completed
+                buffer_2 = self.rc.ReadBuffers(self.address_2)
+
+            if launch_position == 0:
+                launch_objective = 0
+            else:
+                launch_objective = int(self.launch_pulses/(self.launch_length/self.launch_position))
+
+            launch_increment = launch_objective - self.rc.ReadEncM2(self.address_2)[1] + self.launch_connect
+            if launch_increment >= 0:
+                self.rc.SpeedDistanceM2(self.address_2, self.launch_speed_pulses_slow, launch_increment, 0) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
+                self.rc.SpeedDistanceM2(self.address_2, 0, 0, 0) #To avoid deceleration
+            else:
+                self.rc.SpeedDistanceM2(self.address_2, -self.launch_speed_pulses_slow, -launch_increment,0)
+                self.rc.SpeedDistanceM2(self.address_2, 0, 0, 0) #To avoid deceleration
         else:
-            #return Error?
+            #return error?
             pass
+
 
     def launch_control(self, cmd: LaunchCMD):
         '''
-        Takes in a command (forwards, backwards, position or stop) and controlls the launch accordingly
+        Takes in a command (forwards, backwards or stop) and controlls the launch accordingly
         '''
         if cmd == LaunchCMD.forwards:
             self.rc.ForwardM2(self.address_2, self.launch_speed_manual)
         if cmd == LaunchCMD.backwards:
             self.rc.BackwardM2(self.address_2, self.launch_speed_manual)
-        if cmd == LaunchCMD.position:
-            set_launch_position()
         if cmd == LaunchCMD.stop:
             self.rc.ForwardM2(self.address_2,0)
 
