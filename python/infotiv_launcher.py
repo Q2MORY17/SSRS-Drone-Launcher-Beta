@@ -4,7 +4,6 @@ AIM: Separate backend and frontend and make the code more readable.
 CODER: Luan
 """
 # Libraries
-from flask import Flask, render_template, request, jsonify
 from roboclaw_3 import Roboclaw # This throws a warning but it works fine
 import time
 import socket
@@ -34,14 +33,14 @@ class RotationCMD(Enum):
     stop = 3
 
 class Launcher:
-    def __init__(self, rc: Roboclaw):
+    def __init__(self):
 
         #setup variables
         #Open serial port
         #Linux comport name
-        #rc = Roboclaw("/dev/ttyACM0",115200)
+        self.rc = Roboclaw("/dev/ttyACM0",115200)
         #Windows comport name
-        self.rc = rc
+        #self.rc = Roboclaw("COM8",115200)
         self.rc.Open()
 
         #Look for the appropriate local network. based on the Raspberry Pi IP address - RPi Terminal -> Hostname -I or ifconfig
@@ -55,27 +54,27 @@ class Launcher:
         self.pitch_pulses=355000           #Encoder pulses from the linear actuator
         self.pitch_length=90.0             #Degrees
         self.pitch_speed_pulses=7000       #Pulses per second
-        self.pitch_speed_manual=127        #From 0 to 127
+        self.pitch_speed_manual=75        #From 0 to 127
         self.pitch_ready=70.0              #Pitch degrees for the launch (temporary)
 
         self.rotation_pulses=950000        #Encoder pulses from the rotation motor
         self.rotation_length=180.0         #Degrees
         self.rotation_speed_pulses=16000   #Pulses per second
-        self.rotation_speed_manual=15      #From 0 to 127
+        self.rotation_speed_manual=127      #From 0 to 127
         self.rotation_ready=10.0           #Rotation degress for the launch (temporary)
 
         self.lift_pulses=19000             #Encoder pulses from the lifting colum
         self.lift_length=130.0             #cm
         self.lift_speed_pulses=420         #Pulses per second
         self.lift_speed_manual=127         #From 0 to 127 - 7 bits
-        self.lift_ready=lift_length        #Lift lenght for the launch (temporary)
+        self.lift_ready=self.lift_length        #Lift lenght for the launch (temporary)
 
         self.launch_pulses=14800           #Encoder pulses from the launch motor
         self.launch_length=111.0           #cm
         self.launch_speed_pulses=6*13400   #Pulses per second during launch (145000 max) (13400 pulses/m)
         self.launch_speed_pulses_slow=2500 #Pulses per second during preparation
         self.launch_speed_manual=12        #From 0 to 127
-        self.launch_acceleration=(launch_speed_pulses**2)/13400 #Acceleration during launch (pulses/second2)
+        self.launch_acceleration=(self.launch_speed_pulses**2)/13400 #Acceleration during launch (pulses/second2)
         self.launch_max_speed=10           #Maximum launch speed
         self.launch_min_speed=1            #Minimum launch speed
         self.launch_max_acceleration=48    #Maximum launch acceleration
@@ -102,7 +101,6 @@ class Launcher:
     def set_pitch_position(self, pitch_position):
         '''
         sets the pitch position of the launcher by the given pitch_position parameter.
-
         '''
         if self.encoder_ready_check():
             # Checks conditions
@@ -126,17 +124,15 @@ class Launcher:
             #return Error?
             pass
 
-    def pitch_control(self, cmd: PitchCMD):
+    def pitch_control(self, cmd):
         '''
         Takes in a command (up, down or stop) and controlls the pitch accordingly
         '''
-        if  cmd == PitchCMD.up:
+        if  cmd == 'up':
             self.rc.BackwardM1(self.address, self.pitch_speed_manual)
         if cmd == PitchCMD.down:
             self.rc.ForwardM1(self.address, self.pitch_speed_manual)
-        if cmd == PitchCMD.position:
-            self.set_pitch_position()
-        if cmd == PitchCMD.stop:
+        if cmd == 'stop':
             self.rc.ForwardM1(self.address, 0)
 
 # ---------------------------------------------------------------------------------
@@ -146,7 +142,6 @@ class Launcher:
     def set_rotation_position(self, rotation_position):
         '''
         sets the rotation position of the launcher by the given rotation_position parameter.
-
         '''
         if self.encoder_ready_check():
             # Checks conditions
@@ -171,16 +166,16 @@ class Launcher:
             pass
 
 
-    def rotation_control(self, cmd: RotationCMD):
+    def rotation_control(self, cmd):
         '''
         Takes in a command (right, left or stop) and controlls the rotation accordingly
         '''
-        if cmd == RotationCMD.right:
-            self.rc.ForwardM1(self.address_2, self.lift_speed_manual)
-        if cmd == RotationCMD.left:
-            self.rc.BackwardM2(self.address, self.rotation_speed_manual)
-        if cmd == RotationCMD.stop:
-            self.rc.ForwardM2(self.address,0)
+        if cmd == 'right':
+            self.rc.ForwardM1(self.address_2, self.rotation_speed_manual)
+        if cmd == 'left':
+            self.rc.BackwardM1(self.address_2, self.rotation_speed_manual)
+        if cmd == 'stop':
+            self.rc.ForwardM1(self.address_2,0)
 
 # ---------------------------------------------------------------------------------
 # ------------------------ Lift functions--------------------------------------
@@ -188,7 +183,6 @@ class Launcher:
     def set_lift_position(self, lift_position):
         '''
         sets the lift position of the launcher by the given lift_position parameter.
-
         '''
         if self.encoder_ready_check():
             # Checks conditions
@@ -234,7 +228,6 @@ class Launcher:
     def set_launch_position(self, launch_position):
         '''
         sets the launch position of the launcher by the given launch_position parameter.
-
         '''
         if self.encoder_ready_check():
             # Checks conditions
@@ -360,9 +353,6 @@ class Launcher:
 
 
 
-launch = Launcher(Roboclaw("COM8",115200))
-
-launch
+launch = Launcher()
 
 
-launch.set_lift_position(30)
