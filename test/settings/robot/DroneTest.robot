@@ -7,7 +7,7 @@ Library  SeleniumLibrary
 
 *** Variables ***
 ${BROWSER} =    chrome
-${URL} =  http://192.168.1.216:5000/
+${URL} =  http://192.168.1.236:5000/
 ${IP} =  return ip
 ${PORT} =  5000
 
@@ -17,3 +17,7 @@ IP address test
     [Tags]         IPtest
     Open Browser   about:blank  ${BROWSER}
     Go To          ${URL}
+    Click Element    xpath:/html/body/ul/li[4]/a
+    Input Text      xpath://*[@id="settings_launch"]/div[1]/input     -100
+    Click Button    xpath://*[@id="script_change_pitch"]
+    Handle Alert
