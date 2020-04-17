@@ -21,7 +21,7 @@ Begin Web Test
       import library	${CURDIR}/library/getip.py
       ${VAR} =  return_ip
       Start Process  ./resources/start_server.sh  shell=yes
-      Open Browser	${VAR}  	${BROWSER}
+      Open Browser	${URL}  	${BROWSER}
       Maximize Browser Window
 
 End Web Test
