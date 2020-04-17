@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.1.1 (Python 3.8.2 on linux)" generated="20200416 17:27:50.726" rpa="false">
+<robot generator="Robot 3.1.1 (Python 3.8.2 on linux)" generated="20200417 12:21:10.768" rpa="false">
 <suite id="s1" name="Pitch" source="/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/pitch.robot">
 <test id="s1-t1" name="Pitch Up">
 <kw name="Begin Web Test" type="setup">
@@ -8,15 +8,15 @@
 <arguments>
 <arg>/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/library/getip.py</arg>
 </arguments>
-<status status="PASS" starttime="20200416 17:27:50.815" endtime="20200416 17:27:50.815"></status>
+<status status="PASS" starttime="20200417 12:21:10.861" endtime="20200417 12:21:10.861"></status>
 </kw>
 <kw name="Return Ip" library="getip">
 <assign>
 <var>${VAR}</var>
 </assign>
-<msg timestamp="20200416 17:27:50.819" level="INFO">192.168.0.4</msg>
-<msg timestamp="20200416 17:27:50.819" level="INFO">${VAR} = None</msg>
-<status status="PASS" starttime="20200416 17:27:50.815" endtime="20200416 17:27:50.819"></status>
+<msg timestamp="20200417 12:21:10.865" level="INFO">192.168.0.4</msg>
+<msg timestamp="20200417 12:21:10.865" level="INFO">${VAR} = None</msg>
+<status status="PASS" starttime="20200417 12:21:10.861" endtime="20200417 12:21:10.865"></status>
 </kw>
 <kw name="Start Process" library="Process">
 <doc>Starts a new process on background.</doc>
@@ -24,9 +24,9 @@
 <arg>./resources/start_server.sh</arg>
 <arg>shell=yes</arg>
 </arguments>
-<msg timestamp="20200416 17:27:50.819" level="INFO">Starting process:
+<msg timestamp="20200417 12:21:10.865" level="INFO">Starting process:
 ./resources/start_server.sh</msg>
-<status status="PASS" starttime="20200416 17:27:50.819" endtime="20200416 17:27:50.821"></status>
+<status status="PASS" starttime="20200417 12:21:10.865" endtime="20200417 12:21:10.867"></status>
 </kw>
 <kw name="Open Browser" library="SeleniumLibrary">
 <doc>Opens a new browser instance to the optional ``url``.</doc>
@@ -34,15 +34,15 @@
 <arg>${VAR}</arg>
 <arg>${BROWSER}</arg>
 </arguments>
-<msg timestamp="20200416 17:27:50.822" level="INFO">Opening browser 'firefox' to base url 'None'.</msg>
-<msg timestamp="20200416 17:27:50.822" level="INFO">Firefox driver log is always forced to to: /home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/results/geckodriver-22.log</msg>
-<status status="PASS" starttime="20200416 17:27:50.821" endtime="20200416 17:27:53.188"></status>
+<msg timestamp="20200417 12:21:10.867" level="INFO">Opening browser 'firefox' to base url 'None'.</msg>
+<msg timestamp="20200417 12:21:10.868" level="INFO">Firefox driver log is always forced to to: /home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/results/geckodriver-1.log</msg>
+<status status="PASS" starttime="20200417 12:21:10.867" endtime="20200417 12:21:13.226"></status>
 </kw>
 <kw name="Maximize Browser Window" library="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20200416 17:27:53.188" endtime="20200416 17:27:53.451"></status>
+<status status="PASS" starttime="20200417 12:21:13.226" endtime="20200417 12:21:13.512"></status>
 </kw>
-<status status="PASS" starttime="20200416 17:27:50.814" endtime="20200416 17:27:53.451"></status>
+<status status="PASS" starttime="20200417 12:21:10.860" endtime="20200417 12:21:13.512"></status>
 </kw>
 <kw name="Given Server Is Up">
 <kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
@@ -52,37 +52,32 @@
 </arguments>
 <kw name="Capture Page Screenshot" library="SeleniumLibrary">
 <doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<msg timestamp="20200416 17:27:56.943" level="FAIL">NoSuchWindowException: Message: Browsing context has been discarded
-</msg>
-<status status="FAIL" starttime="20200416 17:27:56.926" endtime="20200416 17:27:56.943"></status>
+<msg timestamp="20200417 12:21:18.682" level="INFO" html="yes">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20200417 12:21:18.584" endtime="20200417 12:21:18.682"></status>
 </kw>
-<msg timestamp="20200416 17:27:56.944" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: NoSuchWindowException: Message: Browsing context has been discarded
-</msg>
-<msg timestamp="20200416 17:27:56.945" level="FAIL">NoSuchWindowException: Message: Browsing context has been discarded
-</msg>
-<status status="FAIL" starttime="20200416 17:27:53.451" endtime="20200416 17:27:56.945"></status>
+<msg timestamp="20200417 12:21:18.682" level="FAIL">Element 'xpath://button[@id="script_pitch_up"]' did not appear in 5 seconds.</msg>
+<status status="FAIL" starttime="20200417 12:21:13.513" endtime="20200417 12:21:18.682"></status>
 </kw>
-<status status="FAIL" starttime="20200416 17:27:53.451" endtime="20200416 17:27:56.945"></status>
+<status status="FAIL" starttime="20200417 12:21:13.512" endtime="20200417 12:21:18.682"></status>
 </kw>
 <kw name="End Web Test" type="teardown">
 <kw name="Terminate Process" library="Process">
 <doc>Stops the process gracefully or forcefully.</doc>
-<msg timestamp="20200416 17:27:56.946" level="INFO">Gracefully terminating process.</msg>
-<msg timestamp="20200416 17:27:57.046" level="INFO">Process completed.</msg>
-<status status="PASS" starttime="20200416 17:27:56.946" endtime="20200416 17:27:57.047"></status>
+<msg timestamp="20200417 12:21:18.683" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200417 12:21:18.783" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200417 12:21:18.683" endtime="20200417 12:21:18.783"></status>
 </kw>
 <kw name="Close Browser" library="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20200416 17:27:57.047" endtime="20200416 17:27:58.153"></status>
+<status status="PASS" starttime="20200417 12:21:18.783" endtime="20200417 12:21:20.247"></status>
 </kw>
-<status status="PASS" starttime="20200416 17:27:56.945" endtime="20200416 17:27:58.153"></status>
+<status status="PASS" starttime="20200417 12:21:18.682" endtime="20200417 12:21:20.248"></status>
 </kw>
 <doc>Clicking the pitch up button</doc>
 <tags>
 <tag>pitch_up</tag>
 </tags>
-<status status="FAIL" starttime="20200416 17:27:50.814" endtime="20200416 17:27:58.153" critical="yes">NoSuchWindowException: Message: Browsing context has been discarded
-</status>
+<status status="FAIL" starttime="20200417 12:21:10.860" endtime="20200417 12:21:20.248" critical="yes">Element 'xpath://button[@id="script_pitch_up"]' did not appear in 5 seconds.</status>
 </test>
 <test id="s1-t2" name="Pitch Down">
 <kw name="Begin Web Test" type="setup">
@@ -91,15 +86,15 @@
 <arguments>
 <arg>/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/library/getip.py</arg>
 </arguments>
-<status status="PASS" starttime="20200416 17:27:58.154" endtime="20200416 17:27:58.155"></status>
+<status status="PASS" starttime="20200417 12:21:20.249" endtime="20200417 12:21:20.249"></status>
 </kw>
 <kw name="Return Ip" library="getip">
 <assign>
 <var>${VAR}</var>
 </assign>
-<msg timestamp="20200416 17:27:58.156" level="INFO">192.168.0.4</msg>
-<msg timestamp="20200416 17:27:58.156" level="INFO">${VAR} = None</msg>
-<status status="PASS" starttime="20200416 17:27:58.156" endtime="20200416 17:27:58.156"></status>
+<msg timestamp="20200417 12:21:20.250" level="INFO">192.168.0.4</msg>
+<msg timestamp="20200417 12:21:20.250" level="INFO">${VAR} = None</msg>
+<status status="PASS" starttime="20200417 12:21:20.249" endtime="20200417 12:21:20.250"></status>
 </kw>
 <kw name="Start Process" library="Process">
 <doc>Starts a new process on background.</doc>
@@ -107,9 +102,9 @@
 <arg>./resources/start_server.sh</arg>
 <arg>shell=yes</arg>
 </arguments>
-<msg timestamp="20200416 17:27:58.157" level="INFO">Starting process:
+<msg timestamp="20200417 12:21:20.250" level="INFO">Starting process:
 ./resources/start_server.sh</msg>
-<status status="PASS" starttime="20200416 17:27:58.156" endtime="20200416 17:27:58.159"></status>
+<status status="PASS" starttime="20200417 12:21:20.250" endtime="20200417 12:21:20.252"></status>
 </kw>
 <kw name="Open Browser" library="SeleniumLibrary">
 <doc>Opens a new browser instance to the optional ``url``.</doc>
@@ -117,47 +112,131 @@
 <arg>${VAR}</arg>
 <arg>${BROWSER}</arg>
 </arguments>
-<msg timestamp="20200416 17:27:58.160" level="INFO">Opening browser 'firefox' to base url 'None'.</msg>
-<msg timestamp="20200416 17:27:58.160" level="INFO">Firefox driver log is always forced to to: /home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/results/geckodriver-23.log</msg>
+<msg timestamp="20200417 12:21:20.253" level="INFO">Opening browser 'firefox' to base url 'None'.</msg>
+<msg timestamp="20200417 12:21:20.253" level="INFO">Firefox driver log is always forced to to: /home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/results/geckodriver-2.log</msg>
+<status status="PASS" starttime="20200417 12:21:20.252" endtime="20200417 12:21:22.617"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200417 12:21:22.617" endtime="20200417 12:21:22.932"></status>
+</kw>
+<status status="PASS" starttime="20200417 12:21:20.248" endtime="20200417 12:21:22.932"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>xpath://button[@id="script_pitch_up"]</arg>
+</arguments>
 <kw name="Capture Page Screenshot" library="SeleniumLibrary">
 <doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
-<status status="FAIL" starttime="20200416 17:27:59.146" endtime="20200416 17:27:59.147"></status>
+<msg timestamp="20200417 12:21:28.124" level="INFO" html="yes">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20200417 12:21:28.025" endtime="20200417 12:21:28.125"></status>
 </kw>
-<msg timestamp="20200416 17:27:59.147" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Execution terminated by signal</msg>
-<status status="FAIL" starttime="20200416 17:27:58.159" endtime="20200416 17:27:59.147"></status>
+<msg timestamp="20200417 12:21:28.125" level="FAIL">Element 'xpath://button[@id="script_pitch_up"]' did not appear in 5 seconds.</msg>
+<status status="FAIL" starttime="20200417 12:21:22.933" endtime="20200417 12:21:28.125"></status>
 </kw>
-<status status="FAIL" starttime="20200416 17:27:58.154" endtime="20200416 17:27:59.147"></status>
+<status status="FAIL" starttime="20200417 12:21:22.933" endtime="20200417 12:21:28.125"></status>
 </kw>
 <kw name="End Web Test" type="teardown">
 <kw name="Terminate Process" library="Process">
 <doc>Stops the process gracefully or forcefully.</doc>
-<msg timestamp="20200416 17:27:59.148" level="INFO">Gracefully terminating process.</msg>
-<msg timestamp="20200416 17:27:59.248" level="INFO">Process completed.</msg>
-<status status="PASS" starttime="20200416 17:27:59.147" endtime="20200416 17:27:59.248"></status>
+<msg timestamp="20200417 12:21:28.126" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200417 12:21:28.226" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200417 12:21:28.126" endtime="20200417 12:21:28.227"></status>
 </kw>
 <kw name="Close Browser" library="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20200416 17:27:59.248" endtime="20200416 17:27:59.248"></status>
+<status status="PASS" starttime="20200417 12:21:28.227" endtime="20200417 12:21:29.697"></status>
 </kw>
-<status status="PASS" starttime="20200416 17:27:59.147" endtime="20200416 17:27:59.248"></status>
+<status status="PASS" starttime="20200417 12:21:28.126" endtime="20200417 12:21:29.698"></status>
 </kw>
 <doc>Clicking the pitch down button</doc>
 <tags>
 <tag>pitch_down</tag>
 </tags>
-<status status="FAIL" starttime="20200416 17:27:58.153" endtime="20200416 17:27:59.248" critical="yes">Setup failed:
-Execution terminated by signal</status>
+<status status="FAIL" starttime="20200417 12:21:20.248" endtime="20200417 12:21:29.698" critical="yes">Element 'xpath://button[@id="script_pitch_up"]' did not appear in 5 seconds.</status>
 </test>
 <test id="s1-t3" name="Pitch Value">
+<kw name="Begin Web Test" type="setup">
+<kw name="Import Library" library="BuiltIn">
+<doc>Imports a library with the given name and optional arguments.</doc>
+<arguments>
+<arg>/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/library/getip.py</arg>
+</arguments>
+<status status="PASS" starttime="20200417 12:21:29.699" endtime="20200417 12:21:29.700"></status>
+</kw>
+<kw name="Return Ip" library="getip">
+<assign>
+<var>${VAR}</var>
+</assign>
+<msg timestamp="20200417 12:21:29.701" level="INFO">192.168.0.4</msg>
+<msg timestamp="20200417 12:21:29.701" level="INFO">${VAR} = None</msg>
+<status status="PASS" starttime="20200417 12:21:29.700" endtime="20200417 12:21:29.701"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>./resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200417 12:21:29.701" level="INFO">Starting process:
+./resources/start_server.sh</msg>
+<status status="PASS" starttime="20200417 12:21:29.701" endtime="20200417 12:21:29.704"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${VAR}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200417 12:21:29.704" level="INFO">Opening browser 'firefox' to base url 'None'.</msg>
+<msg timestamp="20200417 12:21:29.705" level="INFO">Firefox driver log is always forced to to: /home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/results/geckodriver-3.log</msg>
+<status status="PASS" starttime="20200417 12:21:29.704" endtime="20200417 12:21:31.966"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200417 12:21:31.966" endtime="20200417 12:21:32.347"></status>
+</kw>
+<status status="PASS" starttime="20200417 12:21:29.699" endtime="20200417 12:21:32.347"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>xpath://button[@id="script_pitch_up"]</arg>
+</arguments>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<msg timestamp="20200417 12:21:37.517" level="INFO" html="yes">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" starttime="20200417 12:21:37.425" endtime="20200417 12:21:37.517"></status>
+</kw>
+<msg timestamp="20200417 12:21:37.517" level="FAIL">Element 'xpath://button[@id="script_pitch_up"]' did not appear in 5 seconds.</msg>
+<status status="FAIL" starttime="20200417 12:21:32.348" endtime="20200417 12:21:37.517"></status>
+</kw>
+<status status="FAIL" starttime="20200417 12:21:32.348" endtime="20200417 12:21:37.517"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200417 12:21:37.518" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200417 12:21:37.619" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200417 12:21:37.518" endtime="20200417 12:21:37.619"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200417 12:21:37.619" endtime="20200417 12:21:39.091"></status>
+</kw>
+<status status="PASS" starttime="20200417 12:21:37.518" endtime="20200417 12:21:39.091"></status>
+</kw>
 <doc>Change pitch value then press GO!</doc>
 <tags>
 <tag>pitch_value</tag>
-<tag>robot:exit</tag>
 </tags>
-<status status="FAIL" starttime="20200416 17:27:59.248" endtime="20200416 17:27:59.249" critical="yes">Test execution stopped due to a fatal error.</status>
+<status status="FAIL" starttime="20200417 12:21:29.698" endtime="20200417 12:21:39.091" critical="yes">Element 'xpath://button[@id="script_pitch_up"]' did not appear in 5 seconds.</status>
 </test>
 <doc>Global documentation</doc>
-<status status="FAIL" starttime="20200416 17:27:50.727" endtime="20200416 17:27:59.249"></status>
+<status status="FAIL" starttime="20200417 12:21:10.769" endtime="20200417 12:21:39.092"></status>
 </suite>
 <statistics>
 <total>
@@ -165,19 +244,14 @@ Execution terminated by signal</status>
 <stat pass="0" fail="3">All Tests</stat>
 </total>
 <tag>
-<stat pass="0" fail="2" info="combined" combined="NOT robot:exit">NOT robot:exit</stat>
 <stat pass="0" fail="1">pitch_down</stat>
 <stat pass="0" fail="1">pitch_up</stat>
 <stat pass="0" fail="1">pitch_value</stat>
-<stat pass="0" fail="1">robot:exit</stat>
 </tag>
 <suite>
 <stat pass="0" fail="3" id="s1" name="Pitch">Pitch</stat>
 </suite>
 </statistics>
 <errors>
-<msg timestamp="20200416 17:27:56.944" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: NoSuchWindowException: Message: Browsing context has been discarded
-</msg>
-<msg timestamp="20200416 17:27:59.147" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: Execution terminated by signal</msg>
 </errors>
 </robot>
