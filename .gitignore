@@ -1,4 +1,4 @@
 .idea
-/__pycache__/*
+*/__pycache__/*
 test/manual/results/*.*
 test/manual/library/__*
