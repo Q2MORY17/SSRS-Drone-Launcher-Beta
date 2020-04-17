@@ -18,8 +18,10 @@ ${PORT} =		5000
 	
 *** Keywords ***
 Begin Web Test
+      import library	${CURDIR}/library/getip.py
+      ${VAR} =  return_ip
       Start Process  ./resources/start_server.sh  shell=yes
-      Open Browser	${URL}  	${BROWSER}
+      Open Browser	${VAR}  	${BROWSER}
       Maximize Browser Window
 
 End Web Test
