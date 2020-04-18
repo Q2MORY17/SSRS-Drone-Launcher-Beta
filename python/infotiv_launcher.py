@@ -9,8 +9,8 @@ import time
 import socket
 from enum import Enum
 
-    # TODO: merge functions like "pitch_up, down, position and stop" into one function, which takes a parameter instead
-
+class EncoderError(Exception):
+    pass
 
 class PitchCMD(Enum):
     up = 1
@@ -43,9 +43,10 @@ class Launcher:
         #self.rc = Roboclaw("COM8",115200)
         self.rc.Open()
 
+        # Flask config. Not used here anymore.
         #Look for the appropriate local network. based on the Raspberry Pi IP address - RPi Terminal -> Hostname -I or ifconfig
-        self.host=(([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")] or [[(s.connect(("8.8.8.8", 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) + ["no IP found"])[0]
-        port=5000
+        #self.host=(([ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")] or [[(s.connect(("8.8.8.8", 53)), s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET, socket.SOCK_DGRAM)]][0][1]]) + ["no IP found"])[0]
+        #port=5000
 
         #Declare variables
         self.address = 0x80                #Controller 1, M1=Pitch, M2=Rotation
@@ -105,8 +106,7 @@ class Launcher:
         if self.encoder_ready_check():
             # Checks conditions
             if pitch_position > self.lift_length or pitch_position < 0:
-                #TODO: return error
-                pass
+                raise ValueError("out of bounds")
             elif pitch_position == 0:
                 pitch_objective = 0
             else:
@@ -121,8 +121,7 @@ class Launcher:
                 self.rc.SpeedDistanceM1(self.address, -self.pitch_speed_pulses, -pitch_increment, 1)
                 self.rc.SpeedDistanceM1(self.address,0,0,0) #To avoid deceleration
         else:
-            #return Error?
-            pass
+            raise EncoderError('Encoder Not Ready')
 
     def pitch_control(self, cmd: PitchCMD):
         '''
@@ -165,8 +164,7 @@ class Launcher:
                 self.rc.SpeedDistanceM2(self.address, -self.rotation_speed_pulses, -rotation_increment, 1)
                 self.rc.SpeedDistanceM2(self.address,0,0,0) #To avoid deceleration
         else:
-            #return Error?
-            pass
+            raise EncoderError('Encoder Not Ready')
 
 
     def rotation_control(self, cmd: RotationCMD):
@@ -193,12 +191,11 @@ class Launcher:
         if self.encoder_ready_check():
             # Checks conditions
             if lift_position > self.lift_length or lift_position < 0:
-                #TODO: return error
-                pass
+                raise ValueError("out of bounds")
             elif lift_position == 0:
                 lift_objective = 0
             else:
-                lift_objective = int(self.lift_pulses / (self.lift_length / self.lift_position))
+                lift_objective = int(self.lift_pulses / (self.lift_length / lift_position))
                 
             lift_increment = lift_objective - self.rc.ReadEncM1(self.address_2)[1]
 
@@ -208,10 +205,9 @@ class Launcher:
                 # set position cases
             else:
                 self.rc.SpeedDistanceM1(self.address_2, -self.lift_speed_pulses, -lift_increment, 1)
-                rc.SpeedDistanceM1(self.address_2,0,0,0) #To avoid deceleration
+                self.rc.SpeedDistanceM1(self.address_2,0,0,0) #To avoid deceleration
         else:
-            #return Error?
-            pass
+            raise EncoderError('Encoder Not Ready')
 
     def lift_control(self, cmd: LiftCMD):
         '''
@@ -221,8 +217,6 @@ class Launcher:
             self.rc.ForwardM1(self.address_2, self.lift_speed_manual)
         if cmd == LiftCMD.down:
             self.rc.BackwardM1(self.address_2, self.lift_speed_manual)
-        if cmd == LiftCMD.position:
-            self.set_lift_position()
         if cmd == LiftCMD.stop:
             self.rc.ForwardM1(self.address_2, 0)
 
@@ -234,12 +228,12 @@ class Launcher:
     def set_launch_position(self, launch_position):
         '''
         sets the launch position of the launcher by the given launch_position parameter.
+        #TODO: Does this set AND launch? or only set? 
         '''
         if self.encoder_ready_check():
             # Checks conditions
             if launch_position > self.launch_length or launch_position < 0:
-                #TODO: return error
-                pass
+                raise ValueError("out of bounds")
             else:
                 launch_objective = self.launch_bottom
                 launch_increment = launch_objective - self.rc.ReadEncM2(self.address_2)[1]
@@ -258,7 +252,7 @@ class Launcher:
             if launch_position == 0:
                 launch_objective = 0
             else:
-                launch_objective = int(self.launch_pulses/(self.launch_length/self.launch_position))
+                launch_objective = int(self.launch_pulses / (self.launch_length / launch_position))
 
             launch_increment = launch_objective - self.rc.ReadEncM2(self.address_2)[1] + self.launch_connect
             if launch_increment >= 0:
@@ -268,23 +262,31 @@ class Launcher:
                 self.rc.SpeedDistanceM2(self.address_2, -self.launch_speed_pulses_slow, -launch_increment,0)
                 self.rc.SpeedDistanceM2(self.address_2, 0, 0, 0) #To avoid deceleration
         else:
-            #return error?
-            pass
+            raise EncoderError('Encoder Not Ready')
 
 
     def launch_control(self, cmd: LaunchCMD):
         '''
         Takes in a command (forwards, backwards or stop) and controlls the launch accordingly
+        Args:
+            cmd (LaunchCMD): 
         '''
         if cmd == LaunchCMD.forwards:
             self.rc.ForwardM2(self.address_2, self.launch_speed_manual)
         if cmd == LaunchCMD.backwards:
             self.rc.BackwardM2(self.address_2, self.launch_speed_manual)
         if cmd == LaunchCMD.stop:
-            self.rc.ForwardM2(self.address_2,0)
+            self.rc.ForwardM2(self.address_2, 0)
 
-
-
+    def stop(self):
+        '''
+        stops all motors
+        '''
+        self.rc.ForwardM1(self.address, 0)
+        self.rc.ForwardM2(self.address, 0)
+        self.rc.ForwardM1(self.address_2, 0)
+        self.rc.ForwardM2(self.address_2, 0)
+        
     def max_pitch(self):
         
         if self.encoder_ready_check():
@@ -311,48 +313,109 @@ class Launcher:
         pass
 
     def reset_encoders(self):
+        #TODO: reset encoder. Either set to "1" (ready) OR make the inverse of what it is now.
+
+        #example 1:
+        self.encoders_ready = 1
+        
+        #example 2:
+        
         pass
 
     def battery_voltage(self):
-        pass
+        '''
+        Calculates and returns battery voltage
 
-    def stop(self):
-        pass
+        param:
+            none
+        return:
+            voltage (float): represents battery voltage
+        '''
+        voltage = round(0.1 * self.rc.ReadMainBatteryVoltage(self.address)[1],2)
+        return voltage
 
 
-    # AUTOMATED FUNCTIONS:
 
+# ---------------------------------------------------------------------------------
+# ------------------------ Automated functions--------------------------------------
+# ---------------------------------------------------------------------------------
     def standby(self):
         pass
 
-    def prepare(self):
-        pass
+    def prepare(self, pitch_position, rotation_position, lift_position, launch_position):
+        '''
+        Prepare configures pitch, rotation, lift and launch.
+        Takes in four parameters and sets the position for launch
+        Args:
+            pitch_position      (int): desired pitch position between values x and y 
+            rotation_position   (int): desired rotation position between x and y
+            lift_position       (int): desired lift position in between values x and y
+            launch_position     (int): desired launch position in between values x and y
+        '''
+        self.set_pitch_position(pitch_position)
+        self.set_rotation_position(rotation_position)
+        self.set_lift_position(lift_position)
+        self.set_launch_position(launch_position)
 
     def launch(self):
+        '''
+        launch operates the launch motor  + belt.
+        when this runs, the drone launches into the air.
+
+        '''
         pass
 
     def mount(self):
         pass
 
-    def automatic_laumch(self):
+    def automatic_launch(self):
         pass
 
-    # variable update
+# ---------------------------------------------------------------------------------
+# ------------------------ Variable update functions-------------------------------
+# ---------------------------------------------------------------------------------
 
-    def change_pitch(self):
-        pass
+    #TODO: Not sure if these are neccessary anymore.
+    #      pitch, lift, potation are set directly in their set_functions
+    #      I implemented them anyways, if the variables are needed in the future, or in other functions
+    #       It does only change the VARIABLES. It does not run and change the launcher motor positions.
 
-    def change_lift(self):
-        pass
+    def change_pitch(self, pitch_position):
+        if pitch_position > self.pitch_length or pitch_position < 0:
+            raise ValueError("Out of Bounds")
+        else:
+            self.pitch_ready = pitch_position
 
-    def change_rotation(self):
-        pass
 
-    def change_speed(self):
-        pass
+    def change_lift(self, lift_position):
+        if lift_position > self.lift_length or lift_position < 0:
+            raise ValueError("Out of Bounds")
+        else:
+            self.lift_ready = lift_position
 
-    def change_acceleration(self):
-        pass
+    def change_rotation(self, rotation_position):
+        if rotation_position > self.rotation_length or rotation_position < 0:
+            raise ValueError("Out of Bounds")
+        else:
+            self.rotation_ready = rotation_position
+
+    def change_speed(self, speed):
+        if speed > self.launch_max_speed or speed < self.launch_min_speed:
+            raise ValueError("Out of Bounds")
+        else:
+            if speed > 7:
+                self.launch_speed_pulses = speed*13400
+                self.launch.acceleration = 655360 #maximum value
+            else:
+                self.launch_speed_pulses = speed*13400
+                self.launch_acceleration = (speed.launch_speed_pulses**2)/13400
+
+
+    def change_acceleration(self, acceleration):
+        if acceleration > self.launch_max_acceleration or acceleration < self.launch_min_acceleration:
+            raise ValueError("Out of Bounds")
+        else:
+            self.launch_acceleration = acceleration*13400
 
     def disable_buttons(self):
         pass
