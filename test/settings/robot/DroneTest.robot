@@ -20,17 +20,24 @@ End Web Test
     Close Browser
 
 *** Test Cases ***
-Change Pitch Test
+Change Pitch Test1
     [Documentation]     Test the "change pitch" function with negative outcome
     [Tags]              CPtest
     Go To               ${URL}
     Click Element       xpath:/html/body/ul/li[4]/a
     Input Text          xpath://*[@id="settings_launch"]/div[1]/input     -1
     Click Button        xpath://*[@id="script_change_pitch"]
-    Handle Alert
-    Input Text          xpath://*[@id="settings_launch"]/div[1]/input     91
-    Click Button        xpath://*[@id="script_change_pitch"]
-    Handle Alert
+    Alert Should be Present
+    #Wait Until Page Contains    Value should be between 0 and 90
+    #Handle Alert
+
+Change Pitch Test2
+    Go To               ${URL}
+    Click Element       xpath:/html/body/ul/li[4]/a
+    #Input Text          xpath://*[@id="settings_launch"]/div[1]/input     91
+    #Click Button        xpath://*[@id="script_change_pitch"]
+    #Handle Alert
+
 
 
 Change Lift Test
