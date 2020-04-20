@@ -1,7 +1,7 @@
 """
 This code is being worked on @INFOTIV
 AIM: Separate backend and frontend and make the code more readable. 
-CODER: Luan Mollakuqe
+CODER: Luan
 """
 # Libraries
 from roboclaw_3 import Roboclaw # This throws a warning but it works fine
@@ -145,13 +145,11 @@ class Launcher:
 # ---------------------------------------------------------------------------------
 
     def set_rotation_position(self, rotation_position):
-        print({rotation_position})
         '''
         sets the rotation position of the launcher by the given rotation_position parameter.
         NOT USED YET. ONLY ON REAL LAUNCHER
         '''
         if self.encoder_ready_check():
-            print({rotation_position})
             # Checks conditions
             if rotation_position > self.lift_length or rotation_position < 0:
                 raise ValueError("out of bounds")
@@ -160,9 +158,7 @@ class Launcher:
                 rotation_objective = 0
             else:
                 rotation_objective = int((self.rotation_pulses / (self.rotation_length / rotation_position))/2)
-            print({rotation_objective})    
             rotation_increment = rotation_objective - self.rc.ReadEncM2(self.address)[1]
-            print({rotation_increment})
             if rotation_increment >= 0:
                 self.rc.SpeedDistanceM2(self.address, self.rotation_speed_pulses,rotation_increment, 1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
                 self.rc.SpeedDistanceM2(self.address,0,0,0) #To avoid deceleration
