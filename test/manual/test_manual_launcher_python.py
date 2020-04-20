@@ -62,7 +62,7 @@ def test_function_launch_position_encoders_not_ready(dl):
 
 invalid_data_over_boundary={112,-1}
 @pytest.mark.parametrize("invalid_data",invalid_data_over_boundary)
-def test_function_launch_position_encoders_ready_with_large_value(dl,invalid_data):
+def test_function_launch_position_encoders_ready_with_invalid_value(dl,invalid_data):
     #Creates a flask request context
     # GIVEN
     dl.encoders_ready = 1
