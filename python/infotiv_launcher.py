@@ -55,7 +55,7 @@ class Launcher:
         self.pitch_pulses=355000           #Encoder pulses from the linear actuator
         self.pitch_length=90.0             #Degrees
         self.pitch_speed_pulses=7000       #Pulses per second
-        self.pitch_speed_manual=75        #From 0 to 127
+        self.pitch_speed_manual=75         #From 0 to 127
         self.pitch_ready=70.0              #Pitch degrees for the launch (temporary)
 
         self.rotation_pulses=950000        #Encoder pulses from the rotation motor
@@ -68,7 +68,7 @@ class Launcher:
         self.lift_length=130.0             #cm
         self.lift_speed_pulses=420         #Pulses per second
         self.lift_speed_manual=127         #From 0 to 127 - 7 bits
-        self.lift_ready=self.lift_length        #Lift lenght for the launch (temporary)
+        self.lift_ready=self.lift_length   #Lift lenght for the launch (temporary)
 
         self.launch_pulses=14800           #Encoder pulses from the launch motor
         self.launch_length=111.0           #cm
@@ -89,7 +89,12 @@ class Launcher:
         self.encoders_ready = 1            #At the beggining, the encoders are not ready
 
     def encoder_ready_check(self):
-        #Check if encoder is ready
+        '''
+        Checks if encoder i ready.
+
+        return:
+            True or False
+        '''
         if self.encoders_ready == 0:
             return False
         else:
@@ -126,6 +131,7 @@ class Launcher:
     def pitch_control(self, cmd: PitchCMD):
         '''
         Takes in a command (up, down or stop) and controlls the pitch accordingly
+        cmd example: Pitch.CMD
         '''
         if  cmd == PitchCMD.up:
             self.rc.BackwardM1(self.address, self.pitch_speed_manual)
@@ -220,7 +226,6 @@ class Launcher:
         if cmd == LiftCMD.stop:
             self.rc.ForwardM1(self.address_2, 0)
 
-
 # ---------------------------------------------------------------------------------
 # ------------------------ Launch functions--------------------------------------
 # ---------------------------------------------------------------------------------
@@ -286,7 +291,7 @@ class Launcher:
         self.rc.ForwardM2(self.address, 0)
         self.rc.ForwardM1(self.address_2, 0)
         self.rc.ForwardM2(self.address_2, 0)
-        
+
     def max_pitch(self):
         
         if self.encoder_ready_check():
@@ -335,27 +340,42 @@ class Launcher:
         return voltage
 
 
-
 # ---------------------------------------------------------------------------------
 # ------------------------ Automated functions--------------------------------------
 # ---------------------------------------------------------------------------------
     def standby(self):
-        pass
+        '''
+        #TODO: This function should set the launcher to standby position (home)
+        '''
+        self.set_pitch_position(0)
+        self.set_rotation_position(0)
+        self.set_lift_position(0)
+        self.set_launch_position(0)
 
-    def prepare(self, pitch_position, rotation_position, lift_position, launch_position):
+    def set_launch_variables(self, pitch_position, rotation_position, lift_position):
         '''
-        Prepare configures pitch, rotation, lift and launch.
-        Takes in four parameters and sets the position for launch
-        Args:
-            pitch_position      (int): desired pitch position between values x and y 
-            rotation_position   (int): desired rotation position between x and y
-            lift_position       (int): desired lift position in between values x and y
-            launch_position     (int): desired launch position in between values x and y
+        Sets the variables before preparing the launch.
+
+            Args:
+        pitch_position      (int): desired pitch position between values x and y 
+        rotation_position   (int): desired rotation position between x and y
+        lift_position       (int): desired lift position in between values x and y
+        launch_position     (int): desired launch position in between values x and y
         '''
-        self.set_pitch_position(pitch_position)
-        self.set_rotation_position(rotation_position)
-        self.set_lift_position(lift_position)
-        self.set_launch_position(launch_position)
+        self.change_pitch(pitch_position)       #Updates self.pitch_ready
+        self.change_rotation(rotation_position) #Updates self.rotation_ready
+        self.change_lift(lift_position)         #Updates self.lift_ready
+
+    def prepare_launch(self):
+        '''
+        Configures the launchers pitch, rotation and lift according to the variables set in set_launch_variables().
+        also sets launch position to zero, since that is the start position before launch
+
+        '''
+        self.set_pitch_position(self.pitch_ready)
+        self.set_rotation_position(self.rotation_ready)
+        self.set_lift_position(self.lift_position)
+        self.set_launch_position(0)
 
     def launch(self):
         '''
