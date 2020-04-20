@@ -1,7 +1,7 @@
 """
 This code is being worked on @INFOTIV
 AIM: Separate backend and frontend and make the code more readable. 
-CODER: Luan
+CODER: Luan Mollakuqe
 """
 # Libraries
 from roboclaw_3 import Roboclaw # This throws a warning but it works fine
