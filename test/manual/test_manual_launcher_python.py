@@ -10,6 +10,8 @@ from unittest.mock import MagicMock
 
 import python.dronelauncher_python
 app = flask.Flask(__name__)
+
+
 @pytest.fixture()
 def dl():
     print('\n*********Start*********')
@@ -27,6 +29,18 @@ def test_function_launch_backwards_with_valid_speed(dl):
 
     # THEN
     dl.rc.BackwardM2.assert_called_with(dl.address_2, dl.launch_speed_manual)
+    assert returnValue == ('', 204)
+
+
+# This should not pass, but yet it does. No precautions taken in coding this part
+def test_function_launch_backwards_with_invalid_speed(dl):
+    # GIVEN
+    dl.rc = MagicMock()
+    # WHEN
+    dl.launch_speed_manual = 30000
+    returnValue = dl.function_launch_backwards()
+    # THEN
+    dl.rc.BackwardM2.assert_called_with(dl.address_2, 30000)
     assert returnValue == ('', 204)
 
 
