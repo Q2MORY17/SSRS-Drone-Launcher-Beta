@@ -28,6 +28,10 @@ Change Pitch Test
     Input Text          xpath://*[@id="settings_launch"]/div[1]/input     -1
     Click Button        xpath://*[@id="script_change_pitch"]
     Handle Alert
+    Input Text          xpath://*[@id="settings_launch"]/div[1]/input     91
+    Click Button        xpath://*[@id="script_change_pitch"]
+    Handle Alert
+
 
 Change Lift Test
     [Documentation]    Test the "change lift" function with negative outcome
@@ -37,12 +41,18 @@ Change Lift Test
     Input Text         xpath://*[@id="settings_launch"]/div[2]/input   131
     Click Button       xpath://*[@id="script_change_lift"]
     Handle Alert
+    Input Text         xpath://*[@id="settings_launch"]/div[2]/input   -1
+    Click Button       xpath://*[@id="script_change_lift"]
+    Handle Alert
 
 Change Rotation Test
     [Documentation]    Test the "change rotation" function with negative outcome
     [Tags]             CRtest
     Go To              ${URL}
     Click Element      xpath:/html/body/ul/li[4]/a
-    Input Text          xpath://*[@id="settings_launch"]/div[3]/input   181
-    Click Button        xpath://*[@id="script_change_rotation"]
+    Input Text         xpath://*[@id="settings_launch"]/div[3]/input   181
+    Click Button       xpath://*[@id="script_change_rotation"]
+    Handle Alert
+    Input Text         xpath://*[@id="settings_launch"]/div[3]/input   -181
+    Click Button       xpath://*[@id="script_change_rotation"]
     Handle Alert
