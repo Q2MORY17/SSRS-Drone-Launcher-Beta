@@ -1,6 +1,7 @@
 import os
 import sys
 
+import flask
 import pytest
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../python")
@@ -8,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "
 from unittest.mock import MagicMock
 
 import python.dronelauncher_python
-
+app = flask.Flask(__name__)
 @pytest.fixture()
 def dl():
     print('\n*********Start*********')
@@ -58,3 +59,14 @@ def test_function_launch_position_encoders_not_ready(dl):
     returnValue = dl.function_launch_position()
     # THEN
     assert returnValue == ('', 403)
+
+invalid_data_over_boundary={112,-1}
+@pytest.mark.parametrize("invalid_data",invalid_data_over_boundary)
+def test_function_launch_position_encoders_ready_with_large_value(dl,invalid_data):
+    #Creates a flask request context
+    # GIVEN
+    dl.encoders_ready = 1
+    # WHEN
+    with app.test_request_context('/app_launch_position',data={'launch_position': invalid_data}):
+        # THEN
+        assert dl.function_launch_position() == ('', 400)
