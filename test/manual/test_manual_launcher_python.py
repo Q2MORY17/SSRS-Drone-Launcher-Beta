@@ -134,3 +134,19 @@ def test_function_launch_position_encoders_ready_launch_position_higher_than_zer
 
     # THEN
     assert response.status_code == 204
+
+
+def test_function_launch_position_encoders_ready_launch_position_max(dl):
+    # GIVEN
+    dl.encoders_ready = 1
+    app_client = dl.app.test_client()
+    dl.rc.ReadEncM2 = MagicMock(return_value=(1, -1.5, 2))
+    dl.rc.SpeedDistanceM2 = MagicMock()
+    dl.rc.ReadBuffers = MagicMock(return_value=(0, 0, 0x80))
+
+    # WHEN
+    response = app_client.post('/app_launch_position', content_type='multipart/form-data',
+                               data={'launch_position': '111'})
+
+    # THEN
+    assert response.status_code == 204
