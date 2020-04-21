@@ -8,6 +8,9 @@ Library		 Process
 Test Setup       Begin Web Test
 Test Teardown    End Web Test
 
+
+
+
 *** Variables ***
 ${BROWSER} =		firefox
 ${URL} =    		http://192.168.1.155:5000
