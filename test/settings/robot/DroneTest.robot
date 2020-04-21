@@ -132,3 +132,30 @@ Change Speed Test3
     Input Text                  xpath://html/body/div/div[1]/div[8]/div[4]/input   5
     Click Button                xpath://*[@id="script_change_speed"]
     Alert Should Not be Present
+
+Change Acceleration Test1
+    [Documentation]             Test the "change acceleration" function with negative outcome
+    [Tags]                      CAtest
+    Go To                       ${URL}
+    Click Element               xpath:/html/body/ul/li[4]/a
+    Input Text                  xpath://*[@id="settings_launch"]/div[5]/input   -1
+    Click Button                xpath://*[@id="script_change_acceleration"]
+    Alert Should be Present     Value should be between 1 and 48
+
+Change Acceleration Test2
+    [Documentation]             Test the "change acceleration" function with negative outcome
+    [Tags]                      CAtest
+    Go To                       ${URL}
+    Click Element               xpath:/html/body/ul/li[4]/a
+    Input Text                  xpath://*[@id="settings_launch"]/div[5]/input   49
+    Click Button                xpath://*[@id="script_change_acceleration"]
+    Alert Should be Present     Value should be between 1 and 48
+
+Change Acceleration Test3
+    [Documentation]             Test the "change acceleration" function with no negative outcome
+    [Tags]                      CAtest
+    Go To                       ${URL}
+    Click Element               xpath:/html/body/ul/li[4]/a
+    Input Text                  xpath://*[@id="settings_launch"]/div[5]/input   24
+    Click Button                xpath://*[@id="script_change_acceleration"]
+    Alert Should Not be Present
