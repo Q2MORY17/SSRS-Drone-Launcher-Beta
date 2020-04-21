@@ -5,12 +5,12 @@ Documentation    Global documentation
 Library          SeleniumLibrary
 Library		 ./library/getip.py
 Library		 Process
-Test Setup       Begin Web Test
-Test Teardown    End Web Test
+Suite Setup       Begin Web Test
+Suite Teardown    End Web Test
 
 
 *** Variables ***
-${BROWSER} =		firefox
+${BROWSER} =		chrome
 ${URL} =    		http://192.168.0.4:5000
 # ${IP} = 		return_ip	
 ${PORT} =		5000
@@ -56,6 +56,7 @@ User Expects The Pitch To Change
 
 Then User Expects An Error Message
         Alert Should Be Present		action=ACCEPT
+	
 *** Test Cases ***
 
 Pitch Up
@@ -73,21 +74,12 @@ Pitch Down
 	Then User Expects The Pitch To Decrease
 
 Pitch Value
-	[Documentation]		Change pitch value then press GO!
+	[Documentation]		Change pitch value arbitrarily
 	[Tags]			pitch_value
      	Given Server Is Up
-	When User Enters Value In Field  23
-	Then User Expects The Pitch To Change
-
-Pitch Wrong Input
-	[Documentation]		Change pitch value to illegal value
-	[Tags]			pitch_value
-     	Given Server Is Up
+	When User Enters Value In Field  -1
+	Then User Expects An Error Message
+	When User Enters Value In Field  1
+	When User Enters Value In Field  89
 	When User Enters Value In Field  91
 	Then User Expects An Error Message
-
-
-
-
-
-
