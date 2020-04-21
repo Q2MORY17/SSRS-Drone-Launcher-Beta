@@ -16,8 +16,10 @@ app = flask.Flask(__name__)
 def dl():
     print('\n*********Start*********')
     dl = python.dronelauncher_python
+    orig_launch_speed = dl.launch_speed_manual  # = 12
     yield dl
     print('\n**********End**********')
+    dl.launch_speed_manual = orig_launch_speed
 
 
 def test_function_launch_backwards_with_valid_speed(dl):
@@ -32,7 +34,7 @@ def test_function_launch_backwards_with_valid_speed(dl):
     assert returnValue == ('', 204)
 
 
-# This should not pass, but yet it does. No precautions taken in coding this part
+#Test fails because no handling for invalid input speed
 def test_function_launch_backwards_with_invalid_speed(dl):
     # GIVEN
     dl.rc = MagicMock()
@@ -41,7 +43,7 @@ def test_function_launch_backwards_with_invalid_speed(dl):
     returnValue = dl.function_launch_backwards()
     # THEN
     dl.rc.BackwardM2.assert_called_with(dl.address_2, 30000)
-    assert returnValue == ('', 204)
+    assert returnValue != ('', 204)
 
 
 def test_function_launch_forwards_with_valid_speed(dl):
@@ -54,6 +56,17 @@ def test_function_launch_forwards_with_valid_speed(dl):
     # THEN
     dl.rc.ForwardM2.assert_called_with(dl.address_2, dl.launch_speed_manual)
     assert returnValue == ('', 204)
+
+#Test fails because no handling for invalid input speed
+def test_function_launch_forwards_with_invalid_speed(dl):
+    # GIVEN
+    dl.rc = MagicMock()
+    # WHEN
+    dl.launch_speed_manual = 999
+    returnValue = dl.function_launch_forwards()
+    # THEN
+    dl.rc.ForwardM2.assert_called_with(dl.address_2, 999)
+    assert returnValue != ('', 204)
 
 
 def test_function_launch_stop(dl):
