@@ -39,8 +39,8 @@ User Clicks Button Lift Down
 	Click Button	xpath://button[@id="script_lift_down"]
 
 User Enters Value In Field
-	Click Element	xpath://input[@class="form-2" and @name="lift_position"]
-	Input Text	xpath://input[@class="form-2" and @name="lift_position"]  23
+	Click Element	xpath://input[@class="form-3" and @name="lift_position"]
+	Input Text	xpath://input[@class="form-3" and @name="lift_position"]  130
 	Click Button	xpath://button[@id="script_lift_position"]
 
 User Expects The Lift To Increase
