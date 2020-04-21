@@ -9,7 +9,7 @@ Test Setup       Begin Web Test
 Test Teardown    End Web Test
 
 *** Variables ***
-${BROWSER} =		chrome
+${BROWSER} =		firefox
 ${URL} =    		http://192.168.1.155:5000
 ${IP} = 		return_ip
 ${PORT} =		5000
