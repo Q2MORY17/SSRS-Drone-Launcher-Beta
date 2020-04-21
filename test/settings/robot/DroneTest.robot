@@ -2,12 +2,14 @@
 Documentation  Dronelauncher tests regarding settings for the automatic use
 Resource  Resources/keywords.robot
 Library  SeleniumLibrary
+Library  Dialogs
+
 Test Setup  Begin web test
 Test Teardown  End web test
 
 *** Variables ***
-${BROWSER} =    firefox
-${URL} =  http://192.168.2.52:5000/
+${BROWSER}  chrome
+${URL} =  http://192.168.1.216:5000/
 ${IP} =  return ip
 ${PORT} =  5000
 
@@ -18,6 +20,9 @@ Begin Web Test
 
 End Web Test
     Close Browser
+
+#Select Browser
+#    ${BROWSER}=  Get Selection From User    Select browser:    chrome      firefox
 
 *** Test Cases ***
 Change Pitch Test1
@@ -106,6 +111,24 @@ Change Speed Test1
     [Tags]                      CStest
     Go To                       ${URL}
     Click Element               xpath:/html/body/ul/li[4]/a
-    Input Text                  xpath://html/body/div/div[1]/div[8]/div[4]/input   0
+    Input Text                  xpath://html/body/div/div[1]/div[8]/div[4]/input   -1
     Click Button                xpath://*[@id="script_change_speed"]
     Alert Should be Present     Value should be between 1 and 10
+
+Change Speed Test2
+    [Documentation]             Test the "change speed" function with negative outcome
+    [Tags]                      CStest
+    Go To                       ${URL}
+    Click Element               xpath:/html/body/ul/li[4]/a
+    Input Text                  xpath://html/body/div/div[1]/div[8]/div[4]/input   11
+    Click Button                xpath://*[@id="script_change_speed"]
+    Alert Should be Present     Value should be between 1 and 10
+
+Change Speed Test3
+    [Documentation]             Test the "change speed" function with no negative outcome
+    [Tags]                      CStest
+    Go To                       ${URL}
+    Click Element               xpath:/html/body/ul/li[4]/a
+    Input Text                  xpath://html/body/div/div[1]/div[8]/div[4]/input   5
+    Click Button                xpath://*[@id="script_change_speed"]
+    Alert Should Not be Present
