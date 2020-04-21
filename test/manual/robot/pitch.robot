@@ -40,8 +40,9 @@ User Clicks Button Pitch Down
 	Click Button	xpath://button[@id="script_pitch_down"]
 
 User Enters Value In Field
+	[Arguments]	${input}
 	Click Element	xpath://input[@class="form-2" and @name="pitch_position"]
-	Input Text	xpath://input[@class="form-2" and @name="pitch_position"]  23
+	Input Text	xpath://input[@class="form-2" and @name="pitch_position"]  ${input}
 	Click Button	xpath://button[@id="script_pitch_position"]
 
 User Expects The Pitch To Increase
@@ -53,8 +54,8 @@ User Expects The Pitch To Decrease
 User Expects The Pitch To Change
 	Page Should Contain	Pitch	# Placeholder for Gherkin
 
-
-
+Then User Expects An Error Message
+        Alert Should Be Present		action=ACCEPT
 *** Test Cases ***
 
 Pitch Up
@@ -75,5 +76,18 @@ Pitch Value
 	[Documentation]		Change pitch value then press GO!
 	[Tags]			pitch_value
      	Given Server Is Up
-	When User Enters Value In Field
+	When User Enters Value In Field  23
 	Then User Expects The Pitch To Change
+
+Pitch Wrong Input
+	[Documentation]		Change pitch value to illegal value
+	[Tags]			pitch_value
+     	Given Server Is Up
+	When User Enters Value In Field  91
+	Then User Expects An Error Message
+
+
+
+
+
+
