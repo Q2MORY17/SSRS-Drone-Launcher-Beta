@@ -1,5 +1,6 @@
 #!/bin/bash
-DRONE_IP=$(hostname -i | cut -f2 -d " ")
+#DRONE_IP=$(hostname -i | cut -f2 -d " ")
+DRONE_IP=$(python ./library/getip.py)
 
 python ../../../python/dronelauncher_python.py &> /dev/null &
 DRONE_PID=$!
