@@ -1,31 +1,30 @@
 
+
 *** Settings ***
-Documentation    Global documentation
-# Resource         ./resources/keywords.robot
-Library          SeleniumLibrary
-Library		 ./library/getip.py
-Library		 Process
-Suite Setup       Begin Web Test
-Suite Teardown    End Web Test
+Documentation	Global documentation
+Library		SeleniumLibrary
+Library		./library/getip.py
+Library		Process
+Suite Setup	Begin Web Test
+Suite Teardown	End Web Test
 
 
 *** Variables ***
-${BROWSER} =		chrome
-${URL} =    		http://192.168.0.4:5000
-# ${IP} = 		return_ip	
-${PORT} =		5000
+${BROWSER} =	firefox
+${URL} =   	http://192.168.0.4:5000
+# ${IP} =	return_ip	
+${PORT} =	5000
 
-	
+
 *** Keywords ***
 Begin Web Test
-      import library	${CURDIR}/library/getip.py
-      ${VAR} =  return_ip
-      Start Process  ./resources/start_server.sh  shell=yes
+#     import library	${CURDIR}/library/getip.py
+#      Start Process	./resources/start_server.sh	shell=yes
       Open Browser	${URL}  	${BROWSER}
       Maximize Browser Window
 
 End Web Test
-	Terminate Process
+#	Terminate Process
 	Close Browser
 
 Server Is Up 
@@ -56,7 +55,8 @@ User Expects The Pitch To Change
 
 Then User Expects An Error Message
         Alert Should Be Present		action=ACCEPT
-	
+
+
 *** Test Cases ***
 
 Pitch Up
