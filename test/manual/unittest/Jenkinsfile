@@ -1,0 +1,16 @@
+pipeline {
+     agent any
+     stages {
+         stage('Checkout') {
+             steps {
+             git 'https://github.com/mika-github/SSRS2'
+             }
+         }
+         stage('Build') {
+             steps {
+             sh 'python3 -m pip install flask'
+             sh "python3 -m pytest ./test/manual/unittest/test_manual_launcher_python.py"
+             }
+         }
+    }
+ }
