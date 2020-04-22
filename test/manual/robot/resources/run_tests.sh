@@ -1,7 +1,7 @@
 #!/bin/bash
 DRONE_IP=$(hostname -i | cut -f2 -d " ")
 
-python ../../../python/dronelauncher_python.py &> ./logs/dronelauncher.log &
+python ../../../python/dronelauncher_python.py &> /dev/null &
 DRONE_PID=$!
 
 if [ $# -eq 0 ]; then
