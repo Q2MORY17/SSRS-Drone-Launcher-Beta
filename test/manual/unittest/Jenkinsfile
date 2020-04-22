@@ -6,11 +6,30 @@ pipeline {
              git 'https://github.com/mika-github/SSRS2'
              }
          }
-         stage('Build') {
+
+         stage('Test') {
              steps {
-             sh 'python3 -m pip install flask'
-             sh "python3 -m pytest ./test/manual/unittest/test_manual_launcher_python.py"
+                 sh 'python3 -m pip install flask'
+                 sh 'python3 -m pip install pytest'
+                 sh "python3 -m pytest -v -s test/manual/unittest/test_manual_launcher_python.py --junitxml=test/manual/unittest/testreport.xml"
              }
+             post {
+                     always {
+                             junit  '**/test/manual/unittest/*.xml'
+                            }
+                   }
          }
-    }
- }
+     }
+         post {
+             always {
+             junit '**/test/manual/unittest/*.xml'
+             emailext attachLog: true, attachmentsPattern: '**/test/manual/unittest/*.xml',
+             body: '', recipientProviders: [culprits()], subject:
+             '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
+             }
+     }
+
+
+
+
+}
