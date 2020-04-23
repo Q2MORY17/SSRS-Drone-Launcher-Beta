@@ -12,7 +12,6 @@ Suite Teardown	End Web Test
 *** Variables ***
 ${BROWSER} =	firefox
 ${URL} =   	http://192.168.0.4:5000
-# ${IP} =	return_ip	
 ${PORT} =	5000
 
 
