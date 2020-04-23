@@ -12,7 +12,7 @@ Test Teardown    End Web Test
 
 
 *** Variables ***
-${BROWSER} =		firefox
+${BROWSER} = 		firefox
 ${URL} =    		http://192.168.1.155:5000
 ${IP} = 		return_ip
 ${PORT} =		5000
@@ -20,9 +20,9 @@ ${PORT} =		5000
 	
 *** Keywords ***
 Begin Web Test
-      #import library	${CURDIR}/library/getip.py
-
-      Start Process     ./resources/start_server.sh   shell=yes
+      import library	${CURDIR}/library/getip.py
+	  ${VAR} =  return_ip
+      Start Process  ./resources/start_server.sh  shell=yes
       Open Browser	${URL}  	${BROWSER}
       Maximize Browser Window
 
@@ -42,9 +42,11 @@ User Clicks Button Lift Down
 	Click Button	xpath://button[@id="script_lift_down"]
 
 User Enters Value In Field
+	[Arguments]	${input}				 
 	Click Element	xpath://input[@class="form-3" and @name="lift_position"]
-	Input Text	xpath://input[@class="form-3" and @name="lift_position"]  130
+	Input Text	xpath://input[@class="form-3" and @name="lift_position"]  ${input}
 	Click Button	xpath://button[@id="script_lift_position"]
+
 
 User Expects The Lift To Increase
 	Page Should Contain	Lift	# Placeholder for Gherkin
@@ -54,8 +56,8 @@ User Expects The Lift To Decrease
 
 User Expects The Lift To Change
 	Page Should Contain	Lift	# Placeholder for Gherkin
-
-
+Then User Expects An Error Message
+        Alert Should Be Present		action=ACCEPT
 
 *** Test Cases ***
 
@@ -74,8 +76,12 @@ Lift Down
 	Then User Expects The Lift To Decrease
 
 Lift Value
-	[Documentation]		Change lift value then press GO!
+	[Documentation]		Change lift value to Max then ok values then Min
 	[Tags]			lift_value
      	Given Server Is Up
-	When User Enters Value In Field
-	Then User Expects The Lift To Change
+	When User Enters Value In Field  131
+	Then User Expects An Error Message
+	When User Enters Value In Field  130
+	When User Enters Value In Field  20
+	When User Enters Value In Field  -1
+	Then User Expects An Error Message							   
