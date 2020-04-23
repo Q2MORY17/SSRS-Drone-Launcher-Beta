@@ -6,12 +6,16 @@ echo $DRONE_IP > .current_ip
 python ../../../python/dronelauncher_python.py &> /dev/null &
 DRONE_PID=$!
 
-
-
-if [ $# -eq 0 ]; then
-    robot -d results *.robot
-else
-    robot -d results $@
+if [ $# -eq 0 ]; then           #If argumentlist is empty, run all tests.
+    for i in *.robot
+    do
+	robot -d results $i
+    done
+else                            # Run tests provided by argument.
+    for i in $@
+    do
+	robot -d results $i
+    done
 fi
 
 kill $DRONE_PID
@@ -21,4 +25,3 @@ if [ -f .current_ip ]; then
 fi
 
 exit 0
-
