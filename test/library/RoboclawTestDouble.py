@@ -3,6 +3,17 @@ import subprocess
 
 
 class RoboclawTestDouble:
+    """
+    Class to be used as a Library in RobotFramework.
+    To read the commands sent to the roboclaw, a virtual COM port pair shall be setup using
+    com0com, https://sourceforge.net/projects/com0com/files/latest/download (install with defaults)
+    Start the com0com application and setup the port names to be port names used in
+    dronelauncher_python.py (COM8) and the one used here (COM5)
+
+    The com0com application need to be started manually before running the tests.
+    """
+
+    # Uses GLOBAL scope to not open the port for each test case
     ROBOT_LIBRARY_SCOPE = 'GLOBAL'
 
     com_port = "COM5"
@@ -25,4 +36,4 @@ class RoboclawTestDouble:
 
 if __name__ == "__main__":
     rc_test = RoboclawTestDouble()
-    rc_test.run
+    rc_test.read_roboclaw_command()
