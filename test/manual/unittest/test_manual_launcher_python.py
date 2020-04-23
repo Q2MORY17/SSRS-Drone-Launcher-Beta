@@ -102,9 +102,6 @@ def test_function_launch_position_encoders_ready_with_invalid_value(dl, invalid_
     with app.test_request_context('/app_launch_position', data={'launch_position': invalid_data}):
         # THEN
         assert dl.function_launch_position() == ('', 400)
-<<<<<<< HEAD:test/manual/unittest/test_manual_launcher_python.py
-=======
-
 
 def test_function_launch_position_encoders_ready_launch_position_zero(dl):
     # GIVEN
@@ -152,4 +149,4 @@ def test_function_launch_position_encoders_ready_launch_position_max(dl):
 
     # THEN
     assert response.status_code == 204
->>>>>>> SSRS2-64:test/manual/unittest/test_manual_launcher_python.py
+
