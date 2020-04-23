@@ -6,15 +6,16 @@ python ../../../python/dronelauncher_python.py &> /dev/null &
 DRONE_PID=$!
 
 
-# if [ $# -eq 0 ]; then
-#     robot -d results *.robot
-# else
-#     robot -d results $@
-# fi
 
-echo $DRONE_IP
-echo $DRONE_PID
+if [ $# -eq 0 ]; then
+    robot -d results *.robot
+else
+    robot -d results $@
+fi
+
+echo $DRONE_IP > .current_ip
+# echo $DRONE_PID
 kill $DRONE_PID
-
+rm .current_ip
 exit 0
 
