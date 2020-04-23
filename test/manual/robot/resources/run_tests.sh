@@ -1,6 +1,7 @@
 #!/bin/bash
 #DRONE_IP=$(hostname -i | cut -f2 -d " ")
 DRONE_IP=$(python ./library/getip.py)
+echo $DRONE_IP > .current_ip
 
 python ../../../python/dronelauncher_python.py &> /dev/null &
 DRONE_PID=$!
@@ -13,9 +14,11 @@ else
     robot -d results $@
 fi
 
-echo $DRONE_IP > .current_ip
-# echo $DRONE_PID
 kill $DRONE_PID
-rm .current_ip
+
+if [ -f .current_ip ]; then
+    rm .current_ip
+fi
+
 exit 0
 
