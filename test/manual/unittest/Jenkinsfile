@@ -3,7 +3,7 @@ pipeline {
      stages {
          stage('Checkout') {
              steps {
-             git 'https://github.com/mika-github/SSRS2'
+             git 'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta'
              }
          }
 
