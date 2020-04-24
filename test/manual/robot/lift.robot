@@ -5,15 +5,15 @@ Documentation    Global documentation
 Library          SeleniumLibrary
 Library		 ./library/getip.py
 Library		 Process
-Test Setup       Begin Web Test
-Test Teardown    End Web Test
+Suite Setup	 Begin Web Test
+Suite Teardown	 End Web Test
 
 
 
 
 *** Variables ***
 ${BROWSER} = 		firefox
-${URL} =    		http://192.168.1.155:5000
+${URL} =    		http://192.168.1.15:5000
 ${IP} = 		return_ip
 ${PORT} =		5000
 
@@ -27,8 +27,10 @@ Begin Web Test
       Maximize Browser Window
 
 End Web Test
-	Terminate Process
+#	Terminate Process
 	Close Browser
+
+
 
 Server Is Up 
 	Wait Until Page Contains Element	xpath://button[@id="script_lift_up"]
