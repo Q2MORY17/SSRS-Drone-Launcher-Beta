@@ -1,0 +1,1569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.1 (Python 3.8.2 on linux)" generated="20200421 13:13:32.425" rpa="false">
+<suite id="s1" name="MaxMin &amp; Pitch &amp; Rotate.Boundaries &amp; Rotate">
+<suite id="s1-s1" name="MaxMin" source="/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/MaxMin.robot">
+<test id="s1-s1-t1" name="Max pitch">
+<kw name="Begain Web Test" type="setup">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:32.517" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:13:32.517" endtime="20200421 13:13:33.994"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:33.994" endtime="20200421 13:13:34.139"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:32.517" endtime="20200421 13:13:34.139"></status>
+</kw>
+<kw name="Display Page">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<doc>Waits until ``text`` appears on the current page.</doc>
+<arguments>
+<arg>Positions</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:34.139" endtime="20200421 13:13:34.152"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:34.139" endtime="20200421 13:13:34.152"></status>
+</kw>
+<kw name="User Click Button Max pitch">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_max_pitch"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:34.153" level="INFO">Clicking button '//*[@id="script_max_pitch"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:34.153" endtime="20200421 13:13:34.211"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:34.152" endtime="20200421 13:13:34.211"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:34.211" endtime="20200421 13:13:34.265"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:34.211" endtime="20200421 13:13:34.266"></status>
+</kw>
+<doc>Clicking the Positions Max pitch</doc>
+<tags>
+<tag>max_pitch</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:32.516" endtime="20200421 13:13:34.266" critical="yes"></status>
+</test>
+<test id="s1-s1-t2" name="Min pitch">
+<kw name="Begain Web Test" type="setup">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:34.267" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:13:34.267" endtime="20200421 13:13:35.716"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:35.716" endtime="20200421 13:13:35.853"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:34.266" endtime="20200421 13:13:35.853"></status>
+</kw>
+<kw name="Display Page">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<doc>Waits until ``text`` appears on the current page.</doc>
+<arguments>
+<arg>Positions</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:35.854" endtime="20200421 13:13:35.868"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:35.853" endtime="20200421 13:13:35.868"></status>
+</kw>
+<kw name="User Click Button Min pitch">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_min_pitch"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:35.868" level="INFO">Clicking button '//*[@id="script_min_pitch"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:35.868" endtime="20200421 13:13:35.925"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:35.868" endtime="20200421 13:13:35.925"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:35.926" endtime="20200421 13:13:35.980"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:35.925" endtime="20200421 13:13:35.980"></status>
+</kw>
+<doc>Clicking the Positions Max pitch</doc>
+<tags>
+<tag>min_pitch</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:34.266" endtime="20200421 13:13:35.980" critical="yes"></status>
+</test>
+<test id="s1-s1-t3" name="Max lift">
+<kw name="Begain Web Test" type="setup">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:35.982" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:13:35.981" endtime="20200421 13:13:37.507"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:37.507" endtime="20200421 13:13:37.611"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:35.981" endtime="20200421 13:13:37.611"></status>
+</kw>
+<kw name="Display Page">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<doc>Waits until ``text`` appears on the current page.</doc>
+<arguments>
+<arg>Positions</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:37.612" endtime="20200421 13:13:37.625"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:37.611" endtime="20200421 13:13:37.626"></status>
+</kw>
+<kw name="User Click Button Max lift">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_max_lift"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:37.626" level="INFO">Clicking button '//*[@id="script_max_lift"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:37.626" endtime="20200421 13:13:37.688"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:37.626" endtime="20200421 13:13:37.688"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:37.689" endtime="20200421 13:13:37.746"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:37.689" endtime="20200421 13:13:37.746"></status>
+</kw>
+<doc>Clicking the Positions Max pitch</doc>
+<tags>
+<tag>max_lift</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:35.981" endtime="20200421 13:13:37.746" critical="yes"></status>
+</test>
+<test id="s1-s1-t4" name="Min lift">
+<kw name="Begain Web Test" type="setup">
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:37.748" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:13:37.748" endtime="20200421 13:13:39.223"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:39.223" endtime="20200421 13:13:39.365"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:37.747" endtime="20200421 13:13:39.365"></status>
+</kw>
+<kw name="Display Page">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<doc>Waits until ``text`` appears on the current page.</doc>
+<arguments>
+<arg>Positions</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:39.365" endtime="20200421 13:13:39.374"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:39.365" endtime="20200421 13:13:39.375"></status>
+</kw>
+<kw name="User Click Button Min lift">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_min_lift"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:39.375" level="INFO">Clicking button '//*[@id="script_min_lift"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:39.375" endtime="20200421 13:13:39.420"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:39.375" endtime="20200421 13:13:39.421"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:39.421" endtime="20200421 13:13:39.475"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:39.421" endtime="20200421 13:13:39.475"></status>
+</kw>
+<doc>Clicking the Positions Max pitch</doc>
+<tags>
+<tag>min_lift</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:37.746" endtime="20200421 13:13:39.475" critical="yes"></status>
+</test>
+<doc>Maximizing and Minimizing the Drone Positions</doc>
+<status status="PASS" starttime="20200421 13:13:32.440" endtime="20200421 13:13:39.476"></status>
+</suite>
+<suite id="s1-s2" name="Pitch" source="/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/pitch.robot">
+<test id="s1-s2-t1" name="Pitch Up">
+<kw name="Begin Web Test" type="setup">
+<kw name="Import Library" library="BuiltIn">
+<doc>Imports a library with the given name and optional arguments.</doc>
+<arguments>
+<arg>/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/library/getip.py</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:39.489" endtime="20200421 13:13:39.490"></status>
+</kw>
+<kw name="Return Ip" library="getip">
+<assign>
+<var>${VAR}</var>
+</assign>
+<msg timestamp="20200421 13:13:39.490" level="INFO">192.168.0.4</msg>
+<msg timestamp="20200421 13:13:39.490" level="INFO">${VAR} = None</msg>
+<status status="PASS" starttime="20200421 13:13:39.490" endtime="20200421 13:13:39.491"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>./resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:13:39.491" level="INFO">Starting process:
+./resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:13:39.491" endtime="20200421 13:13:39.493"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:39.494" level="INFO">Opening browser 'firefox' to base url 'http://192.168.0.4:5000'.</msg>
+<msg timestamp="20200421 13:13:39.495" level="INFO">Firefox driver log is always forced to to: /home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/resources/geckodriver-4.log</msg>
+<status status="PASS" starttime="20200421 13:13:39.494" endtime="20200421 13:13:41.999"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:41.999" endtime="20200421 13:13:42.286"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:39.489" endtime="20200421 13:13:42.286"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>xpath://button[@id="script_pitch_up"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:42.286" endtime="20200421 13:13:42.292"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Pitch</arg>
+</arguments>
+<msg timestamp="20200421 13:13:42.302" level="INFO">Current page contains text 'Pitch'.</msg>
+<status status="PASS" starttime="20200421 13:13:42.293" endtime="20200421 13:13:42.302"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:42.302" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:42.302" endtime="20200421 13:13:42.537"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:42.286" endtime="20200421 13:13:42.537"></status>
+</kw>
+<kw name="When User Clicks Button Pitch Up">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_pitch_up"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:42.538" level="INFO">Clicking button 'xpath://button[@id="script_pitch_up"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:42.538" endtime="20200421 13:13:42.758"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:42.538" endtime="20200421 13:13:42.758"></status>
+</kw>
+<kw name="Then User Expects The Pitch To Increase">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Pitch</arg>
+</arguments>
+<msg timestamp="20200421 13:13:42.764" level="INFO">Current page contains text 'Pitch'.</msg>
+<status status="PASS" starttime="20200421 13:13:42.759" endtime="20200421 13:13:42.764"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:42.758" endtime="20200421 13:13:42.764"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:13:42.765" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:13:42.765" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:13:42.764" endtime="20200421 13:13:42.765"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:42.765" endtime="20200421 13:13:44.239"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:42.764" endtime="20200421 13:13:44.239"></status>
+</kw>
+<doc>Clicking the pitch up button</doc>
+<tags>
+<tag>pitch_up</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:39.488" endtime="20200421 13:13:44.239" critical="yes"></status>
+</test>
+<test id="s1-s2-t2" name="Pitch Down">
+<kw name="Begin Web Test" type="setup">
+<kw name="Import Library" library="BuiltIn">
+<doc>Imports a library with the given name and optional arguments.</doc>
+<arguments>
+<arg>/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/library/getip.py</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:44.241" endtime="20200421 13:13:44.241"></status>
+</kw>
+<kw name="Return Ip" library="getip">
+<assign>
+<var>${VAR}</var>
+</assign>
+<msg timestamp="20200421 13:13:44.242" level="INFO">192.168.0.4</msg>
+<msg timestamp="20200421 13:13:44.242" level="INFO">${VAR} = None</msg>
+<status status="PASS" starttime="20200421 13:13:44.241" endtime="20200421 13:13:44.242"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>./resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:13:44.242" level="INFO">Starting process:
+./resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:13:44.242" endtime="20200421 13:13:44.244"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:44.245" level="INFO">Opening browser 'firefox' to base url 'http://192.168.0.4:5000'.</msg>
+<msg timestamp="20200421 13:13:44.245" level="INFO">Firefox driver log is always forced to to: /home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/resources/geckodriver-5.log</msg>
+<status status="PASS" starttime="20200421 13:13:44.245" endtime="20200421 13:13:46.832"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:46.832" endtime="20200421 13:13:47.173"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:44.241" endtime="20200421 13:13:47.173"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>xpath://button[@id="script_pitch_up"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:47.174" endtime="20200421 13:13:47.180"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Pitch</arg>
+</arguments>
+<msg timestamp="20200421 13:13:47.188" level="INFO">Current page contains text 'Pitch'.</msg>
+<status status="PASS" starttime="20200421 13:13:47.180" endtime="20200421 13:13:47.188"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:47.188" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:47.188" endtime="20200421 13:13:47.420"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:47.174" endtime="20200421 13:13:47.420"></status>
+</kw>
+<kw name="When User Clicks Button Pitch Down">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_pitch_down"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:47.421" level="INFO">Clicking button 'xpath://button[@id="script_pitch_down"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:47.421" endtime="20200421 13:13:47.638"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:47.421" endtime="20200421 13:13:47.638"></status>
+</kw>
+<kw name="Then User Expects The Pitch To Decrease">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Pitch</arg>
+</arguments>
+<msg timestamp="20200421 13:13:47.645" level="INFO">Current page contains text 'Pitch'.</msg>
+<status status="PASS" starttime="20200421 13:13:47.639" endtime="20200421 13:13:47.645"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:47.638" endtime="20200421 13:13:47.645"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:13:47.646" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:13:47.646" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:13:47.646" endtime="20200421 13:13:47.646"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:47.646" endtime="20200421 13:13:48.131"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:47.646" endtime="20200421 13:13:48.131"></status>
+</kw>
+<doc>Clicking the pitch down button</doc>
+<tags>
+<tag>pitch_down</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:44.240" endtime="20200421 13:13:48.131" critical="yes"></status>
+</test>
+<test id="s1-s2-t3" name="Pitch Value">
+<kw name="Begin Web Test" type="setup">
+<kw name="Import Library" library="BuiltIn">
+<doc>Imports a library with the given name and optional arguments.</doc>
+<arguments>
+<arg>/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/library/getip.py</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:48.133" endtime="20200421 13:13:48.135"></status>
+</kw>
+<kw name="Return Ip" library="getip">
+<assign>
+<var>${VAR}</var>
+</assign>
+<msg timestamp="20200421 13:13:48.136" level="INFO">192.168.0.4</msg>
+<msg timestamp="20200421 13:13:48.136" level="INFO">${VAR} = None</msg>
+<status status="PASS" starttime="20200421 13:13:48.135" endtime="20200421 13:13:48.136"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>./resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:13:48.136" level="INFO">Starting process:
+./resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:13:48.136" endtime="20200421 13:13:48.138"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:48.139" level="INFO">Opening browser 'firefox' to base url 'http://192.168.0.4:5000'.</msg>
+<msg timestamp="20200421 13:13:48.140" level="INFO">Firefox driver log is always forced to to: /home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/resources/geckodriver-6.log</msg>
+<status status="PASS" starttime="20200421 13:13:48.139" endtime="20200421 13:13:50.785"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:50.785" endtime="20200421 13:13:51.061"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:48.132" endtime="20200421 13:13:51.061"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>xpath://button[@id="script_pitch_up"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:51.062" endtime="20200421 13:13:51.066"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Pitch</arg>
+</arguments>
+<msg timestamp="20200421 13:13:51.073" level="INFO">Current page contains text 'Pitch'.</msg>
+<status status="PASS" starttime="20200421 13:13:51.066" endtime="20200421 13:13:51.073"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:51.073" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:51.073" endtime="20200421 13:13:51.297"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:51.061" endtime="20200421 13:13:51.297"></status>
+</kw>
+<kw name="When User Enters Value In Field">
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://input[@class="form-2" and @name="pitch_position"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:51.297" level="INFO">Clicking element 'xpath://input[@class="form-2" and @name="pitch_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:51.297" endtime="20200421 13:13:51.511"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://input[@class="form-2" and @name="pitch_position"]</arg>
+<arg>23</arg>
+</arguments>
+<msg timestamp="20200421 13:13:51.511" level="INFO">Typing text '23' into text field 'xpath://input[@class="form-2" and @name="pitch_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:51.511" endtime="20200421 13:13:51.527"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_pitch_position"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:51.527" level="INFO">Clicking button 'xpath://button[@id="script_pitch_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:51.527" endtime="20200421 13:13:51.747"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:51.297" endtime="20200421 13:13:51.747"></status>
+</kw>
+<kw name="Then User Expects The Pitch To Change">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Pitch</arg>
+</arguments>
+<msg timestamp="20200421 13:13:51.752" level="INFO">Current page contains text 'Pitch'.</msg>
+<status status="PASS" starttime="20200421 13:13:51.748" endtime="20200421 13:13:51.752"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:51.747" endtime="20200421 13:13:51.752"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:13:51.753" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:13:51.753" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:13:51.753" endtime="20200421 13:13:51.753"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:51.753" endtime="20200421 13:13:53.222"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:51.752" endtime="20200421 13:13:53.223"></status>
+</kw>
+<doc>Change pitch value then press GO!</doc>
+<tags>
+<tag>pitch_value</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:48.132" endtime="20200421 13:13:53.223" critical="yes"></status>
+</test>
+<doc>Global documentation</doc>
+<status status="PASS" starttime="20200421 13:13:39.479" endtime="20200421 13:13:53.224"></status>
+</suite>
+<suite id="s1-s3" name="Rotate.Boundaries" source="/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/rotate.boundaries.robot">
+<test id="s1-s3-t1" name="Roatation Value over 180 degrees">
+<kw name="Begin Web Test" type="setup">
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:13:53.233" level="INFO">Starting process:
+resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:13:53.233" endtime="20200421 13:13:53.235"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:53.236" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:13:53.236" endtime="20200421 13:13:54.670"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:54.670" endtime="20200421 13:13:54.822"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:53.232" endtime="20200421 13:13:54.822"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:54.822" endtime="20200421 13:13:54.831"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:13:54.839" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:13:54.831" endtime="20200421 13:13:54.839"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:54.840" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:54.840" endtime="20200421 13:13:54.879"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:54.822" endtime="20200421 13:13:54.879"></status>
+</kw>
+<kw name="When User Enters Value Over Max Value In Field">
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+</arguments>
+<msg timestamp="20200421 13:13:54.880" level="INFO">Clicking element '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:13:54.880" endtime="20200421 13:13:54.926"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+<arg>181</arg>
+</arguments>
+<msg timestamp="20200421 13:13:54.926" level="INFO">Typing text '181' into text field '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:13:54.926" endtime="20200421 13:13:55.017"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_position"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:55.018" level="INFO">Clicking button '//*[@id="script_rotation_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:55.018" endtime="20200421 13:13:55.079"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:54.879" endtime="20200421 13:13:55.079"></status>
+</kw>
+<kw name="Then User Expects To Get A Error Messege">
+<kw name="Alert Should Be Present" library="SeleniumLibrary">
+<doc>Verifies that an alert is present and by default, accepts it.</doc>
+<arguments>
+<arg>action=ACCEPT</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:55.080" endtime="20200421 13:13:55.088"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:55.080" endtime="20200421 13:13:55.088"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:13:55.089" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:13:55.089" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:13:55.088" endtime="20200421 13:13:55.089"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:55.089" endtime="20200421 13:13:55.143"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:55.088" endtime="20200421 13:13:55.143"></status>
+</kw>
+<doc>Change Roatation value to over max value then press GO!</doc>
+<tags>
+<tag>Roatateion over permited value</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:53.232" endtime="20200421 13:13:55.143" critical="yes"></status>
+</test>
+<test id="s1-s3-t2" name="Roatation Value under -180 degrees">
+<kw name="Begin Web Test" type="setup">
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:13:55.144" level="INFO">Starting process:
+resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:13:55.144" endtime="20200421 13:13:55.146"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:55.147" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:13:55.147" endtime="20200421 13:13:56.638"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:56.638" endtime="20200421 13:13:56.789"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:55.144" endtime="20200421 13:13:56.789"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:56.790" endtime="20200421 13:13:56.799"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:13:56.814" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:13:56.800" endtime="20200421 13:13:56.815"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:56.815" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:56.815" endtime="20200421 13:13:56.876"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:56.790" endtime="20200421 13:13:56.877"></status>
+</kw>
+<kw name="When User Enters Value Under Min Value In Field">
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+</arguments>
+<msg timestamp="20200421 13:13:56.877" level="INFO">Clicking element '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:13:56.877" endtime="20200421 13:13:56.931"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+<arg>-181</arg>
+</arguments>
+<msg timestamp="20200421 13:13:56.932" level="INFO">Typing text '-181' into text field '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:13:56.931" endtime="20200421 13:13:57.034"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_position"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:57.035" level="INFO">Clicking button '//*[@id="script_rotation_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:57.034" endtime="20200421 13:13:57.080"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:56.877" endtime="20200421 13:13:57.080"></status>
+</kw>
+<kw name="Then User Expects To Get A Error Messege">
+<kw name="Alert Should Be Present" library="SeleniumLibrary">
+<doc>Verifies that an alert is present and by default, accepts it.</doc>
+<arguments>
+<arg>action=ACCEPT</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:57.081" endtime="20200421 13:13:57.084"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:57.081" endtime="20200421 13:13:57.084"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:13:57.085" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:13:57.085" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:13:57.085" endtime="20200421 13:13:57.085"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:57.085" endtime="20200421 13:13:57.139"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:57.085" endtime="20200421 13:13:57.139"></status>
+</kw>
+<doc>Change Roatation value to under min value then press GO!</doc>
+<tags>
+<tag>Roatateion under permited value</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:55.143" endtime="20200421 13:13:57.139" critical="yes"></status>
+</test>
+<test id="s1-s3-t3" name="Roatation Value 180 degrees">
+<kw name="Begin Web Test" type="setup">
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:13:57.141" level="INFO">Starting process:
+resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:13:57.141" endtime="20200421 13:13:57.143"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:57.143" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:13:57.143" endtime="20200421 13:13:58.691"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:13:58.692" endtime="20200421 13:13:58.795"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:57.140" endtime="20200421 13:13:58.795"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:13:58.796" endtime="20200421 13:13:58.809"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:13:58.823" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:13:58.809" endtime="20200421 13:13:58.823"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:58.823" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:58.823" endtime="20200421 13:13:58.887"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:58.795" endtime="20200421 13:13:58.887"></status>
+</kw>
+<kw name="When User Enters Value Max Exepted Value In Field">
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+</arguments>
+<msg timestamp="20200421 13:13:58.887" level="INFO">Clicking element '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:13:58.887" endtime="20200421 13:13:58.948"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+<arg>180</arg>
+</arguments>
+<msg timestamp="20200421 13:13:58.948" level="INFO">Typing text '180' into text field '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:13:58.948" endtime="20200421 13:13:59.003"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_position"]</arg>
+</arguments>
+<msg timestamp="20200421 13:13:59.003" level="INFO">Clicking button '//*[@id="script_rotation_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:13:59.003" endtime="20200421 13:13:59.046"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:58.887" endtime="20200421 13:13:59.046"></status>
+</kw>
+<kw name="Then User Expects The Rotor To Move Max To The Right">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:13:59.058" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:13:59.047" endtime="20200421 13:13:59.058"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:59.047" endtime="20200421 13:13:59.058"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:13:59.059" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:13:59.059" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:13:59.059" endtime="20200421 13:13:59.060"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:13:59.060" endtime="20200421 13:13:59.114"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:59.059" endtime="20200421 13:13:59.114"></status>
+</kw>
+<doc>Change Roatation value to max exepted value then press GO!</doc>
+<tags>
+<tag>Roatateion_value 180 degrees</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:57.140" endtime="20200421 13:13:59.114" critical="yes"></status>
+</test>
+<test id="s1-s3-t4" name="Roatation Value -180 degrees">
+<kw name="Begin Web Test" type="setup">
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:13:59.116" level="INFO">Starting process:
+resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:13:59.115" endtime="20200421 13:13:59.118"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:13:59.119" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:13:59.119" endtime="20200421 13:14:00.634"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:14:00.635" endtime="20200421 13:14:00.769"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:13:59.115" endtime="20200421 13:14:00.769"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:14:00.770" endtime="20200421 13:14:00.783"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:00.799" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:00.784" endtime="20200421 13:14:00.799"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:00.799" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:00.799" endtime="20200421 13:14:00.855"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:00.770" endtime="20200421 13:14:00.855"></status>
+</kw>
+<kw name="When User Enters Value Min Exepted Value In Field">
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+</arguments>
+<msg timestamp="20200421 13:14:00.856" level="INFO">Clicking element '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:14:00.855" endtime="20200421 13:14:00.913"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+<arg>-180</arg>
+</arguments>
+<msg timestamp="20200421 13:14:00.913" level="INFO">Typing text '-180' into text field '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:14:00.913" endtime="20200421 13:14:00.987"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_position"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:00.987" level="INFO">Clicking button '//*[@id="script_rotation_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:00.987" endtime="20200421 13:14:01.045"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:00.855" endtime="20200421 13:14:01.045"></status>
+</kw>
+<kw name="Then User Expects The Rotor To Move Max To The Left">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:01.052" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:01.046" endtime="20200421 13:14:01.052"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:01.045" endtime="20200421 13:14:01.053"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:14:01.053" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:14:01.053" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:14:01.053" endtime="20200421 13:14:01.053"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:14:01.053" endtime="20200421 13:14:01.106"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:01.053" endtime="20200421 13:14:01.106"></status>
+</kw>
+<doc>Change Roatation value to min exepted value then press GO!</doc>
+<tags>
+<tag>Roatateion_value -180 degrees</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:13:59.115" endtime="20200421 13:14:01.106" critical="yes"></status>
+</test>
+<test id="s1-s3-t5" name="Roatation Value 100 degrees">
+<kw name="Begin Web Test" type="setup">
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:14:01.107" level="INFO">Starting process:
+resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:14:01.107" endtime="20200421 13:14:01.109"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:14:01.110" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:14:01.110" endtime="20200421 13:14:02.576"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:14:02.576" endtime="20200421 13:14:02.714"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:01.107" endtime="20200421 13:14:02.714"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:14:02.715" endtime="20200421 13:14:02.729"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:02.744" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:02.730" endtime="20200421 13:14:02.745"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:02.745" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:02.745" endtime="20200421 13:14:02.810"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:02.715" endtime="20200421 13:14:02.810"></status>
+</kw>
+<kw name="When User Enters Value 100 degrees In Field">
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+</arguments>
+<msg timestamp="20200421 13:14:02.811" level="INFO">Clicking element '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:14:02.811" endtime="20200421 13:14:02.871"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+<arg>100</arg>
+</arguments>
+<msg timestamp="20200421 13:14:02.871" level="INFO">Typing text '100' into text field '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:14:02.871" endtime="20200421 13:14:02.945"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_position"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:02.945" level="INFO">Clicking button '//*[@id="script_rotation_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:02.945" endtime="20200421 13:14:03.012"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:02.810" endtime="20200421 13:14:03.012"></status>
+</kw>
+<kw name="Then User Expects The Rotor To Move 100 Degrees To The Rigt">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:03.021" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:03.013" endtime="20200421 13:14:03.022"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:03.013" endtime="20200421 13:14:03.022"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:14:03.023" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:14:03.023" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:14:03.022" endtime="20200421 13:14:03.023"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:14:03.023" endtime="20200421 13:14:03.078"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:03.022" endtime="20200421 13:14:03.078"></status>
+</kw>
+<doc>Change Roatation value to 100 degrees then press GO!</doc>
+<tags>
+<tag>Roatateion_value 100 degrees</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:14:01.107" endtime="20200421 13:14:03.078" critical="yes"></status>
+</test>
+<test id="s1-s3-t6" name="Roatation Value -100 degrees">
+<kw name="Begin Web Test" type="setup">
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:14:03.080" level="INFO">Starting process:
+resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:14:03.080" endtime="20200421 13:14:03.082"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:14:03.083" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:14:03.083" endtime="20200421 13:14:04.560"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:14:04.560" endtime="20200421 13:14:04.693"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:03.079" endtime="20200421 13:14:04.694"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:14:04.694" endtime="20200421 13:14:04.708"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:04.722" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:04.708" endtime="20200421 13:14:04.722"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:04.722" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:04.722" endtime="20200421 13:14:04.782"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:04.694" endtime="20200421 13:14:04.782"></status>
+</kw>
+<kw name="When User Enters Value -100 Degrees In Field">
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+</arguments>
+<msg timestamp="20200421 13:14:04.783" level="INFO">Clicking element '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:14:04.783" endtime="20200421 13:14:04.846"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+<arg>-100</arg>
+</arguments>
+<msg timestamp="20200421 13:14:04.846" level="INFO">Typing text '-100' into text field '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:14:04.846" endtime="20200421 13:14:04.909"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_position"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:04.909" level="INFO">Clicking button '//*[@id="script_rotation_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:04.909" endtime="20200421 13:14:04.966"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:04.782" endtime="20200421 13:14:04.966"></status>
+</kw>
+<kw name="Then User Expects The Rotor To Move 100 Degrees To The Left">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:04.975" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:04.966" endtime="20200421 13:14:04.975"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:04.966" endtime="20200421 13:14:04.975"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:14:04.976" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:14:04.976" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:14:04.975" endtime="20200421 13:14:04.976"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:14:04.976" endtime="20200421 13:14:05.029"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:04.975" endtime="20200421 13:14:05.029"></status>
+</kw>
+<doc>Change Roatation value to -100 degrees then press GO!</doc>
+<tags>
+<tag>Roatateion_value -100 degrees</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:14:03.079" endtime="20200421 13:14:05.030" critical="yes"></status>
+</test>
+<doc>Global documentation</doc>
+<status status="PASS" starttime="20200421 13:13:53.226" endtime="20200421 13:14:05.030"></status>
+</suite>
+<suite id="s1-s4" name="Rotate" source="/home/vadis/.nextcloud/iths/iths-projekt/SSRS-Drone-Launcher-Beta/test/manual/robot/rotate.robot">
+<test id="s1-s4-t1" name="Roatate To The Right">
+<kw name="Begin Web Test" type="setup">
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:14:05.036" level="INFO">Starting process:
+resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:14:05.036" endtime="20200421 13:14:05.038"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:14:05.039" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:14:05.038" endtime="20200421 13:14:06.496"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:14:06.496" endtime="20200421 13:14:06.634"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:05.036" endtime="20200421 13:14:06.634"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:14:06.635" endtime="20200421 13:14:06.646"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:06.659" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:06.646" endtime="20200421 13:14:06.659"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:06.660" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:06.660" endtime="20200421 13:14:06.721"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:06.635" endtime="20200421 13:14:06.722"></status>
+</kw>
+<kw name="When User Clicks Button Rotation Right">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:06.722" level="INFO">Clicking button '//*[@id="script_rotation_right"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:06.722" endtime="20200421 13:14:06.779"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:06.722" endtime="20200421 13:14:06.779"></status>
+</kw>
+<kw name="Then User Expects The Rotor To Rotate To The Right">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:06.788" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:06.780" endtime="20200421 13:14:06.788"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:06.780" endtime="20200421 13:14:06.788"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:14:06.788" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:14:06.788" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:14:06.788" endtime="20200421 13:14:06.788"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:14:06.788" endtime="20200421 13:14:06.842"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:06.788" endtime="20200421 13:14:06.842"></status>
+</kw>
+<doc>Clicking the Roatate to the Right</doc>
+<tags>
+<tag>Rotation_Right</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:14:05.035" endtime="20200421 13:14:06.842" critical="yes"></status>
+</test>
+<test id="s1-s4-t2" name="Roatate To The Left">
+<kw name="Begin Web Test" type="setup">
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:14:06.843" level="INFO">Starting process:
+resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:14:06.843" endtime="20200421 13:14:06.845"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:14:06.846" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:14:06.846" endtime="20200421 13:14:08.302"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:14:08.302" endtime="20200421 13:14:08.440"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:06.843" endtime="20200421 13:14:08.440"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:14:08.440" endtime="20200421 13:14:08.451"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:08.460" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:08.451" endtime="20200421 13:14:08.461"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:08.461" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:08.461" endtime="20200421 13:14:08.512"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:08.440" endtime="20200421 13:14:08.512"></status>
+</kw>
+<kw name="When User Clicks Button Rotation Left">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_left"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:08.512" level="INFO">Clicking button '//*[@id="script_rotation_left"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:08.512" endtime="20200421 13:14:08.554"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:08.512" endtime="20200421 13:14:08.554"></status>
+</kw>
+<kw name="Then User Expects The Rotor To Rotate To The Left">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:08.562" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:08.554" endtime="20200421 13:14:08.562"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:08.554" endtime="20200421 13:14:08.563"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:14:08.563" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:14:08.563" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:14:08.563" endtime="20200421 13:14:08.563"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:14:08.564" endtime="20200421 13:14:08.618"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:08.563" endtime="20200421 13:14:08.619"></status>
+</kw>
+<doc>Clicking the Roatation_Left button</doc>
+<tags>
+<tag>Roatate_Left</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:14:06.842" endtime="20200421 13:14:08.619" critical="yes"></status>
+</test>
+<test id="s1-s4-t3" name="Pitch Value">
+<kw name="Begin Web Test" type="setup">
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>resources/start_server.sh</arg>
+<arg>shell=yes</arg>
+</arguments>
+<msg timestamp="20200421 13:14:08.620" level="INFO">Starting process:
+resources/start_server.sh</msg>
+<status status="PASS" starttime="20200421 13:14:08.619" endtime="20200421 13:14:08.622"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200421 13:14:08.622" level="INFO">Opening browser 'chrome' to base url 'http://192.168.0.4:5000'.</msg>
+<status status="PASS" starttime="20200421 13:14:08.622" endtime="20200421 13:14:10.104"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200421 13:14:10.105" endtime="20200421 13:14:10.244"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:08.619" endtime="20200421 13:14:10.244"></status>
+</kw>
+<kw name="Given Server Is Up">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_right"]</arg>
+</arguments>
+<status status="PASS" starttime="20200421 13:14:10.244" endtime="20200421 13:14:10.257"></status>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:10.271" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:10.257" endtime="20200421 13:14:10.271"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>xpath://button[@id="script_reset_encoders"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:10.271" level="INFO">Clicking button 'xpath://button[@id="script_reset_encoders"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:10.271" endtime="20200421 13:14:10.329"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:10.244" endtime="20200421 13:14:10.330"></status>
+</kw>
+<kw name="When User Enters Value In Field">
+<kw name="Click Element" library="SeleniumLibrary">
+<doc>Click the element identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+</arguments>
+<msg timestamp="20200421 13:14:10.330" level="INFO">Clicking element '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:14:10.330" endtime="20200421 13:14:10.382"></status>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="manual_rotation_buttons"]/div/input</arg>
+<arg>23</arg>
+</arguments>
+<msg timestamp="20200421 13:14:10.382" level="INFO">Typing text '23' into text field '//*[@id="manual_rotation_buttons"]/div/input'.</msg>
+<status status="PASS" starttime="20200421 13:14:10.382" endtime="20200421 13:14:10.451"></status>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>//*[@id="script_rotation_position"]</arg>
+</arguments>
+<msg timestamp="20200421 13:14:10.451" level="INFO">Clicking button '//*[@id="script_rotation_position"]'.</msg>
+<status status="PASS" starttime="20200421 13:14:10.451" endtime="20200421 13:14:10.512"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:10.330" endtime="20200421 13:14:10.512"></status>
+</kw>
+<kw name="Then User Expects The Rotor To Move">
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<doc>Verifies that current page contains ``text``.</doc>
+<arguments>
+<arg>Rotation</arg>
+</arguments>
+<msg timestamp="20200421 13:14:10.522" level="INFO">Current page contains text 'Rotation'.</msg>
+<status status="PASS" starttime="20200421 13:14:10.513" endtime="20200421 13:14:10.522"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:10.513" endtime="20200421 13:14:10.522"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<msg timestamp="20200421 13:14:10.522" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200421 13:14:10.522" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200421 13:14:10.522" endtime="20200421 13:14:10.522"></status>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200421 13:14:10.523" endtime="20200421 13:14:10.575"></status>
+</kw>
+<status status="PASS" starttime="20200421 13:14:10.522" endtime="20200421 13:14:10.576"></status>
+</kw>
+<doc>Change Roatation value then press GO!</doc>
+<tags>
+<tag>Roatateion_value</tag>
+</tags>
+<status status="PASS" starttime="20200421 13:14:08.619" endtime="20200421 13:14:10.576" critical="yes"></status>
+</test>
+<doc>Global documentation</doc>
+<status status="PASS" starttime="20200421 13:14:05.033" endtime="20200421 13:14:10.576"></status>
+</suite>
+<status status="PASS" starttime="20200421 13:13:32.425" endtime="20200421 13:14:10.579"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="16" fail="0">Critical Tests</stat>
+<stat pass="16" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0">max_lift</stat>
+<stat pass="1" fail="0">max_pitch</stat>
+<stat pass="1" fail="0">min_lift</stat>
+<stat pass="1" fail="0">min_pitch</stat>
+<stat pass="1" fail="0">pitch_down</stat>
+<stat pass="1" fail="0">pitch_up</stat>
+<stat pass="1" fail="0">pitch_value</stat>
+<stat pass="1" fail="0">Roatateion over permited value</stat>
+<stat pass="1" fail="0">Roatateion under permited value</stat>
+<stat pass="1" fail="0">Roatateion_value</stat>
+<stat pass="1" fail="0">Roatateion_value -100 degrees</stat>
+<stat pass="1" fail="0">Roatateion_value -180 degrees</stat>
+<stat pass="1" fail="0">Roatateion_value 100 degrees</stat>
+<stat pass="1" fail="0">Roatateion_value 180 degrees</stat>
+<stat pass="1" fail="0">Roatate_Left</stat>
+<stat pass="1" fail="0">Rotation_Right</stat>
+</tag>
+<suite>
+<stat pass="16" fail="0" id="s1" name="MaxMin &amp; Pitch &amp; Rotate.Boundaries &amp; Rotate">MaxMin &amp; Pitch &amp; Rotate.Boundaries &amp; Rotate</stat>
+<stat pass="4" fail="0" id="s1-s1" name="MaxMin">MaxMin &amp; Pitch &amp; Rotate.Boundaries &amp; Rotate.MaxMin</stat>
+<stat pass="3" fail="0" id="s1-s2" name="Pitch">MaxMin &amp; Pitch &amp; Rotate.Boundaries &amp; Rotate.Pitch</stat>
+<stat pass="6" fail="0" id="s1-s3" name="Rotate.Boundaries">MaxMin &amp; Pitch &amp; Rotate.Boundaries &amp; Rotate.Rotate.Boundaries</stat>
+<stat pass="3" fail="0" id="s1-s4" name="Rotate">MaxMin &amp; Pitch &amp; Rotate.Boundaries &amp; Rotate.Rotate</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
