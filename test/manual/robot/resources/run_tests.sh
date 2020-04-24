@@ -15,35 +15,32 @@ if [ $# -eq 0 ]; then           #If argumentlist is empty, run all tests.
 	robot $OPTS $i
     done
     
-    $BROWSER="firefox"
-    OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
+    if [ -x "$(command -v firefox)" ]; then
+	BROWSER="firefox"
+	OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
+	
+	for i in *.robot             
+	do
+	    robot $OPTS $i
+	done
+    fi
 
-    for i in *.robot             
-    do
-	robot $OPTS $i
-    done
-    
 else                            # Run tests provided by argument.
     for i in $@
     do
 	robot $OPTS $i
     done
-
-    BROWSER="firefox"
-    OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
-    for i in $@
-    do
-	robot $OPTS $i
-    done
-
-    BROWSER="chrome"
-    OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
     
-    for i in $@
-    do
-	robot $OPTS $i
-    done
-
+    if [ -x "$(command -v firefox)" ]; then
+	BROWSER="firefox"
+	OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
+	for i in $@
+	do
+	    robot $OPTS $i
+	done
+    else
+	echo -e "\nFirefox not installed! skipping firefox tests...\n"
+    fi
 fi
 
 kill $DRONE_PID
