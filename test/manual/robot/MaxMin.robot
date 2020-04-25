@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation     Maximizing and Minimizing the Drone Positions
 Library           SeleniumLibrary
-Test Setup         Begain Web Test
-Test Teardown       End Web Test
+Suite Setup         Begain Web Test
+Suite Teardown        End Web Test
 
 *** Variables ***
 ${BROWSER} =        chrome
