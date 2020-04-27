@@ -7,7 +7,9 @@ BROWSER="chrome"
 OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
 
 if [ -d "/c/Program Files/Mozilla Firefox" ]; then
-    echo "It exists :-)"
+    export PATH="$PATH:/c/Program Files/Mozilla Firefox"
+elif [ -d "/d/Program Files/Mozilla Firefox" ]; then
+    export PATH="$PATH:/d/Program Files/Mozilla Firefox"
 fi
 		      
 
