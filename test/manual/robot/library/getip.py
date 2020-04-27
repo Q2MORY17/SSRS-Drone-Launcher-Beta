@@ -10,3 +10,5 @@ def hello(name):
 def do_nothing():
     pass
 
+return_ip()
+

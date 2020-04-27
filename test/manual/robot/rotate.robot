@@ -72,7 +72,26 @@ User Enters Value In Field
 
 	Input Text      //*[@id="manual_rotation_buttons"]/div/input  23
 
-	Click Button	//*[@id="script_rotation_position"]
+
+
+
+User presses up arrow in textfeild
+
+    Click Element	//*[@id="manual_rotation_buttons"]/div/input
+
+   Press Keys  //*[@id="manual_rotation_buttons"]/div/input     ARROW_UP    ARROW_UP    ARROW_UP
+
+    Click Button	//*[@id="script_rotation_position"]
+
+
+
+User presses down arrow in textfeild
+
+    Click Element	//*[@id="manual_rotation_buttons"]/div/input
+
+   Press Keys  //*[@id="manual_rotation_buttons"]/div/input     ARROW_DOWN    ARROW_DOWN    ARROW_DOWN
+
+    Click Button	//*[@id="script_rotation_position"]
 
 
 
@@ -144,3 +163,27 @@ Pitch Value
 
 
 
+Pitch Value change manuly up
+
+	[Documentation]		Change Roatation value manualy by pressing upp arrow in textfield then press GO!
+
+	[Tags]			Roatateion_value manualy changing
+
+     	Given Server Is Up
+
+	When User presses up arrow in textfeild
+
+	Then User Expects The Rotor To Move
+
+
+Pitch Value change manuly down
+
+	[Documentation]		Change Roatation value manualy by pressing upp arrow in textfield then press GO!
+
+	[Tags]			Roatateion_value manualy changing
+
+     	Given Server Is Up
+
+	When User presses down arrow in textfeild
+
+	Then User Expects The Rotor To Move
