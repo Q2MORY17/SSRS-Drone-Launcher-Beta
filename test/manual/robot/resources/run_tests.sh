@@ -6,6 +6,11 @@ URL="http://$IP:$PORT"
 BROWSER="chrome"
 OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
 
+if [ -d "/c/Program Files/Mozilla Firefox" ]; then
+    echo "It exists :-)"
+fi
+		      
+
 python ../../../python/dronelauncher_python.py &> /dev/null &
 DRONE_PID=$!
 
