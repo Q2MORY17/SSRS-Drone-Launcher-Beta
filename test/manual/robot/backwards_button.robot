@@ -27,7 +27,7 @@ Generate Ip
 Website Is Open
     [Arguments]     ${browser}
     ${ssrs launcher url}=        Generate Ip
-    Start Process       python   ./python/dronelauncher_python.py   shell=True
+    Start Process       python3   ./python/dronelauncher_python.py   shell=True
     Open Browser    ${ssrs launcher url}     ${browser}
     Maximize Browser Window
 
