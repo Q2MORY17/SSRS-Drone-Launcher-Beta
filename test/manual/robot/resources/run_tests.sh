@@ -11,7 +11,7 @@ OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
 # Check if firefox exists on windows based systems
 #
 
-if [[ "$OSTYPE" == "cygwin" ]]; then
+if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
     if [ -d "/c/Program Files/Mozilla Firefox" ]; then
 	export PATH="$PATH:/c/Program Files/Mozilla Firefox"
     elif [ -d "/d/Program Files/Mozilla Firefox" ]; then
@@ -19,16 +19,7 @@ if [[ "$OSTYPE" == "cygwin" ]]; then
     else
 	echo -e "\nFirefox not found in usual places, please add to path!\n"
     fi
-elif [[ "$OSTYPE" == "msys" ]]; then
-    if [ -d "/c/Program Files/Mozilla Firefox" ]; then
-	export PATH="$PATH:/c/Program Files/Mozilla Firefox"
-    elif [ -d "/d/Program Files/Mozilla Firefox" ]; then
-	export PATH="$PATH:/d/Program Files/Mozilla Firefox"
-    else
-	echo -e "\nFirefox not found in usual places, please add to path!\n"
-    fi    
 fi
-    
 
 
 python ../../../python/dronelauncher_python.py &> /dev/null &
