@@ -8,9 +8,9 @@ Library		./library/getip.py
 
 Library		 Process
 
-Test Setup       Begin Web Test
+Suite Setup       Begin Web Test
 
-Test Teardown    End Web Test
+Suite Teardown    End Web Test
 
 
 
@@ -20,7 +20,7 @@ Test Teardown    End Web Test
 
 ${BROWSER} =		chrome
 
-${URL} =    		http://192.168.1.127:5000
+${URL} =    		http://192.168.1.12:5000
 
 ${IP} = 		return_ip
 
@@ -30,8 +30,6 @@ ${PORT} =		5000
 
 Begin Web Test
 
-      Start Process  resources/start_server.sh  shell=yes
-
       Open Browser	${URL}  	${BROWSER}
 
       Maximize Browser Window
@@ -39,8 +37,6 @@ Begin Web Test
 
 
 End Web Test
-
-	Terminate Process
 
 	Close Browser
 
@@ -79,7 +75,7 @@ User presses up arrow in textfeild
 
     Click Element	//*[@id="manual_rotation_buttons"]/div/input
 
-   Press Keys  //*[@id="manual_rotation_buttons"]/div/input     ARROW_UP    ARROW_UP    ARROW_UP
+    Press Keys  //*[@id="manual_rotation_buttons"]/div/input     ARROW_UP    ARROW_UP    ARROW_UP
 
     Click Button	//*[@id="script_rotation_position"]
 
@@ -89,7 +85,7 @@ User presses down arrow in textfeild
 
     Click Element	//*[@id="manual_rotation_buttons"]/div/input
 
-   Press Keys  //*[@id="manual_rotation_buttons"]/div/input     ARROW_DOWN    ARROW_DOWN    ARROW_DOWN
+    Press Keys  //*[@id="manual_rotation_buttons"]/div/input     ARROW_DOWN    ARROW_DOWN    ARROW_DOWN
 
     Click Button	//*[@id="script_rotation_position"]
 
@@ -141,7 +137,7 @@ Roatate To The Left
 
 	[Tags]			Roatate_Left
 
-     	Given Server Is Up
+    Given Server Is Up
 
 	When User Clicks Button Rotation Left
 
@@ -155,7 +151,7 @@ Pitch Value
 
 	[Tags]			Roatateion_value
 
-     	Given Server Is Up
+    Given Server Is Up
 
 	When User Enters Value In Field
 
@@ -169,7 +165,7 @@ Pitch Value change manuly up
 
 	[Tags]			Roatateion_value manualy changing
 
-     	Given Server Is Up
+    Given Server Is Up
 
 	When User presses up arrow in textfeild
 
@@ -182,7 +178,7 @@ Pitch Value change manuly down
 
 	[Tags]			Roatateion_value manualy changing
 
-     	Given Server Is Up
+    Given Server Is Up
 
 	When User presses down arrow in textfeild
 
