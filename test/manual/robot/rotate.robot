@@ -8,9 +8,9 @@ Library		./library/getip.py
 
 Library		 Process
 
-Test Setup       Begin Web Test
+Suite Setup       Begin Web Test
 
-Test Teardown    End Web Test
+Suite Teardown    End Web Test
 
 
 
@@ -20,7 +20,7 @@ Test Teardown    End Web Test
 
 ${BROWSER} =		chrome
 
-${URL} =    		http://192.168.1.127:5000
+${URL} =    		http://192.168.1.120:5000
 
 ${IP} = 		return_ip
 
@@ -29,8 +29,6 @@ ${PORT} =		5000
 *** Keywords ***
 
 Begin Web Test
-
-      Start Process  resources/start_server.sh  shell=yes
 
       Open Browser	${URL}  	${BROWSER}
 
@@ -141,7 +139,7 @@ Roatate To The Left
 
 	[Tags]			Roatate_Left
 
-     	Given Server Is Up
+    Given Server Is Up
 
 	When User Clicks Button Rotation Left
 
@@ -155,7 +153,7 @@ Pitch Value
 
 	[Tags]			Roatateion_value
 
-     	Given Server Is Up
+    Given Server Is Up
 
 	When User Enters Value In Field
 
@@ -169,7 +167,7 @@ Pitch Value change manuly up
 
 	[Tags]			Roatateion_value manualy changing
 
-     	Given Server Is Up
+    Given Server Is Up
 
 	When User presses up arrow in textfeild
 
@@ -182,7 +180,7 @@ Pitch Value change manuly down
 
 	[Tags]			Roatateion_value manualy changing
 
-     	Given Server Is Up
+    Given Server Is Up
 
 	When User presses down arrow in textfeild
 
