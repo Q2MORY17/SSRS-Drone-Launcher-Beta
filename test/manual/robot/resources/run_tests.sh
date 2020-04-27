@@ -10,8 +10,11 @@ if [ -d "/c/Program Files/Mozilla Firefox" ]; then
     export PATH="$PATH:/c/Program Files/Mozilla Firefox"
 elif [ -d "/d/Program Files/Mozilla Firefox" ]; then
     export PATH="$PATH:/d/Program Files/Mozilla Firefox"
+else
+    echo "Firefox not found in usual places, please add to path!"
 fi
-		      
+
+echo $PATH
 
 python ../../../python/dronelauncher_python.py &> /dev/null &
 DRONE_PID=$!
