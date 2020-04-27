@@ -3,4 +3,4 @@
 **/robot/results/**
 *.pyc
 \#*
-**/.dronelauncher.log/**
+.dronelauncher.log
