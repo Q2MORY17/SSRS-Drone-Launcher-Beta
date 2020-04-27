@@ -38,8 +38,6 @@ Begin Web Test
 
 End Web Test
 
-	Terminate Process
-
 	Close Browser
 
 
