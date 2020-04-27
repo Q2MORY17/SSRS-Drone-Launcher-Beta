@@ -6,6 +6,11 @@ URL="http://$IP:$PORT"
 BROWSER="chrome"
 OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
 
+
+#
+# Check if firefox exists on windows based systems
+#
+
 if [[ "$OSTYPE" == "cygwin" ]]; then
     if [ -d "/c/Program Files/Mozilla Firefox" ]; then
 	export PATH="$PATH:/c/Program Files/Mozilla Firefox"
