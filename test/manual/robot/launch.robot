@@ -3,11 +3,11 @@ Documentation
 Library                 SeleniumLibrary
 Library                 Process
 Library                 ./library/UrlLibrary.py
-Test Setup              Begin Web Test
-Test Teardown           End Web Test
+Suite Setup              Begin Web Test
+Suite Teardown           End Web Test
 
 *** Variables ***
-${BROWSER} =            headlesschrome
+${BROWSER} =            chrome
 
 *** Keywords ***
 Begin Web Test
@@ -38,7 +38,7 @@ Verify Button Backwards Clicked
     ${result}       Terminate Process
     Process Should Be Stopped
     Log To Console      ${result.stderr}
-    Should Contain      ${result.stderr}  in function_launch_backwards
+    Should Contain      ${result.stderr}  POST /app_launch_backwards HTTP/1.1
 
 *** Test Cases ***
 Battery Voltage Button Should Be Visible
