@@ -934,4 +934,4 @@ def function_disable_buttons():
 #Specify IP address and port for the server
 
 if __name__ == "__main__":
-    app.run(host=host,port=port)
+    app.run(host=host, port=port, use_reloader=False)
