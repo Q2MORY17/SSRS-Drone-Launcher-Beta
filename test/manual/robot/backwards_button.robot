@@ -12,7 +12,7 @@ ${BROWSER} =            headlesschrome
 *** Keywords ***
 Begin Web Test
     ${URL}=             Get Url
-    Start Process       python    ./python/dronelauncher_python.py    shell=True
+    Start Process       python3    ./python/dronelauncher_python.py    shell=True
     Open Browser        about:blank     ${BROWSER}
     Maximize Browser Window
     Go To               ${URL}
