@@ -1,45 +1,56 @@
 *** Settings ***
-Documentation     A test case of button backwards in the Launch part of SSRS Launcher Website
-Library     SeleniumLibrary
+Documentation
+Library                 SeleniumLibrary
 Library                 Process
-Library       ./library/ip.py
-Test Teardown       Close All The Browsers
+Library                 ./library/UrlLibrary.py
+Suite Setup              Begin Web Test
+Suite Teardown           End Web Test
 
 *** Variables ***
-${browser}    chrome
+${BROWSER} =            headlesschrome
+
+*** Keywords ***
+Begin Web Test
+    ${URL}=             Get Url
+    Start Process       python3    ./python/dronelauncher_python.py    shell=True
+    Open Browser        about:blank     ${BROWSER}
+    Maximize Browser Window
+    Go To               ${URL}
+
+End Web Test
+    Close Browser
+    Terminate All Processes
+
+Gui Is Visible
+    Wait Until Page Contains Element     id=video
+
+Gui Has Loaded
+    Page Should Contain Element          id=script_battery_voltage
+
+Encoders Reset
+    Click Button                         id:script_reset_encoders
+
+Press Button Backwards
+    Click Button                         id:script_launch_backwards
+    Sleep                                150
+
+Verify Button Backwards Clicked
+    ${result}       Terminate Process
+    Process Should Be Stopped
+    Log To Console      ${result.stderr}
+    Should Contain      ${result.stderr}  in function_launch_backwards
 
 *** Test Cases ***
+Battery Voltage Button Should Be Visible
+    Gui Is Visible
+    Gui Has Loaded
+
+
 Functionable Button Backwards
     [Documentation]       Since there is no intended visible response after pressing button backwards, this testcase tests button function
     ...                   by checking whether the action of clicking button backwards calls the targeted method function_launch_backwards()
     ...                   in dronelauncher_python.py.
-    [tags]      ButtonBackwards
-    Given Website Is Open    ${browser}
+    [Tags]                ButtonBackwards
+    Given Encoders Reset
     When Press Button Backwards
-    Then Verify Clicking Button Backwards Calls Relevant Function In Python File
-
-
-*** Keywords ***
-Generate Ip
-    ${result}       return ip
-    [return]        ${result}
-
-Website Is Open
-    [Arguments]     ${browser}
-    ${ssrs launcher url}=        Generate Ip
-    Start Process       python3   ./python/dronelauncher_python.py   shell=True
-    Open Browser    ${ssrs launcher url}     ${browser}
-    Maximize Browser Window
-
-Press Button Backwards
-    Click Button    id:script_launch_backwards
-    Sleep  100
-
-Verify Clicking Button Backwards Calls Relevant Function In Python File
-    ${result}       Terminate Process
-    Process Should Be Stopped
-    Log To Console        ${result.stderr}
-    Should Contain         ${result.stderr}     in function_launch_backwards
-
-Close All The Browsers
-    Close All Browsers
+    Then Verify Button Backwards Clicked
