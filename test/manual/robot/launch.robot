@@ -3,8 +3,8 @@ Documentation
 Library                 SeleniumLibrary
 Library                 Process
 Library                 ./library/UrlLibrary.py
-Suite Setup              Begin Web Test
-Suite Teardown           End Web Test
+Test Setup              Begin Web Test
+Test Teardown           End Web Test
 
 *** Variables ***
 ${BROWSER} =            headlesschrome
