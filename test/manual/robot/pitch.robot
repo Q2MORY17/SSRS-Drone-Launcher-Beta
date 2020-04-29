@@ -46,10 +46,10 @@ User Enters Value In Field
 	Click Button	xpath://button[@id="script_pitch_position"]
 
 User Expects The Pitch To Increase
-        Sleep    10
+     	${target_string} =	Set Variable	POST /app_pitch_up HTTP/1.1
 	Page Should Contain	Pitch	# Placeholder for Gherkin
 	${logfile}  Get File	.dronelauncher.log
-	Should Contain	${logfile}	POST /app_pitch_up HTTP/1.1
+	Check Log   		${target_string}
 
 User Expects The Pitch To Decrease
 	Page Should Contain	Pitch	# Placeholder for Gherkin
@@ -64,6 +64,11 @@ User Expects The Pitch To Change
 Then User Expects An Error Message
         Alert Should Be Present		action=ACCEPT
 
+Check Log
+	[Arguments]	${target_string}
+        ${logfile}	Get File	.dronelauncher.log
+	Should Contain	${logfile}	${target_string}
+	
 
 *** Test Cases ***
 
