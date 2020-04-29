@@ -47,19 +47,15 @@ User Enters Value In Field
 
 User Expects The Pitch To Increase
      	${target_string} =	Set Variable	POST /app_pitch_up HTTP/1.1
-	Page Should Contain	Pitch	# Placeholder for Gherkin
-	${logfile}  Get File	.dronelauncher.log
-	Check Log   		${target_string}
-
+	Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}
+	
 User Expects The Pitch To Decrease
-	Page Should Contain	Pitch	# Placeholder for Gherkin
-	${logfile}  Get File	.dronelauncher.log
-	Should Contain	${logfile}	POST /app_pitch_down HTTP/1.1
+     	${target_string} =	Set Variable	POST /app_pitch_down HTTP/1.1
+	Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}
 
 User Expects The Pitch To Change
-	Page Should Contain	Pitch	# Placeholder for Gherkin
-	${logfile}  Get File	.dronelauncher.log
-	Should Contain	${logfile}	POST /app_pitch_position HTTP/1.1
+     	${target_string} =	Set Variable	POST /app_pitch_position HTTP/1.1
+	Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}
 
 Then User Expects An Error Message
         Alert Should Be Present		action=ACCEPT
@@ -67,7 +63,7 @@ Then User Expects An Error Message
 Check Log
 	[Arguments]	${target_string}
         ${logfile}	Get File	.dronelauncher.log
-	Should Contain	${logfile}	${target_string}
+	Should Contain   ${logfile}	${target_string}
 	
 
 *** Test Cases ***

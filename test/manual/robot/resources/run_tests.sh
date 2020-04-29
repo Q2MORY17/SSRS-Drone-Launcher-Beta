@@ -22,8 +22,7 @@ if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
 fi
 
 
-python ../../../python/dronelauncher_python.py > $LOG &
-#python ../../../python/dronelauncher_python.py &> $LOG &
+python ../../../python/dronelauncher_python.py &> $LOG &
 DRONE_PID=$!
 
 if [ $# -eq 0 ]; then           #If argumentlist is empty, run all tests.
@@ -61,9 +60,9 @@ else                            # Run tests provided by arguments.
     fi
 fi
 
-# if [ -f $LOG ]; then
-#     rm $LOG
-# fi
+if [ -f $LOG ]; then
+    rm $LOG
+fi
 
 kill $DRONE_PID
 
