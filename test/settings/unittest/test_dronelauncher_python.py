@@ -3,6 +3,9 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../../python")
 
+#from unittest.mock import Mock
+#mock = Mock()
+
 import pytest
 import python.dronelauncher_python
 
@@ -24,4 +27,4 @@ def test_function_reset_encoders(dl):
     returnValue = dl.function_reset_encoders()
 
     #THEN
-    assert returnValue == (''), 204
+    assert returnValue == ('', 204)
