@@ -1,10 +1,10 @@
 import os
 import sys
-import pytest
-import python.dronelauncher_python
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../../python")
 
+import pytest
+import python.dronelauncher_python
 
 @pytest.fixture()
 def dl():
@@ -20,8 +20,8 @@ def test_function_reset_encoders(dl):
     #GIVEN
     dl.encoders_ready = 1
 
-    #THEN
+    #WHEN
     returnValue = dl.function_reset_encoders()
 
-    #WHEN
+    #THEN
     assert returnValue == (''), 204
