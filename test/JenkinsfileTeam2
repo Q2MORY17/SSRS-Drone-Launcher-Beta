@@ -17,5 +17,10 @@ pipeline {
         }
       }
     }
+    stage('Unit test') {
+      steps {
+        sh 'python3 -m pytest test/manual/unittest/test_manual_launcher_python.py'
+      }
+    }
   }
 }
