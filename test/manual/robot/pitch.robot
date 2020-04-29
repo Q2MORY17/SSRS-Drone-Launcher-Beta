@@ -22,7 +22,7 @@ Begin Web Test
 #      Start Process	./resources/start_server.sh	shell=yes
       Open Browser	${URL}  	${BROWSER}
       Maximize Browser Window
-      Sleep    10
+
 
 End Web Test
 #	Terminate Process
@@ -46,6 +46,7 @@ User Enters Value In Field
 	Click Button	xpath://button[@id="script_pitch_position"]
 
 User Expects The Pitch To Increase
+        Sleep    10
 	Page Should Contain	Pitch	# Placeholder for Gherkin
 	${logfile}  Get File	.dronelauncher.log
 	Should Contain	${logfile}	POST /app_pitch_up HTTP/1.1
