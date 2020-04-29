@@ -5,7 +5,7 @@ PORT=5000
 URL="http://$IP:$PORT"
 BROWSER="chrome"
 OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
-
+LOG=.dronelauncher.log
 
 #
 # Check if firefox exists on windows based systems
@@ -22,9 +22,8 @@ if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
 fi
 
 
-python ../../../python/dronelauncher_python.py &> /dev/null &
+python ../../../python/dronelauncher_python.py &> $LOG &
 DRONE_PID=$!
-
 
 if [ $# -eq 0 ]; then           #If argumentlist is empty, run all tests.
     for i in *.robot
@@ -59,6 +58,10 @@ else                            # Run tests provided by arguments.
     else
 	echo -e "\nFirefox not installed! skipping firefox tests...\n"
     fi
+fi
+
+if [ -f $LOG ]; then
+    rm $LOG
 fi
 
 kill $DRONE_PID

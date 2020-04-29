@@ -5,6 +5,7 @@ Documentation	Global documentation
 Library		SeleniumLibrary
 Library		./library/getip.py
 Library		Process
+Library         OperatingSystem	
 Suite Setup	Begin Web Test
 Suite Teardown	End Web Test
 
@@ -13,7 +14,7 @@ Suite Teardown	End Web Test
 ${BROWSER} =	firefox
 ${URL} =   	http://192.168.0.4:5000
 ${PORT} =	5000
-
+${logfile}  	Get File	.dronelauncher.log
 
 *** Keywords ***
 Begin Web Test
@@ -21,6 +22,7 @@ Begin Web Test
 #      Start Process	./resources/start_server.sh	shell=yes
       Open Browser	${URL}  	${BROWSER}
       Maximize Browser Window
+
 
 End Web Test
 #	Terminate Process
@@ -45,12 +47,18 @@ User Enters Value In Field
 
 User Expects The Pitch To Increase
 	Page Should Contain	Pitch	# Placeholder for Gherkin
+	${logfile}  Get File	.dronelauncher.log
+	Should Contain	${logfile}	POST /app_pitch_up HTTP/1.1
 
 User Expects The Pitch To Decrease
 	Page Should Contain	Pitch	# Placeholder for Gherkin
+	${logfile}  Get File	.dronelauncher.log
+	Should Contain	${logfile}	POST /app_pitch_down HTTP/1.1
 
 User Expects The Pitch To Change
 	Page Should Contain	Pitch	# Placeholder for Gherkin
+	${logfile}  Get File	.dronelauncher.log
+	Should Contain	${logfile}	POST /app_pitch_position HTTP/1.1
 
 Then User Expects An Error Message
         Alert Should Be Present		action=ACCEPT
