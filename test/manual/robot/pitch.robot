@@ -22,7 +22,7 @@ Begin Web Test
 #      Start Process	./resources/start_server.sh	shell=yes
       Open Browser	${URL}  	${BROWSER}
       Maximize Browser Window
-
+      Sleep    10
 
 End Web Test
 #	Terminate Process
