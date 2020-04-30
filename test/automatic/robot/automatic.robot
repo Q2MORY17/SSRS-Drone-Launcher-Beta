@@ -7,7 +7,7 @@ Test Setup                                  Begin Web Test
 Test Teardown                               End Web Test
 
 *** Variables ***
-${BROWSER} =                                chrome
+${BROWSER} =                                headlesschrome
 
 *** Keywords ***
 #If you want to run the program local and python3 command is not found
@@ -28,10 +28,10 @@ End Web Test
     Terminate All Processes
 
 Gui Is Visible
-    Wait Until Page Contains Element        id=video
+    Wait Until Page Contains Element        id:video
 
 Gui Has Loaded
-    Page Should Contain Element             id=script_battery_voltage
+    Page Should Contain Element             id:script_battery_voltage
 
 Encoders Reset
     Click Button                            id:script_reset_encoders
@@ -40,10 +40,14 @@ Press Button Automatic
     Click Element                           xpath://html/body/ul/li[3]/a
 
 Verify Automatic Loaded
-    Page Should Contain Element             id=script_standby
+    Page Should Contain Element             id:script_standby
 
 Press Button Mount
     Click Element                           id:script_mount
+    Sleep                                   1
+
+Press Button Stop
+    Click Button                            id:script_stop
     Sleep                                   1
 
 Verify Function Is Called
@@ -71,3 +75,10 @@ Functionable Button Mount
     Press Button Automatic
     Press Button Mount
     Verify Function Is Called            POST /app_mount HTTP/1.1
+
+Stop All Functions
+    [Tags]                              Stop
+    Encoders Reset
+    Press Button Automatic
+    Press Button Stop
+    Verify Function Is Called            POST /app_stop HTTP/1.1
