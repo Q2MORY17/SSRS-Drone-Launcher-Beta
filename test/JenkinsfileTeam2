@@ -1,0 +1,27 @@
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta'
+      }
+    }
+    stage('Robot') {
+      steps {
+		    sh 'robot -d test/results test/manual/robot/launch.robot'
+		    sh 'robot -d test/results test/automatic/robot/automatic.robot'
+
+      }
+      post {
+        always {
+          chuckNorris()
+        }
+      }
+    }
+    stage('Unit test') {
+      steps {
+        sh 'python3 -m pytest test/manual/unittest/test_manual_launcher_python.py'
+      }
+    }
+  }
+}
