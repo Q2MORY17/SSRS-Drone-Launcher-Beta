@@ -18,7 +18,7 @@ Suite Teardown    End Web Test
 
 *** Variables ***
 
-${BROWSER} =		fierfox
+${BROWSER} =		chrome
 
 ${URL} =    		http://192.168.1.127:5000
 
