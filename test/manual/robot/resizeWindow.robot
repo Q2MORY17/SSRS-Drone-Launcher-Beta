@@ -18,7 +18,7 @@ Suite Teardown    End Web Test
 
 *** Variables ***
 
-${BROWSER} =		chrome
+${BROWSER} =		fierfox
 
 ${URL} =    		http://192.168.1.127:5000
 
@@ -37,6 +37,10 @@ Begin Web Test
 User Sets Resolution To 1920*1200
 
     Set Window Size	  1920 	1200
+
+User Sets Resolution To 1920*1080
+
+    Set Window Size	  1920 	1080
 
 
 User Sets Resolution To 1600*900
@@ -67,6 +71,18 @@ User Sets Resolution To 800*600
 User Sets Resolution To 640*480
 
     Set Window Size      640  480
+
+User Sets Resolution To 2650*1440
+
+    Set Window Size	  2650 	1440
+
+User Sets Resolution To 3840*2160
+
+    Set Window Size	  3840	2160
+
+User Sets Resolution To 4096*2160
+
+    Set Window Size	  4096 	2160
 
 
 User Expects Window To Set The Wanted Size And All Buttons Are Visible
@@ -205,5 +221,44 @@ Set Screen To 640*480
     Given Server Is Up
 
 	When User Sets Resolution To 640*480
+
+	Then User Expects Window To Set The Wanted Size And All Buttons Are Visible
+
+
+Set Screen To 2650*1440
+
+	[Documentation]		Setting the screen size to 2650*1440 and tying out the buttons so thay are visible and clickabell
+
+	[Tags]			minimize screen
+
+    Given Server Is Up
+
+	When User Sets Resolution To 2650*1440
+
+	Then User Expects Window To Set The Wanted Size And All Buttons Are Visible
+
+
+Set Screen To 3840*2160
+
+	[Documentation]		Setting the screen size to 3840*2160 and tying out the buttons so thay are visible and clickabell
+
+	[Tags]			minimize screen
+
+    Given Server Is Up
+
+	When User Sets Resolution To 3840*2160
+
+	Then User Expects Window To Set The Wanted Size And All Buttons Are Visible
+
+
+Set Screen To 4096*2160
+
+	[Documentation]		Setting the screen size to 4096*2160 and tying out the buttons so thay are visible and clickabell
+
+	[Tags]			minimize screen
+
+    Given Server Is Up
+
+	When User Sets Resolution To 4096*2160
 
 	Then User Expects Window To Set The Wanted Size And All Buttons Are Visible
