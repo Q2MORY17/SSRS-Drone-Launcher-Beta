@@ -4,7 +4,6 @@ pipeline {
     stage('Checkout') {
       steps {
         git 'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta'
-        sh 'python3 -m pip install flask'
       }
     }
     stage('Robot') {
