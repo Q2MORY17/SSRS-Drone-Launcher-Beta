@@ -28,3 +28,4 @@ def test_function_reset_encoders(dl):
 
     #THEN
     assert returnValue == ('', 204)
+    
