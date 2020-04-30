@@ -10,6 +10,8 @@ pipeline {
     stage('Robot') {
       steps {
 		    sh 'robot -d test/results test/manual/robot/launch.robot'
+		    sh 'robot -d test/results test/automatic/robot/automatic.robot'
+
       }
       post {
         always {
