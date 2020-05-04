@@ -39,6 +39,9 @@ Press Button Backwards
     Click Button                            id:script_launch_backwards
     Sleep                                   1
 
+Press Button Forwards
+    Click Button                            id:script_launch_forwards
+    Sleep                                   1
 
 Verify Function Is Called
     [Arguments]                             ${function}
@@ -118,8 +121,16 @@ Functionable Button Backwards
     [Documentation]                         Since there is no intended visible response after pressing button backwards, this testcase tests button function
     ...                                     by checking whether the action of clicking button backwards calls the targeted method function_launch_backwards()
     ...                                     in dronelauncher_python.py.
-    [Tags]                                  ButtonBackwards
+    [Tags]                                  ManualButton
     Given Encoders Reset
     When Press Button Backwards
     Then Verify Function Is Called          POST /app_launch_backwards HTTP/1.1
 
+Functionable Button Forwards
+    [Documentation]                         Since there is no intended visible response after pressing button forwards, this testcase tests button function
+    ...                                     by checking whether the action of clicking button forwards calls the targeted method function_launch_forwards()
+    ...                                     in dronelauncher_python.py.
+    [Tags]                                  ManualButton
+    Given Encoders Reset
+    When Press Button Forwards
+    Then Verify Function Is Called          POST /app_launch_forwards HTTP/1.1
