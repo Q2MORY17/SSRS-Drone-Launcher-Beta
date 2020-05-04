@@ -1,7 +1,7 @@
 import os
 import sys
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../../python")
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../../../python")
 
 #from unittest.mock import Mock
 #mock = Mock()
