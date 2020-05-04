@@ -177,21 +177,3 @@ def test_function_launch_position_encoders_ready_launch_position_max(dl):
              call(129, 0, 0, 0)]
     dl.rc.SpeedDistanceM2.assert_has_calls(calls)
     assert dl.rc.SpeedDistanceM2.call_count == 4
-
-
-def test_function_stop(dl):
-    # GIVEN
-    dl.rc.ForwardM1 = MagicMock(return_value=True)
-    dl.rc.ForwardM2 = MagicMock(return_value=True)
-
-    # WHEN
-    returnValue = dl.function_stop()
-
-    # THEN
-    dl.rc.ForwardM1.assert_any_call(dl.address,0)
-    dl.rc.ForwardM2.assert_any_call(dl.address, 0)
-    dl.rc.ForwardM1.assert_any_call(dl.address_2,0)
-    dl.rc.ForwardM2.assert_any_call(dl.address_2, 0)
-    assert dl.rc.ForwardM1.call_count == 2
-    assert dl.rc.ForwardM2.call_count == 2
-    assert returnValue == ('', 204)
