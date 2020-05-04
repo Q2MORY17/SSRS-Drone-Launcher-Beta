@@ -9,7 +9,7 @@ pipeline {
     
     stage('Unit test') {
       steps {
-        sh 'python -m pytest test/manual/options/unittest/test_dronelauncher_python.py'
+        sh 'python3 -m pytest test/manual/options/unittest/test_dronelauncher_python.py'
       }
     }
   }
