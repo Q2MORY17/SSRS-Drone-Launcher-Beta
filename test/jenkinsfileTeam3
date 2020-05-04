@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/2MORY17/SSRS-Drone-Launcher-Beta'
+        git 'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta'
       }
     }
     
