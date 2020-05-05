@@ -52,7 +52,7 @@ User Sets Resolution To Half
 
        Set Window Size	               ${width2}  	${height}
 
-       ${width}    ${height2} =         Get Window Size
+       ${width}    ${height2} =        Get Window Size
 
        Should Be Equal  ${width}    ${width2}
        Should Be Equal  ${height}   ${height2}
@@ -94,14 +94,14 @@ End Web Test
 
 Set Screen To Half
 
-	[Documentation]		    Setting the screen size to Half and tying out the buttons so thay are visible and click abell
-	[Tags]			    minimize screen
+       [Documentation]		    Setting the screen size to Half and tying out the buttons so thay are visible and click abell
+       [Tags]			    minimize screen
 
-    Given Server Is Up
+       Given Server Is Up
 
-	When User Sets Resolution To Half
+       When User Sets Resolution To Half
 
-	Then User Expects Window To Set To Half Size And All Buttons Are Visible
+       Then User Expects Window To Set To Half Size And All Buttons Are Visible
 
 
 
