@@ -32,7 +32,7 @@ ${PORT} =	5000
 
 Begin Web Test
 
-      Open Browser	${URL}  	${BROWSER}
+        Open Browser	${URL}  	${BROWSER}
 
 Server Is Up               
 
@@ -113,6 +113,7 @@ End Web Test
 Set Screen To 600*480
 
     [Documentation]		Setting the screen size to 600*480 and tying out the buttons so thay are visible and clickabell
+    
     [Tags]			minimize screen
 
     Given Server Is Up
