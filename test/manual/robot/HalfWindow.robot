@@ -33,33 +33,36 @@ ${PORT} =		5000
 Begin Web Test
 
     Open Browser	${URL}  	${BROWSER}
+
     Maximize Browser Window
 
 Server Is Up
+
 	Wait Until Page Contains Element	xpath://button[@id="script_reset_encoders"]
 
 	Page Should Contain	  Options
+
 	Click Button		xpath://button[@id="script_reset_encoders"]
 
 
 
 User Sets Resolution To Half
 
-    ${width}    ${height}=          Get Window Size
+    ${width}    ${height} =          Get Window Size
 
-    ${result}=  Convert To Number  ${width}
+    ${result} =  Convert To Number   ${width}
 
-    ${width2} =     Evaluate    ${result}/2
+    ${width2} =     Evaluate        ${result}/2
 
     Log to console                  ${height}
-    Log to console                  ${width2}
 
+    Log to console                  ${width2}
 
     Set Window Size	                ${width2}  	${height}
 
 
 
-User Expects Window To Set The Wanted Size And All Buttons Are Visible
+User Expects Window To Set To Half Size And All Buttons Are Visible
 
     Page Should Contain     Manual
 
@@ -96,16 +99,16 @@ End Web Test
 
 *** Test Cases ***
 
-Set Screen To 800*480
+Set Screen To Half
 
-	[Documentation]		Setting the screen size to 800*480 and tying out the buttons so thay are visible and click abell
-	[Tags]			minimize screen
+	[Documentation]		Setting the screen size to Half and tying out the buttons so thay are visible and click abell
+	[Tags]			    minimize screen
 
     Given Server Is Up
 
 	When User Sets Resolution To Half
 
-	Then User Expects Window To Set The Wanted Size And All Buttons Are Visible
+	Then User Expects Window To Set To Half Size And All Buttons Are Visible
 
 
 
