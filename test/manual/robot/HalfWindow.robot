@@ -50,20 +50,14 @@ User Sets Resolution To Half
 
        ${width2} =     Evaluate        ${result}/2
 
-       Log to console                  ${height}
-
-       Log to console                  ${width2}
-
        Set Window Size	               ${width2}  	${height}
 
-       ${width}    ${height} =         Get Window Size
+       ${width}    ${height2} =         Get Window Size
 
-       
+       Should Be Equal  ${width}    ${width2}
+       Should Be Equal  ${height}   ${height2}
 
        Sleep  3
-
-
-
 
 User Expects Window To Set To Half Size And All Buttons Are Visible
 
