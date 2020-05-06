@@ -35,14 +35,22 @@ ${APP_ACT}		com.google.android.apps.chrome.Main
 
 Server Is Up 
 	Go To Url	${URL}
-	BuiltIn.Sleep 	5
-#	AppiumLibrary.Wait Until Page Contains Element		driver.findElement(By.xpath('//button[@id="script_pitch_up"]'))
-	AppiumLibrary.Wait Until Page Contains Element		xpath://button[@id="script_pitch_up"]
-	Page Should Contain	Pitch
-#	Click Button		xpath://button[@id="script_reset_encoders"]
+	Wait Until Page Contains      Pitch
+#	Click Element		//android.widget.Button[contains(@resource-id,'script_pitch_up')]
 
+
+
+	
 User Clicks Button Pitch Up
-	AppiumLibrary.Click Button	xpath://*[@id="script_pitch_up"]
+	Click Element		//android.widget.Button[contains(@resource-id,'script_pitch_up')]
+User Clicks Button Pitch Down
+	Click Element		//android.widget.Button[contains(@resource-id,'script_pitch_down')]
+User Enters Value In Field
+	[Arguments]	${input}
+#	Click Element	xpath://input[@class="form-2" and @name="pitch_position"]
+	Input Text	//android.widget.EditText[contains(@index,'0')]  ${input}	
+	Click Element	//android.widget.Button[contains(@resource-id,'script_pitch_position')]
+
 
 User Expects The Pitch To Increase
      	${target_string} =	Set Variable	POST /app_pitch_up HTTP/1.1
@@ -65,17 +73,29 @@ Mobile Firefox Settings
 	
 *** Test Cases ***
 
-Mobile Chrome Test
-	[Documentation]		A
-	[Tags]			mobile_chrome
-	Mobile Chrome Settings
-	Go To Url	http://192.168.0.4:5000
-
-Mobile Firefox Test
+Mobile Pitch Up
 	[Documentation]		B
-	[Tags]			mobile_firefox
+	[Tags]			mobile_pitch_up
 	Mobile Firefox Settings
-	Given Server Is Up
-	When User Clicks Button Pitch Up	
-#	Then User Expects The Pitch To Increase
+	Server Is Up
+	User Clicks Button Pitch Up
+	User Expects The Pitch To Increase
 
+Mobile Pitch Down
+	[Documentation]		B
+	[Tags]			mobile_pitch_down
+	Mobile Firefox Settings
+	Server Is Up
+	User Clicks Button Pitch Up
+	User Expects The Pitch To Increase
+
+	Pitch Value
+	[Documentation]		Change pitch value arbitrarily
+	[Tags]			pitch_value
+     	Given Server Is Up
+	When User Enters Value In Field  -1
+	Then User Expects An Error Message
+	When User Enters Value In Field  1
+	When User Enters Value In Field  89
+	When User Enters Value In Field  91
+	Then User Expects An Error Message
