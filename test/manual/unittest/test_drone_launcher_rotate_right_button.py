@@ -30,4 +30,4 @@ def test_function_rotate_right(dl):
 
     # THEN
     dl.rc.ForwardM2.assert_called_with(dl.address, dl.rotation_speed_manual)
-     assert returnValue == ('', 204)
+    assert returnValue == ('', 204)
