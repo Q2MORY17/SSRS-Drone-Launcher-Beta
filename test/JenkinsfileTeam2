@@ -8,6 +8,9 @@ pipeline {
     }
     stage('Robot') {
       steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'robot -d test/results test/manual/robot/launch_invalid_inputs.robot'
+        }
 		    sh 'robot -d test/results test/manual/robot/launch.robot'
 		    sh 'robot -d test/results test/automatic/robot/automatic.robot'
 
@@ -20,7 +23,11 @@ pipeline {
     }
     stage('Unit test') {
       steps {
-        sh 'python3 -m pytest test/manual/unittest/test_manual_launcher_python.py'
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'python3 -m pytest -v -s test/manual/unittest/test_manual_launcher_python.py'
+        }
+        sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_mount_function.py'
+        sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_stop_function.py'
       }
     }
   }
