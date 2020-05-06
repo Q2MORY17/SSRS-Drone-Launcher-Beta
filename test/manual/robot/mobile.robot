@@ -38,24 +38,36 @@ Server Is Up
 	Wait Until Page Contains      Pitch
 #	Click Element		//android.widget.Button[contains(@resource-id,'script_pitch_up')]
 
-
-
-	
 User Clicks Button Pitch Up
 	Click Element		//android.widget.Button[contains(@resource-id,'script_pitch_up')]
+
 User Clicks Button Pitch Down
 	Click Element		//android.widget.Button[contains(@resource-id,'script_pitch_down')]
+	
 User Enters Value In Field
 	[Arguments]	${input}
 #	Click Element	xpath://input[@class="form-2" and @name="pitch_position"]
 	Input Text	//android.widget.EditText[contains(@index,'0')]  ${input}	
 	Click Element	//android.widget.Button[contains(@resource-id,'script_pitch_position')]
 
-
 User Expects The Pitch To Increase
      	${target_string} =	Set Variable	POST /app_pitch_up HTTP/1.1
 	Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}
-	
+
+User Expects The Pitch To Decrease
+     	${target_string} =	Set Variable	POST /app_pitch_down HTTP/1.1
+	Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}	
+
+User Expects The Pitch To Change
+     	${target_string} =	Set Variable	POST /app_pitch_position HTTP/1.1
+	Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}
+
+Then User Expects An Error Message
+#        Alert Should Be Present		action=ACCEPT
+ 	Wait Until Page Contains		Value should be between 0 and 90	timeout=10
+	Page Should Contain Text		Value should be between 0 and 90
+	Click Element		//android.widget.Button[contains(@resource-id,'android:id/button1')]
+	 
 Check Log
 	[Arguments]	${target_string}
         ${logfile}	Get File	.dronelauncher.log
@@ -89,9 +101,10 @@ Mobile Pitch Down
 	User Clicks Button Pitch Up
 	User Expects The Pitch To Increase
 
-	Pitch Value
+Mobile Pitch Value
 	[Documentation]		Change pitch value arbitrarily
-	[Tags]			pitch_value
+	[Tags]			mobile_pitch_value
+	Mobile Firefox Settings
      	Given Server Is Up
 	When User Enters Value In Field  -1
 	Then User Expects An Error Message
