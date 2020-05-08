@@ -1,0 +1,1146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.8.1 on win32)" generated="20200507 12:01:48.132" rpa="false">
+<suite id="s1" name="Launch" source="E:\GitHubRepos\SSRS3\SSRS-Drone-Launcher-Beta\test\manual\robot\launch.robot">
+<test id="s1-t1" name="Battery Voltage Button Should Be Visible">
+<kw name="Begin Web Test" type="setup">
+<kw name="Get Url" library="UrlLibrary">
+<assign>
+<var>${URL}</var>
+</assign>
+<msg timestamp="20200507 12:01:48.279" level="INFO">${URL} = http://192.168.1.216:5000</msg>
+<status status="PASS" starttime="20200507 12:01:48.273" endtime="20200507 12:01:48.279"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>python3</arg>
+<arg>./python/dronelauncher_python.py</arg>
+<arg>shell=True</arg>
+</arguments>
+<msg timestamp="20200507 12:01:48.279" level="INFO">Starting process:
+python3 ./python/dronelauncher_python.py</msg>
+<status status="PASS" starttime="20200507 12:01:48.279" endtime="20200507 12:01:48.282"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200507 12:01:48.282" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20200507 12:01:48.282" endtime="20200507 12:01:53.363"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200507 12:01:53.363" endtime="20200507 12:01:57.477"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200507 12:01:57.477" level="INFO">Opening url 'http://192.168.1.216:5000'</msg>
+<status status="PASS" starttime="20200507 12:01:57.477" endtime="20200507 12:01:57.707"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:01:48.273" endtime="20200507 12:01:57.707"></status>
+</kw>
+<kw name="Gui Is Visible">
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<arguments>
+<arg>id=video</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:01:57.707" endtime="20200507 12:01:57.720"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:01:57.707" endtime="20200507 12:01:57.720"></status>
+</kw>
+<kw name="Gui Has Loaded">
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<arguments>
+<arg>id=script_battery_voltage</arg>
+</arguments>
+<msg timestamp="20200507 12:01:57.728" level="INFO">Current page contains element 'id=script_battery_voltage'.</msg>
+<status status="PASS" starttime="20200507 12:01:57.720" endtime="20200507 12:01:57.728"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:01:57.720" endtime="20200507 12:01:57.728"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200507 12:01:57.729" endtime="20200507 12:01:59.860"></status>
+</kw>
+<kw name="Terminate All Processes" library="Process">
+<doc>Terminates all still running processes started by this library.</doc>
+<msg timestamp="20200507 12:01:59.860" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200507 12:01:59.961" level="INFO">Process completed.</msg>
+<status status="PASS" starttime="20200507 12:01:59.860" endtime="20200507 12:01:59.961"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:01:57.728" endtime="20200507 12:01:59.961"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:01:48.272" endtime="20200507 12:01:59.961" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Launch input-box w/ invalid negative input">
+<kw name="Begin Web Test" type="setup">
+<kw name="Get Url" library="UrlLibrary">
+<assign>
+<var>${URL}</var>
+</assign>
+<msg timestamp="20200507 12:01:59.964" level="INFO">${URL} = http://192.168.1.216:5000</msg>
+<status status="PASS" starttime="20200507 12:01:59.963" endtime="20200507 12:01:59.964"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>python3</arg>
+<arg>./python/dronelauncher_python.py</arg>
+<arg>shell=True</arg>
+</arguments>
+<msg timestamp="20200507 12:01:59.965" level="INFO">Starting process:
+python3 ./python/dronelauncher_python.py</msg>
+<status status="PASS" starttime="20200507 12:01:59.964" endtime="20200507 12:01:59.970"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200507 12:01:59.971" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20200507 12:01:59.970" endtime="20200507 12:02:05.113"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200507 12:02:05.113" endtime="20200507 12:02:09.261"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:09.262" level="INFO">Opening url 'http://192.168.1.216:5000'</msg>
+<status status="PASS" starttime="20200507 12:02:09.262" endtime="20200507 12:02:09.426"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:01:59.963" endtime="20200507 12:02:09.427"></status>
+</kw>
+<kw name="Encoders Reset">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_reset_encoders</arg>
+</arguments>
+<msg timestamp="20200507 12:02:09.427" level="INFO">Clicking button 'id:script_reset_encoders'.</msg>
+<status status="PASS" starttime="20200507 12:02:09.427" endtime="20200507 12:02:09.493"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:09.427" endtime="20200507 12:02:09.493"></status>
+</kw>
+<kw name="Launch Input">
+<arguments>
+<arg>-1</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:launch_position</arg>
+<arg>${number}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:09.493" level="INFO">Typing text '-1' into text field 'name:launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:02:09.493" endtime="20200507 12:02:09.552"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:09.493" endtime="20200507 12:02:09.552"></status>
+</kw>
+<kw name="Click Go">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_launch_position</arg>
+</arguments>
+<msg timestamp="20200507 12:02:09.553" level="INFO">Clicking button 'id:script_launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:02:09.553" endtime="20200507 12:02:09.596"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20200507 12:02:10.597" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20200507 12:02:09.596" endtime="20200507 12:02:10.597"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:09.552" endtime="20200507 12:02:10.597"></status>
+</kw>
+<kw name="Alert Should Be Present" library="SeleniumLibrary">
+<doc>Verifies that an alert is present and by default, accepts it.</doc>
+<arguments>
+<arg>text=Value should be between 0 and 111</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:02:10.597" endtime="20200507 12:02:10.603"></status>
+</kw>
+<kw name="Verify Function Is Called">
+<arguments>
+<arg>POST /app_launch_position HTTP/1.1</arg>
+</arguments>
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20200507 12:02:10.605" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200507 12:02:10.706" level="INFO">Process completed.</msg>
+<msg timestamp="20200507 12:02:10.706" level="INFO">${result} = &lt;result object with rc 3221225786&gt;</msg>
+<status status="PASS" starttime="20200507 12:02:10.604" endtime="20200507 12:02:10.706"></status>
+</kw>
+<kw name="Process Should Be Stopped" library="Process">
+<doc>Verifies that the process is not running.</doc>
+<status status="PASS" starttime="20200507 12:02:10.707" endtime="20200507 12:02:10.707"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${result.stderr}</arg>
+<arg>${function}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:02:10.707" endtime="20200507 12:02:10.708"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:10.604" endtime="20200507 12:02:10.708"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200507 12:02:10.708" endtime="20200507 12:02:12.805"></status>
+</kw>
+<kw name="Terminate All Processes" library="Process">
+<doc>Terminates all still running processes started by this library.</doc>
+<status status="PASS" starttime="20200507 12:02:12.806" endtime="20200507 12:02:12.806"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:10.708" endtime="20200507 12:02:12.807"></status>
+</kw>
+<tags>
+<tag>INPUT</tag>
+</tags>
+<status status="PASS" starttime="20200507 12:01:59.962" endtime="20200507 12:02:12.807" critical="yes"></status>
+</test>
+<test id="s1-t3" name="Launch input-box w/ invalid positive input">
+<kw name="Begin Web Test" type="setup">
+<kw name="Get Url" library="UrlLibrary">
+<assign>
+<var>${URL}</var>
+</assign>
+<msg timestamp="20200507 12:02:12.812" level="INFO">${URL} = http://192.168.1.216:5000</msg>
+<status status="PASS" starttime="20200507 12:02:12.810" endtime="20200507 12:02:12.812"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>python3</arg>
+<arg>./python/dronelauncher_python.py</arg>
+<arg>shell=True</arg>
+</arguments>
+<msg timestamp="20200507 12:02:12.813" level="INFO">Starting process:
+python3 ./python/dronelauncher_python.py</msg>
+<status status="PASS" starttime="20200507 12:02:12.812" endtime="20200507 12:02:12.824"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:12.826" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20200507 12:02:12.825" endtime="20200507 12:02:17.893"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200507 12:02:17.893" endtime="20200507 12:02:22.017"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:22.017" level="INFO">Opening url 'http://192.168.1.216:5000'</msg>
+<status status="PASS" starttime="20200507 12:02:22.017" endtime="20200507 12:02:22.172"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:12.809" endtime="20200507 12:02:22.172"></status>
+</kw>
+<kw name="Encoders Reset">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_reset_encoders</arg>
+</arguments>
+<msg timestamp="20200507 12:02:22.172" level="INFO">Clicking button 'id:script_reset_encoders'.</msg>
+<status status="PASS" starttime="20200507 12:02:22.172" endtime="20200507 12:02:22.234"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:22.172" endtime="20200507 12:02:22.234"></status>
+</kw>
+<kw name="Launch Input">
+<arguments>
+<arg>112</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:launch_position</arg>
+<arg>${number}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:22.234" level="INFO">Typing text '112' into text field 'name:launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:02:22.234" endtime="20200507 12:02:22.298"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:22.234" endtime="20200507 12:02:22.298"></status>
+</kw>
+<kw name="Click Go">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_launch_position</arg>
+</arguments>
+<msg timestamp="20200507 12:02:22.298" level="INFO">Clicking button 'id:script_launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:02:22.298" endtime="20200507 12:02:22.342"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20200507 12:02:23.343" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20200507 12:02:22.342" endtime="20200507 12:02:23.343"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:22.298" endtime="20200507 12:02:23.343"></status>
+</kw>
+<kw name="Alert Should Be Present" library="SeleniumLibrary">
+<doc>Verifies that an alert is present and by default, accepts it.</doc>
+<arguments>
+<arg>text=Value should be between 0 and 111</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:02:23.343" endtime="20200507 12:02:23.347"></status>
+</kw>
+<kw name="Verify Function Is Called">
+<arguments>
+<arg>POST /app_launch_position HTTP/1.1</arg>
+</arguments>
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20200507 12:02:23.348" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200507 12:02:23.449" level="INFO">Process completed.</msg>
+<msg timestamp="20200507 12:02:23.449" level="INFO">${result} = &lt;result object with rc 3221225786&gt;</msg>
+<status status="PASS" starttime="20200507 12:02:23.348" endtime="20200507 12:02:23.449"></status>
+</kw>
+<kw name="Process Should Be Stopped" library="Process">
+<doc>Verifies that the process is not running.</doc>
+<status status="PASS" starttime="20200507 12:02:23.449" endtime="20200507 12:02:23.449"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${result.stderr}</arg>
+<arg>${function}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:02:23.449" endtime="20200507 12:02:23.449"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:23.347" endtime="20200507 12:02:23.449"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200507 12:02:23.450" endtime="20200507 12:02:25.554"></status>
+</kw>
+<kw name="Terminate All Processes" library="Process">
+<doc>Terminates all still running processes started by this library.</doc>
+<status status="PASS" starttime="20200507 12:02:25.555" endtime="20200507 12:02:25.555"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:23.449" endtime="20200507 12:02:25.556"></status>
+</kw>
+<tags>
+<tag>INPUT</tag>
+</tags>
+<status status="PASS" starttime="20200507 12:02:12.808" endtime="20200507 12:02:25.556" critical="yes"></status>
+</test>
+<test id="s1-t4" name="Launch input-box w/ min valid input">
+<kw name="Begin Web Test" type="setup">
+<kw name="Get Url" library="UrlLibrary">
+<assign>
+<var>${URL}</var>
+</assign>
+<msg timestamp="20200507 12:02:25.561" level="INFO">${URL} = http://192.168.1.216:5000</msg>
+<status status="PASS" starttime="20200507 12:02:25.559" endtime="20200507 12:02:25.561"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>python3</arg>
+<arg>./python/dronelauncher_python.py</arg>
+<arg>shell=True</arg>
+</arguments>
+<msg timestamp="20200507 12:02:25.562" level="INFO">Starting process:
+python3 ./python/dronelauncher_python.py</msg>
+<status status="PASS" starttime="20200507 12:02:25.561" endtime="20200507 12:02:25.573"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:25.574" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20200507 12:02:25.574" endtime="20200507 12:02:30.694"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200507 12:02:30.694" endtime="20200507 12:02:34.836"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:34.837" level="INFO">Opening url 'http://192.168.1.216:5000'</msg>
+<status status="PASS" starttime="20200507 12:02:34.836" endtime="20200507 12:02:34.972"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:25.559" endtime="20200507 12:02:34.973"></status>
+</kw>
+<kw name="Encoders Reset">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_reset_encoders</arg>
+</arguments>
+<msg timestamp="20200507 12:02:34.973" level="INFO">Clicking button 'id:script_reset_encoders'.</msg>
+<status status="PASS" starttime="20200507 12:02:34.973" endtime="20200507 12:02:35.040"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:34.973" endtime="20200507 12:02:35.040"></status>
+</kw>
+<kw name="Launch Input">
+<arguments>
+<arg>0</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:launch_position</arg>
+<arg>${number}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:35.041" level="INFO">Typing text '0' into text field 'name:launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:02:35.041" endtime="20200507 12:02:35.094"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:35.040" endtime="20200507 12:02:35.094"></status>
+</kw>
+<kw name="Click Go">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_launch_position</arg>
+</arguments>
+<msg timestamp="20200507 12:02:35.095" level="INFO">Clicking button 'id:script_launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:02:35.095" endtime="20200507 12:02:35.136"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20200507 12:02:36.138" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20200507 12:02:35.136" endtime="20200507 12:02:36.138"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:35.094" endtime="20200507 12:02:36.138"></status>
+</kw>
+<kw name="Verify Function Is Called">
+<arguments>
+<arg>POST /app_launch_position HTTP/1.1</arg>
+</arguments>
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20200507 12:02:36.138" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200507 12:02:36.239" level="INFO">Process completed.</msg>
+<msg timestamp="20200507 12:02:36.239" level="INFO">${result} = &lt;result object with rc 3221225786&gt;</msg>
+<status status="PASS" starttime="20200507 12:02:36.138" endtime="20200507 12:02:36.239"></status>
+</kw>
+<kw name="Process Should Be Stopped" library="Process">
+<doc>Verifies that the process is not running.</doc>
+<status status="PASS" starttime="20200507 12:02:36.239" endtime="20200507 12:02:36.239"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${result.stderr}</arg>
+<arg>${function}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:02:36.239" endtime="20200507 12:02:36.239"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:36.138" endtime="20200507 12:02:36.240"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200507 12:02:36.240" endtime="20200507 12:02:38.328"></status>
+</kw>
+<kw name="Terminate All Processes" library="Process">
+<doc>Terminates all still running processes started by this library.</doc>
+<status status="PASS" starttime="20200507 12:02:38.328" endtime="20200507 12:02:38.329"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:36.240" endtime="20200507 12:02:38.329"></status>
+</kw>
+<tags>
+<tag>INPUT</tag>
+</tags>
+<status status="PASS" starttime="20200507 12:02:25.557" endtime="20200507 12:02:38.329" critical="yes"></status>
+</test>
+<test id="s1-t5" name="Launch input-box w/ min+1 valid input">
+<kw name="Begin Web Test" type="setup">
+<kw name="Get Url" library="UrlLibrary">
+<assign>
+<var>${URL}</var>
+</assign>
+<msg timestamp="20200507 12:02:38.333" level="INFO">${URL} = http://192.168.1.216:5000</msg>
+<status status="PASS" starttime="20200507 12:02:38.332" endtime="20200507 12:02:38.333"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>python3</arg>
+<arg>./python/dronelauncher_python.py</arg>
+<arg>shell=True</arg>
+</arguments>
+<msg timestamp="20200507 12:02:38.334" level="INFO">Starting process:
+python3 ./python/dronelauncher_python.py</msg>
+<status status="PASS" starttime="20200507 12:02:38.333" endtime="20200507 12:02:38.341"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:38.342" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20200507 12:02:38.342" endtime="20200507 12:02:43.469"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200507 12:02:43.469" endtime="20200507 12:02:47.612"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:47.612" level="INFO">Opening url 'http://192.168.1.216:5000'</msg>
+<status status="PASS" starttime="20200507 12:02:47.612" endtime="20200507 12:02:47.735"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:38.331" endtime="20200507 12:02:47.735"></status>
+</kw>
+<kw name="Encoders Reset">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_reset_encoders</arg>
+</arguments>
+<msg timestamp="20200507 12:02:47.735" level="INFO">Clicking button 'id:script_reset_encoders'.</msg>
+<status status="PASS" starttime="20200507 12:02:47.735" endtime="20200507 12:02:47.797"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:47.735" endtime="20200507 12:02:47.797"></status>
+</kw>
+<kw name="Launch Input">
+<arguments>
+<arg>1</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:launch_position</arg>
+<arg>${number}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:47.798" level="INFO">Typing text '1' into text field 'name:launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:02:47.798" endtime="20200507 12:02:47.857"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:47.797" endtime="20200507 12:02:47.858"></status>
+</kw>
+<kw name="Click Go">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_launch_position</arg>
+</arguments>
+<msg timestamp="20200507 12:02:47.858" level="INFO">Clicking button 'id:script_launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:02:47.858" endtime="20200507 12:02:47.901"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20200507 12:02:48.903" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20200507 12:02:47.901" endtime="20200507 12:02:48.903"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:47.858" endtime="20200507 12:02:48.904"></status>
+</kw>
+<kw name="Verify Function Is Called">
+<arguments>
+<arg>POST /app_launch_position HTTP/1.1</arg>
+</arguments>
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20200507 12:02:48.905" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200507 12:02:49.006" level="INFO">Process completed.</msg>
+<msg timestamp="20200507 12:02:49.006" level="INFO">${result} = &lt;result object with rc 3221225786&gt;</msg>
+<status status="PASS" starttime="20200507 12:02:48.905" endtime="20200507 12:02:49.007"></status>
+</kw>
+<kw name="Process Should Be Stopped" library="Process">
+<doc>Verifies that the process is not running.</doc>
+<status status="PASS" starttime="20200507 12:02:49.007" endtime="20200507 12:02:49.008"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${result.stderr}</arg>
+<arg>${function}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:02:49.008" endtime="20200507 12:02:49.009"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:48.904" endtime="20200507 12:02:49.010"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200507 12:02:49.011" endtime="20200507 12:02:51.179"></status>
+</kw>
+<kw name="Terminate All Processes" library="Process">
+<doc>Terminates all still running processes started by this library.</doc>
+<status status="PASS" starttime="20200507 12:02:51.180" endtime="20200507 12:02:51.180"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:49.010" endtime="20200507 12:02:51.181"></status>
+</kw>
+<tags>
+<tag>INPUT</tag>
+</tags>
+<status status="PASS" starttime="20200507 12:02:38.330" endtime="20200507 12:02:51.181" critical="yes"></status>
+</test>
+<test id="s1-t6" name="Launch input-box w/ max-1 valid input">
+<kw name="Begin Web Test" type="setup">
+<kw name="Get Url" library="UrlLibrary">
+<assign>
+<var>${URL}</var>
+</assign>
+<msg timestamp="20200507 12:02:51.185" level="INFO">${URL} = http://192.168.1.216:5000</msg>
+<status status="PASS" starttime="20200507 12:02:51.183" endtime="20200507 12:02:51.185"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>python3</arg>
+<arg>./python/dronelauncher_python.py</arg>
+<arg>shell=True</arg>
+</arguments>
+<msg timestamp="20200507 12:02:51.186" level="INFO">Starting process:
+python3 ./python/dronelauncher_python.py</msg>
+<status status="PASS" starttime="20200507 12:02:51.186" endtime="20200507 12:02:51.198"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200507 12:02:51.199" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20200507 12:02:51.198" endtime="20200507 12:02:56.326"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200507 12:02:56.326" endtime="20200507 12:03:00.470"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200507 12:03:00.470" level="INFO">Opening url 'http://192.168.1.216:5000'</msg>
+<status status="PASS" starttime="20200507 12:03:00.470" endtime="20200507 12:03:00.622"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:02:51.183" endtime="20200507 12:03:00.622"></status>
+</kw>
+<kw name="Encoders Reset">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_reset_encoders</arg>
+</arguments>
+<msg timestamp="20200507 12:03:00.622" level="INFO">Clicking button 'id:script_reset_encoders'.</msg>
+<status status="PASS" starttime="20200507 12:03:00.622" endtime="20200507 12:03:00.686"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:00.622" endtime="20200507 12:03:00.686"></status>
+</kw>
+<kw name="Launch Input">
+<arguments>
+<arg>110</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:launch_position</arg>
+<arg>${number}</arg>
+</arguments>
+<msg timestamp="20200507 12:03:00.687" level="INFO">Typing text '110' into text field 'name:launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:03:00.687" endtime="20200507 12:03:00.752"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:00.686" endtime="20200507 12:03:00.752"></status>
+</kw>
+<kw name="Click Go">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_launch_position</arg>
+</arguments>
+<msg timestamp="20200507 12:03:00.752" level="INFO">Clicking button 'id:script_launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:03:00.752" endtime="20200507 12:03:00.796"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20200507 12:03:01.797" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20200507 12:03:00.796" endtime="20200507 12:03:01.797"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:00.752" endtime="20200507 12:03:01.798"></status>
+</kw>
+<kw name="Verify Function Is Called">
+<arguments>
+<arg>POST /app_launch_position HTTP/1.1</arg>
+</arguments>
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20200507 12:03:01.800" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200507 12:03:01.902" level="INFO">Process completed.</msg>
+<msg timestamp="20200507 12:03:01.902" level="INFO">${result} = &lt;result object with rc 3221225786&gt;</msg>
+<status status="PASS" starttime="20200507 12:03:01.799" endtime="20200507 12:03:01.903"></status>
+</kw>
+<kw name="Process Should Be Stopped" library="Process">
+<doc>Verifies that the process is not running.</doc>
+<status status="PASS" starttime="20200507 12:03:01.903" endtime="20200507 12:03:01.904"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${result.stderr}</arg>
+<arg>${function}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:03:01.904" endtime="20200507 12:03:01.905"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:01.798" endtime="20200507 12:03:01.906"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200507 12:03:01.907" endtime="20200507 12:03:04.041"></status>
+</kw>
+<kw name="Terminate All Processes" library="Process">
+<doc>Terminates all still running processes started by this library.</doc>
+<status status="PASS" starttime="20200507 12:03:04.042" endtime="20200507 12:03:04.043"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:01.906" endtime="20200507 12:03:04.043"></status>
+</kw>
+<tags>
+<tag>INPUT</tag>
+</tags>
+<status status="PASS" starttime="20200507 12:02:51.182" endtime="20200507 12:03:04.043" critical="yes"></status>
+</test>
+<test id="s1-t7" name="Launch input-box w/ max valid input">
+<kw name="Begin Web Test" type="setup">
+<kw name="Get Url" library="UrlLibrary">
+<assign>
+<var>${URL}</var>
+</assign>
+<msg timestamp="20200507 12:03:04.049" level="INFO">${URL} = http://192.168.1.216:5000</msg>
+<status status="PASS" starttime="20200507 12:03:04.047" endtime="20200507 12:03:04.049"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>python3</arg>
+<arg>./python/dronelauncher_python.py</arg>
+<arg>shell=True</arg>
+</arguments>
+<msg timestamp="20200507 12:03:04.050" level="INFO">Starting process:
+python3 ./python/dronelauncher_python.py</msg>
+<status status="PASS" starttime="20200507 12:03:04.049" endtime="20200507 12:03:04.061"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200507 12:03:04.063" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20200507 12:03:04.062" endtime="20200507 12:03:09.219"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200507 12:03:09.219" endtime="20200507 12:03:13.340"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200507 12:03:13.340" level="INFO">Opening url 'http://192.168.1.216:5000'</msg>
+<status status="PASS" starttime="20200507 12:03:13.340" endtime="20200507 12:03:13.461"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:04.046" endtime="20200507 12:03:13.461"></status>
+</kw>
+<kw name="Encoders Reset">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_reset_encoders</arg>
+</arguments>
+<msg timestamp="20200507 12:03:13.461" level="INFO">Clicking button 'id:script_reset_encoders'.</msg>
+<status status="PASS" starttime="20200507 12:03:13.461" endtime="20200507 12:03:13.527"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:13.461" endtime="20200507 12:03:13.528"></status>
+</kw>
+<kw name="Launch Input">
+<arguments>
+<arg>111</arg>
+</arguments>
+<kw name="Input Text" library="SeleniumLibrary">
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<arguments>
+<arg>name:launch_position</arg>
+<arg>${number}</arg>
+</arguments>
+<msg timestamp="20200507 12:03:13.528" level="INFO">Typing text '111' into text field 'name:launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:03:13.528" endtime="20200507 12:03:13.599"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:13.528" endtime="20200507 12:03:13.599"></status>
+</kw>
+<kw name="Click Go">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_launch_position</arg>
+</arguments>
+<msg timestamp="20200507 12:03:13.600" level="INFO">Clicking button 'id:script_launch_position'.</msg>
+<status status="PASS" starttime="20200507 12:03:13.600" endtime="20200507 12:03:13.643"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20200507 12:03:14.646" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20200507 12:03:13.644" endtime="20200507 12:03:14.646"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:13.599" endtime="20200507 12:03:14.646"></status>
+</kw>
+<kw name="Verify Function Is Called">
+<arguments>
+<arg>POST /app_launch_position HTTP/1.1</arg>
+</arguments>
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20200507 12:03:14.646" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200507 12:03:14.747" level="INFO">Process completed.</msg>
+<msg timestamp="20200507 12:03:14.747" level="INFO">${result} = &lt;result object with rc 3221225786&gt;</msg>
+<status status="PASS" starttime="20200507 12:03:14.646" endtime="20200507 12:03:14.747"></status>
+</kw>
+<kw name="Process Should Be Stopped" library="Process">
+<doc>Verifies that the process is not running.</doc>
+<status status="PASS" starttime="20200507 12:03:14.747" endtime="20200507 12:03:14.747"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${result.stderr}</arg>
+<arg>${function}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:03:14.747" endtime="20200507 12:03:14.747"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:14.646" endtime="20200507 12:03:14.747"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200507 12:03:14.748" endtime="20200507 12:03:16.841"></status>
+</kw>
+<kw name="Terminate All Processes" library="Process">
+<doc>Terminates all still running processes started by this library.</doc>
+<status status="PASS" starttime="20200507 12:03:16.842" endtime="20200507 12:03:16.842"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:14.747" endtime="20200507 12:03:16.843"></status>
+</kw>
+<tags>
+<tag>INPUT</tag>
+</tags>
+<status status="PASS" starttime="20200507 12:03:04.045" endtime="20200507 12:03:16.843" critical="yes"></status>
+</test>
+<test id="s1-t8" name="Functionable Button Backwards">
+<kw name="Begin Web Test" type="setup">
+<kw name="Get Url" library="UrlLibrary">
+<assign>
+<var>${URL}</var>
+</assign>
+<msg timestamp="20200507 12:03:16.849" level="INFO">${URL} = http://192.168.1.216:5000</msg>
+<status status="PASS" starttime="20200507 12:03:16.848" endtime="20200507 12:03:16.849"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>python3</arg>
+<arg>./python/dronelauncher_python.py</arg>
+<arg>shell=True</arg>
+</arguments>
+<msg timestamp="20200507 12:03:16.852" level="INFO">Starting process:
+python3 ./python/dronelauncher_python.py</msg>
+<status status="PASS" starttime="20200507 12:03:16.850" endtime="20200507 12:03:16.863"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200507 12:03:16.864" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20200507 12:03:16.863" endtime="20200507 12:03:21.917"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200507 12:03:21.917" endtime="20200507 12:03:26.060"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200507 12:03:26.061" level="INFO">Opening url 'http://192.168.1.216:5000'</msg>
+<status status="PASS" starttime="20200507 12:03:26.060" endtime="20200507 12:03:26.194"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:16.847" endtime="20200507 12:03:26.195"></status>
+</kw>
+<kw name="Given Encoders Reset">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_reset_encoders</arg>
+</arguments>
+<msg timestamp="20200507 12:03:26.195" level="INFO">Clicking button 'id:script_reset_encoders'.</msg>
+<status status="PASS" starttime="20200507 12:03:26.195" endtime="20200507 12:03:26.262"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:26.195" endtime="20200507 12:03:26.262"></status>
+</kw>
+<kw name="When Press Button Backwards">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_launch_backwards</arg>
+</arguments>
+<msg timestamp="20200507 12:03:26.262" level="INFO">Clicking button 'id:script_launch_backwards'.</msg>
+<status status="PASS" starttime="20200507 12:03:26.262" endtime="20200507 12:03:26.304"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20200507 12:03:27.305" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20200507 12:03:26.304" endtime="20200507 12:03:27.305"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:26.262" endtime="20200507 12:03:27.306"></status>
+</kw>
+<kw name="Then Verify Function Is Called">
+<arguments>
+<arg>POST /app_launch_backwards HTTP/1.1</arg>
+</arguments>
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20200507 12:03:27.307" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200507 12:03:27.409" level="INFO">Process completed.</msg>
+<msg timestamp="20200507 12:03:27.409" level="INFO">${result} = &lt;result object with rc 3221225786&gt;</msg>
+<status status="PASS" starttime="20200507 12:03:27.307" endtime="20200507 12:03:27.409"></status>
+</kw>
+<kw name="Process Should Be Stopped" library="Process">
+<doc>Verifies that the process is not running.</doc>
+<status status="PASS" starttime="20200507 12:03:27.409" endtime="20200507 12:03:27.410"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${result.stderr}</arg>
+<arg>${function}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:03:27.410" endtime="20200507 12:03:27.410"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:27.306" endtime="20200507 12:03:27.411"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200507 12:03:27.412" endtime="20200507 12:03:29.535"></status>
+</kw>
+<kw name="Terminate All Processes" library="Process">
+<doc>Terminates all still running processes started by this library.</doc>
+<status status="PASS" starttime="20200507 12:03:29.536" endtime="20200507 12:03:29.536"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:27.411" endtime="20200507 12:03:29.537"></status>
+</kw>
+<doc>Since there is no intended visible response after pressing button backwards, this testcase tests button function
+by checking whether the action of clicking button backwards calls the targeted method function_launch_backwards()
+in dronelauncher_python.py.</doc>
+<tags>
+<tag>ManualButton</tag>
+</tags>
+<status status="PASS" starttime="20200507 12:03:16.844" endtime="20200507 12:03:29.537" critical="yes"></status>
+</test>
+<test id="s1-t9" name="Functionable Button Forwards">
+<kw name="Begin Web Test" type="setup">
+<kw name="Get Url" library="UrlLibrary">
+<assign>
+<var>${URL}</var>
+</assign>
+<msg timestamp="20200507 12:03:29.543" level="INFO">${URL} = http://192.168.1.216:5000</msg>
+<status status="PASS" starttime="20200507 12:03:29.542" endtime="20200507 12:03:29.543"></status>
+</kw>
+<kw name="Start Process" library="Process">
+<doc>Starts a new process on background.</doc>
+<arguments>
+<arg>python3</arg>
+<arg>./python/dronelauncher_python.py</arg>
+<arg>shell=True</arg>
+</arguments>
+<msg timestamp="20200507 12:03:29.544" level="INFO">Starting process:
+python3 ./python/dronelauncher_python.py</msg>
+<status status="PASS" starttime="20200507 12:03:29.543" endtime="20200507 12:03:29.555"></status>
+</kw>
+<kw name="Open Browser" library="SeleniumLibrary">
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<arguments>
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+</arguments>
+<msg timestamp="20200507 12:03:29.557" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20200507 12:03:29.556" endtime="20200507 12:03:34.659"></status>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20200507 12:03:34.660" endtime="20200507 12:03:38.774"></status>
+</kw>
+<kw name="Go To" library="SeleniumLibrary">
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<arguments>
+<arg>${URL}</arg>
+</arguments>
+<msg timestamp="20200507 12:03:38.774" level="INFO">Opening url 'http://192.168.1.216:5000'</msg>
+<status status="PASS" starttime="20200507 12:03:38.774" endtime="20200507 12:03:38.894"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:29.541" endtime="20200507 12:03:38.894"></status>
+</kw>
+<kw name="Given Encoders Reset">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_reset_encoders</arg>
+</arguments>
+<msg timestamp="20200507 12:03:38.895" level="INFO">Clicking button 'id:script_reset_encoders'.</msg>
+<status status="PASS" starttime="20200507 12:03:38.895" endtime="20200507 12:03:38.983"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:38.894" endtime="20200507 12:03:38.983"></status>
+</kw>
+<kw name="When Press Button Forwards">
+<kw name="Click Button" library="SeleniumLibrary">
+<doc>Clicks the button identified by ``locator``.</doc>
+<arguments>
+<arg>id:script_launch_forwards</arg>
+</arguments>
+<msg timestamp="20200507 12:03:38.983" level="INFO">Clicking button 'id:script_launch_forwards'.</msg>
+<status status="PASS" starttime="20200507 12:03:38.983" endtime="20200507 12:03:39.031"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>1</arg>
+</arguments>
+<msg timestamp="20200507 12:03:40.032" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20200507 12:03:39.031" endtime="20200507 12:03:40.032"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:38.983" endtime="20200507 12:03:40.033"></status>
+</kw>
+<kw name="Then Verify Function Is Called">
+<arguments>
+<arg>POST /app_launch_forwards HTTP/1.1</arg>
+</arguments>
+<kw name="Terminate Process" library="Process">
+<doc>Stops the process gracefully or forcefully.</doc>
+<assign>
+<var>${result}</var>
+</assign>
+<msg timestamp="20200507 12:03:40.034" level="INFO">Gracefully terminating process.</msg>
+<msg timestamp="20200507 12:03:40.136" level="INFO">Process completed.</msg>
+<msg timestamp="20200507 12:03:40.155" level="INFO">${result} = &lt;result object with rc 3221225786&gt;</msg>
+<status status="PASS" starttime="20200507 12:03:40.034" endtime="20200507 12:03:40.155"></status>
+</kw>
+<kw name="Process Should Be Stopped" library="Process">
+<doc>Verifies that the process is not running.</doc>
+<status status="PASS" starttime="20200507 12:03:40.155" endtime="20200507 12:03:40.155"></status>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<arguments>
+<arg>${result.stderr}</arg>
+<arg>${function}</arg>
+</arguments>
+<status status="PASS" starttime="20200507 12:03:40.156" endtime="20200507 12:03:40.156"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:40.033" endtime="20200507 12:03:40.157"></status>
+</kw>
+<kw name="End Web Test" type="teardown">
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20200507 12:03:40.157" endtime="20200507 12:03:42.271"></status>
+</kw>
+<kw name="Terminate All Processes" library="Process">
+<doc>Terminates all still running processes started by this library.</doc>
+<status status="PASS" starttime="20200507 12:03:42.272" endtime="20200507 12:03:42.272"></status>
+</kw>
+<status status="PASS" starttime="20200507 12:03:40.157" endtime="20200507 12:03:42.273"></status>
+</kw>
+<doc>Since there is no intended visible response after pressing button forwards, this testcase tests button function
+by checking whether the action of clicking button forwards calls the targeted method function_launch_forwards()
+in dronelauncher_python.py.</doc>
+<tags>
+<tag>ManualButton</tag>
+</tags>
+<status status="PASS" starttime="20200507 12:03:29.538" endtime="20200507 12:03:42.273" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200507 12:01:48.133" endtime="20200507 12:03:42.276"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="9" fail="0">Critical Tests</stat>
+<stat pass="9" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="6" fail="0">INPUT</stat>
+<stat pass="2" fail="0">ManualButton</stat>
+</tag>
+<suite>
+<stat pass="9" fail="0" id="s1" name="Launch">Launch</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
