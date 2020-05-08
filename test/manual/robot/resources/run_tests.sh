@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IP=$(python ./library/getip.py)
+IP=$(python3 ./library/getip.py)
 PORT=5000
 URL="http://$IP:$PORT"
 BROWSER="chrome"
@@ -22,7 +22,7 @@ if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]]; then
 fi
 
 
-python ../../../python/dronelauncher_python.py &> $LOG &
+python3 ../../../python/dronelauncher_python.py &> $LOG &
 DRONE_PID=$!
 
 if [ $# -eq 0 ]; then           #If argumentlist is empty, run all tests.
