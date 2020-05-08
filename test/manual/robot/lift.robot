@@ -71,7 +71,6 @@ Check Log
     ${logfile}  Get File  .dronelauncher.log
     Should match  ${logfile}  *${target_string}*\"*${error_code}*
 
-
 *** Test Cases ***
 
 Lift Up
