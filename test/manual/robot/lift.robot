@@ -58,7 +58,7 @@ User Expects The Lift To Decrease
     ${target_string} =  Set Variable  POST /app_lift_stop HTTP/1.1
     Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
 
-User Expects The Lift To Change
+User Expects The Lift To Change with Code
 	[Arguments]    ${error_code}
     ${target_string} =  Set Variable  POST /app_lift_position HTTP/1.1
     Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  ${error_code}
@@ -94,11 +94,11 @@ Lift Value
      	Given Server Is Up
 	When User Enters Value In Field  131
     Then User Expects An Error Message
-    User Expects The Pitch To Change With Code	400
+    User Expects The Lift To Change With Code	400
     When User Enters Value In Field  130
-    User Expects The Pitch To Change With Code	500
+    User Expects The Lift To Change With Code	500
     When User Enters Value In Field  20
-    User Expects The Pitch To Change With Code	500
+    User Expects The Lift To Change With Code	500
     When User Enters Value In Field  -1
-    User Expects The Pitch To Change With Code	400
+    User Expects The Lift To Change With Code	400
     Then User Expects An Error Message
