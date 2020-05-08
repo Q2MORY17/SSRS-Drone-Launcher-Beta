@@ -2,7 +2,7 @@
 Documentation  Dronelauncher tests regarding settings for the automatic use
 Resource  Resources/keywords.robot
 Library  SeleniumLibrary
-Library  Dialogs
+# Library  Dialogs
 
 Test Setup  Begin web test
 Test Teardown  End web test
