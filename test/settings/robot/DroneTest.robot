@@ -8,7 +8,7 @@ Test Setup  Begin web test
 Test Teardown  End web test
 
 *** Variables ***
-${BROWSER}  chrome
+${BROWSER}  headlesschrome
 ${URL} =  http://192.168.1.216:5000/
 ${IP} =  return ip
 ${PORT} =  5000
