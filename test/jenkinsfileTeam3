@@ -14,7 +14,7 @@ pipeline {
 
     stage('Unit tests') {
       steps {
-        sh 'python3 -m pytest test/manual/options/unittest/test_dronelauncher_python.py'
+        sh 'python3 -m pytest test/manual/unittest/test_dronelauncher_python.py'
       }
     }
   }
