@@ -19,7 +19,8 @@ Begin Web Test
     Maximize Browser Window
     Sleep                       3s
     Go To                       ${URL}
-    Server Is Up
+    Sleep                       3s
+#    Server Is Up
     Click Element               xpath:/html/body/ul/li[4]/a
 
 End Web Test
