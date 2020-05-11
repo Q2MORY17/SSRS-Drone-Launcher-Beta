@@ -20,9 +20,11 @@ Display Page
        Wait Until Page Contains       Positions
 
 User Click Button Max pitch     #To maximize the pitch position
+        Start Process  echo Resetting log... > .dronelauncher.log  shell=yes
         Click Button        //*[@id="script_max_pitch"]
 
 User Click Button Min pitch   #to minimize the pitch position
+        Start Process  echo Resetting log... > .dronelauncher.log  shell=yes
         Click Button             //*[@id="script_min_pitch"]
 
 User Click Button Max lift      #to maximize the lift position

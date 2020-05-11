@@ -12,7 +12,7 @@ Suite Teardown	 End Web Test
 
 
 *** Variables ***
-${BROWSER} = 		firefox
+${BROWSER} = 		headlesschrome
 ${URL} =    		http://192.168.1.15:5000
 ${IP} = 		return_ip
 ${PORT} =		5000
