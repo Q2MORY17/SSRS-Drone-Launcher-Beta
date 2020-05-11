@@ -2,19 +2,21 @@
 Documentation  Dronelauncher tests regarding settings for the automatic use
 Resource  Resources/keywords.robot
 Library  SeleniumLibrary
-# Library  Dialogs
-
+Library  Process
+Library  ./Library/UrlLibrary.py
 Test Setup  Begin web test
 Test Teardown  End web test
 
 *** Variables ***
 ${BROWSER}  headlesschrome
-${URL} =  http://192.168.1.216:5000/
-${IP} =  return ip
-${PORT} =  5000
+# ${URL} =  http://192.168.1.216:5000/
+# ${IP} =  return ip
+# ${PORT} =  5000
 
 *** Keywords ***
 Begin Web Test
+    ${URL}=                     Get Url
+    Start Process               python3    ./python/dronelauncher_python.py    shell=True
     Open Browser                about:blank     ${BROWSER}
     Maximize Browser Window
     Sleep                       3s
@@ -30,9 +32,6 @@ Server Is Up
     Wait Until Page Contains Element  xpath://button[@id="script_pitch_up"]
     Page Should Contain  Pitch
     Click Button  xpath://button[@id="script_reset_encoders"]
-
-#Select Browser
-#    ${BROWSER}=  Get Selection From User    Select browser:    chrome      firefox
 
 *** Test Cases ***
 Change Pitch Test1
