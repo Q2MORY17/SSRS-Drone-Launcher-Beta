@@ -1,6 +1,9 @@
 *** Settings ***
-Documentation     Maximizing and Minimizing the Drone Positions
-Library           SeleniumLibrary
+Documentation        Maximizing and Minimizing the Drone Positions
+Library              SeleniumLibrary
+Library	            ./library/getip.py
+Library             Process
+Library              OperatingSystem
 Suite Setup         Begain Web Test
 Suite Teardown        End Web Test
 
@@ -9,6 +12,7 @@ ${BROWSER} =        chrome
 ${URL} =            http://192.168.1.172:5000
 ${IP}=              return ip
 ${PORT} =           5000
+${logfile}  	Get File  .dronelauncher.log
 
 *** Keywords ***
 Begain Web Test
@@ -16,24 +20,35 @@ Begain Web Test
     Maximize Browser Window
 End Web Test
     Close Browser
+
 Display Page
        Wait Until Page Contains       Positions
 
 User Click Button Max pitch     #To maximize the pitch position
-        Click Button        //*[@id="script_max_pitch"]
+        Start Process            echo Resetting log... > .dronelauncher.log  shell=yes
+        Click Button             //*[@id="script_max_pitch"]
 
-User Click Button Min pitch   #to minimize the pitch position
+User Click Button Min pitch     #to minimize the pitch position
+        Start Process            echo Resetting log... > .dronelauncher.log  shell=yes
         Click Button             //*[@id="script_min_pitch"]
 
 User Click Button Max lift      #to maximize the lift position
+        Start Process            echo Resetting log... > .dronelauncher.log  shell=yes
         Click Button            //*[@id="script_max_lift"]
 
 User Click Button Min lift         #to minimize the lift position
+        Start Process           echo Resetting log... > .dronelauncher.log  shell=yes
         Click Button            //*[@id="script_min_lift"]
+
+Check Log
+    [Arguments]	 ${target_string}  ${error_code}
+    ${logfile}  Get File  .dronelauncher.log
+    Should match  ${logfile}
+
 *** Test Cases ***
 Max pitch                   #test case for the Max position
-    [Documentation]     Clicking the Positions Max pitch
-    [Tags]              max_pitch
+    [Documentation]         Clicking the Positions Max pitch
+    [Tags]                   max_pitch
     Display Page
     User Click Button Max pitch
 Min pitch                         #test case for the Min position
@@ -43,8 +58,8 @@ Min pitch                         #test case for the Min position
     User Click Button Min pitch
 
 Max lift                      #test case for the  Max lift position
-    [Documentation]     Clicking the Positions Max pitch
-    [Tags]              max_lift
+    [Documentation]          Clicking the Positions Max pitch
+    [Tags]                   max_lift
     Display Page
     User Click Button Max lift
 Min lift                      #test case for the Min lift position
