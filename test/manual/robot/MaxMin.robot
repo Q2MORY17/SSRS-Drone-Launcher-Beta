@@ -8,7 +8,7 @@ Suite Setup         Begain Web Test
 Suite Teardown        End Web Test
 
 *** Variables ***
-${BROWSER} =        chrome
+${BROWSER} =        headlesschrome
 ${URL} =            http://192.168.1.172:5000
 ${IP}=              return ip
 ${PORT} =           5000
