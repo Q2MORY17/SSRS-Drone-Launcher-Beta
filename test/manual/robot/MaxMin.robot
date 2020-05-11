@@ -1,35 +1,48 @@
 *** Settings ***
 Documentation     Maximizing and Minimizing the Drone Positions
 Library           SeleniumLibrary
+Library	          ./library/getip.py
+Library           Process
+Library            OperatingSystem
 Suite Setup         Begain Web Test
-Suite Teardown        End Web Test
+Suite Teardown       End Web Test
 
 *** Variables ***
 ${BROWSER} =        chrome
 ${URL} =            http://192.168.1.172:5000
 ${IP}=              return ip
 ${PORT} =           5000
-
+${logfile}  	    Get File  .dronelauncher.log
 *** Keywords ***
 Begain Web Test
     Open Browser       ${URL}        ${BROWSER}
     Maximize Browser Window
 End Web Test
     Close Browser
+
 Display Page
        Wait Until Page Contains       Positions
 
 User Click Button Max pitch     #To maximize the pitch position
+	    Start Process        echo Resetting log... > .dronelauncher.log  shell=yes
         Click Button        //*[@id="script_max_pitch"]
 
 User Click Button Min pitch   #to minimize the pitch position
+        Start Process            echo Resetting log... > .dronelauncher.log  shell=yes
         Click Button             //*[@id="script_min_pitch"]
 
 User Click Button Max lift      #to maximize the lift position
+       	Start Process            echo Resetting log... > .dronelauncher.log  shell=yes
         Click Button            //*[@id="script_max_lift"]
 
 User Click Button Min lift         #to minimize the lift position
+        Start Process           echo Resetting log... > .dronelauncher.log  shell=yes
         Click Button            //*[@id="script_min_lift"]
+Check Log
+    [Arguments]	        ${logfile}
+    ${logfile}         Get File      .dronelauncher.log
+    Should match       ${logfile}
+
 *** Test Cases ***
 Max pitch                   #test case for the Max position
     [Documentation]     Clicking the Positions Max pitch
