@@ -3,7 +3,7 @@ pipeline {
     stages {
 	stage('Checkout') {
 	    steps {
-		git url:'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta', branch:'SSRS1-99'
+		git url:'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta', branch:'master'
 	    }
 	}
 
@@ -18,7 +18,7 @@ pipeline {
 	stage('run_tests.sh') {
 	    steps {
 		dir("test/manual/robot") {
-		    sh 'resources/run_tests.sh'
+		    sh 'resources/run_tests_headless.sh pitch.robot'
 		}
 	    }
 	}
