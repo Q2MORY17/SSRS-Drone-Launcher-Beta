@@ -121,7 +121,7 @@ def test_set_pitch_position_encoder_ready_valid_position_not_zero_increment_less
 
 
 # ---------------------------------------------------------------------------------
-# ----------------- pitch_control -------------------------------------------------
+# ----------------- pitch_control --------------------------------------------
 # ---------------------------------------------------------------------------------
 def test_pitch_control_PitchCMD_up(dl):
     # GIVEN
@@ -129,7 +129,7 @@ def test_pitch_control_PitchCMD_up(dl):
     dl.rc = MagicMock()
 
     # WHEN
-    dl.rc.BackwardM1.return_value= True
+    dl.rc.BackwardM1.return_value = True
     dl.pitch_control(PitchCMD(1))
 
     # THEN
@@ -143,7 +143,7 @@ def test_pitch_control_PitchCMD_down(dl):
     dl.rc = MagicMock()
 
     # WHEN
-    dl.rc.BackwardM1.return_value = True
+    dl.rc.ForwardM1.return_value = True
     dl.pitch_control(PitchCMD(2))
 
     # THEN
@@ -157,7 +157,7 @@ def test_pitch_control_PitchCMD_stop(dl):
     dl.rc = MagicMock()
 
     # WHEN
-    dl.rc.BackwardM1.return_value = True
+    dl.rc.ForwardM1.return_value = True
     dl.pitch_control(PitchCMD(3))
 
     # THEN
