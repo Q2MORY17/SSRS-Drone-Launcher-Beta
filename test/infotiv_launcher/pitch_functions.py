@@ -18,6 +18,10 @@ def dl():
     yield dl
     print('\n**********End**********')
 
+def test_encoder_default_value(dl):
+    assert dl.encoders_ready == 0,"The default value should be 0"
+
+
 def test_set_pitch_position_encoder_not_ready(dl):
     # GIVEN
     dl.encoders_ready = 0
