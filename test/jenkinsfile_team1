@@ -34,10 +34,10 @@ pipeline {
 		}
 	    }
 	}
-	stage('Launch') {
+	stage('Launch Invalid') {
 	    steps {
 		dir("test/manual/robot") {
-		    sh 'resources/run_tests_headless.sh launch.robot'
+		    sh 'resources/run_tests_headless.sh launch_invalid_inputs.robot'
 		}
 	    }
 	}
