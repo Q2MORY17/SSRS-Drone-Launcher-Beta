@@ -34,3 +34,20 @@ def test_standby(dl):
     dl.set_rotation_position.assert_called_with(0)
     dl.set_lift_position.assert_called_once_with(0)
     dl.set_launch_position.assert_called_with(0)
+
+
+def test_prepare_launch_function_calls_with_correct_parameters(dl):
+    # Mock all the functions inside prepare_launch
+    dl.set_pitch_position = MagicMock()
+    dl.set_rotation_position = MagicMock()
+    dl.set_lift_position = MagicMock()
+    dl.set_launch_position = MagicMock()
+
+    # Use the prepare_launch function to run all the function calls
+    dl.prepare_launch()
+
+    # Check if all the functions were called with the correct parameters
+    dl.set_pitch_position.assert_called_with(launcher.pitch_ready)
+    dl.set_rotation_position.assert_called_with(launcher.rotation_ready)
+    dl.set_lift_position.assert_called_once_with(launcher.lift_position)
+    dl.set_launch_position.assert_called_with(0)
