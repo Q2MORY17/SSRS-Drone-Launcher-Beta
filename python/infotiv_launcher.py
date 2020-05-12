@@ -39,10 +39,10 @@ class Launcher:
         #setup variables
 
         #Linux comport name
-        self.rc = Roboclaw("/dev/ttyACM1",115200)
+        #self.rc = Roboclaw("/dev/ttyACM1",115200)
 
         #Windows com-port name
-        #self.rc = Roboclaw("COM8",115200)
+        self.rc = Roboclaw("COM8",115200)
         self.rc.Open()
 
 
