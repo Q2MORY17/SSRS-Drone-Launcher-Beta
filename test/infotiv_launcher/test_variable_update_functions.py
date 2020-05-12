@@ -1,6 +1,7 @@
 import os
 import sys
 import pytest
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../python")
 
 import python.infotiv_launcher
@@ -14,6 +15,19 @@ def launcher():
     print('\n**********End**********')
 
 
+@pytest.mark.parametrize("invalid_data", [(-1), 91])
+def test_change_pitch_invalid_data(launcher, invalid_data):
+    with pytest.raises(ValueError) as err:
+        launcher.change_pitch(invalid_data)
+    assert err.match('Out of Bounds')
+
+
+@pytest.mark.parametrize("valid_data", [0, 1, 89, 90])
+def test_change_pitch_valid_data(launcher, valid_data):
+    launcher.change_pitch(valid_data)
+    assert launcher.pitch_ready == valid_data
+
+
 @pytest.mark.parametrize("invalid_data", [-1, 11, 0])
 def test_change_speed_invalid(launcher, invalid_data):
     with pytest.raises(Exception, match='Out of Bounds') as err:
@@ -24,7 +38,7 @@ def test_change_speed_invalid(launcher, invalid_data):
 @pytest.mark.parametrize("data", [8, 10])
 def test_change_speed_above_7(launcher, data):
     launcher.change_speed(data)
-    actual = data*13400
+    actual = data * 13400
     assert launcher.launch_speed_pulses == actual
 
 
@@ -32,7 +46,7 @@ def test_change_speed_above_7(launcher, data):
 def test_change_speed_below_8(launcher, data):
     launcher.change_speed(data)
     pulse = data * 13400
-    actual = (pulse**2)/13400
+    actual = (pulse ** 2) / 13400
     assert launcher.launch_acceleration == actual
 
 
@@ -46,5 +60,5 @@ def test_change_acceleration_invalid(launcher, invalid_data):
 @pytest.mark.parametrize("valid_data", [1, 32, 48])
 def test_change_acceleration_valid(launcher, valid_data):
     launcher.change_acceleration(valid_data)
-    acceleration_actual = valid_data*13400
+    acceleration_actual = valid_data * 13400
     assert launcher.launch_acceleration == acceleration_actual
