@@ -162,7 +162,7 @@ def test_max_pitch_higher_than_zero_increment(launcher):
     assert launcher.rc.SpeedDistanceM1.call_count == 2
 
 
-def test_max_pitch_higher_than_zero_increment(launcher):
+def test_max_pitch_lower_than_zero_increment(launcher):
     # GIVEN
     launcher.encoders_ready = 1
 
@@ -178,6 +178,17 @@ def test_max_pitch_higher_than_zero_increment(launcher):
              call(launcher.address, 0, 0, 0)]
     launcher.rc.SpeedDistanceM1.assert_has_calls(calls)
     assert launcher.rc.SpeedDistanceM1.call_count == 2
+
+
+@pytest.mark.parametrize("test_input, expected", [(12345.6789, 1234.57), (10, 1), (123, 12.3), (0, 0), (-10, -1)])
+def test_battery_voltage_decimal_value(launcher, test_input, expected):
+    # GIVEN
+    launcher.rc = MagicMock()
+    launcher.rc.ReadMainBatteryVoltage.return_value = (128, test_input)
+    # WHEN
+    return_value = launcher.battery_voltage()
+    # THEN
+    assert return_value == expected
 
 # ---------------------------------------------------------------------------------
 # ------------------------ set_launch_variables------------------------------------
