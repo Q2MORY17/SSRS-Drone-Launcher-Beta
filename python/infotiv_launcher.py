@@ -282,9 +282,9 @@ class Launcher:
         Args:
             cmd (LaunchCMD): desired launch movement for launch motors, (for example: Launch.CMD.forwards)
         '''
-        if cmd == LaunchCMD.forwards:
+        if cmd == LaunchCMD.up:
             self.rc.ForwardM2(self.address_2, self.launch_speed_manual)
-        if cmd == LaunchCMD.backwards:
+        if cmd == LaunchCMD.down:
             self.rc.BackwardM2(self.address_2, self.launch_speed_manual)
         if cmd == LaunchCMD.stop:
             self.rc.ForwardM2(self.address_2, 0)
@@ -301,7 +301,7 @@ class Launcher:
     def max_pitch(self):
         
         if self.encoder_ready_check():
-            pitch_increment = self.pitch_pulses - self.rc.ReadEncM1(address)[1]
+            pitch_increment = self.pitch_pulses - self.rc.ReadEncM1(self.address)[1]
             if pitch_increment >= 0:
                 self.rc.SpeedDistanceM1(self.address,self.pitch_speed_pulses,pitch_increment,1) #(address, +-speed, pulses, buffer(0=buffered, 1=Execute immediately))
                 self.rc.SpeedDistanceM1(self.address,0,0,0) #To avoid deceleration
@@ -427,10 +427,10 @@ class Launcher:
         else:
             if speed > 7:
                 self.launch_speed_pulses = speed*13400
-                self.launch.acceleration = 655360 #maximum value
+                self.launch_acceleration = 655360 #maximum value
             else:
                 self.launch_speed_pulses = speed*13400
-                self.launch_acceleration = (speed.launch_speed_pulses**2)/13400
+                self.launch_acceleration = (self.launch_speed_pulses**2)/13400
 
 
     def change_acceleration(self, acceleration):
