@@ -5,7 +5,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "
 
 import pytest
 from unittest.mock import MagicMock, call
-
+import random
 import python.infotiv_launcher
 
 
@@ -178,3 +178,54 @@ def test_max_pitch_higher_than_zero_increment(launcher):
              call(launcher.address, 0, 0, 0)]
     launcher.rc.SpeedDistanceM1.assert_has_calls(calls)
     assert launcher.rc.SpeedDistanceM1.call_count == 2
+
+# ---------------------------------------------------------------------------------
+# ------------------------ set_launch_variables------------------------------------
+# ---------------------------------------------------------------------------------
+
+# Fails when rotation_position is less than 0 because
+# According to the file: Design and mechatronic integration of a drone launcher, the movement needs to cover a full rotation of 360◦
+# But in infotiv_launcher.py, it says self.rotation_length=180.0 so it's contraditory to mechatronic file
+def test_set_launch_variables_valid_positions_pass(launcher):
+    # GIVEN
+    pitch_position = random.randint(0, launcher.pitch_length)
+    rotation_position = random.randint(-launcher.rotation_length, launcher.rotation_length)
+    lift_position = random.randint(0, launcher.lift_length)
+
+    # WHEN
+    launcher.set_launch_variables(pitch_position, rotation_position, lift_position)
+
+    # THEN PASS
+
+
+def test_set_launch_variables_valid_positions_called(launcher):
+    # GIVEN
+    launcher.change_pitch = MagicMock()
+    launcher.change_rotation = MagicMock()
+    launcher.change_lift = MagicMock()
+
+    # WHEN
+    pitch_position = random.randint(0, launcher.pitch_length)
+    rotation_position = random.randint(-launcher.rotation_length, launcher.rotation_length)
+    lift_position = random.randint(0, launcher.lift_length)
+    launcher.set_launch_variables(pitch_position, rotation_position, lift_position)
+
+    # THEN
+    launcher.change_pitch.assert_called_with(pitch_position)
+    launcher.change_rotation.assert_called_with(rotation_position)
+    launcher.change_lift.assert_called_with(lift_position)
+
+
+# The following testcase will fail because of invalid values
+# o is actually valid pitch, rotation position, added in the data to check whether the testcase fails if we have valid
+# pitch and rotation position but invalid lift position
+@pytest.mark.parametrize("invalid_pitch", [0, -1, 91])
+@pytest.mark.parametrize("invalid_rotation", [0, -181, 181])
+@pytest.mark.parametrize("invalid_lift", [(-1, 131)])
+def test_set_launch_variables_invalid_positions(launcher, invalid_pitch, invalid_rotation,invalid_lift):
+    # GIVEN INVALID POSITION
+
+    # WHEN
+    launcher.set_launch_variables(invalid_pitch, invalid_rotation, invalid_lift)
+
+    # THEN FAILS
