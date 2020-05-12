@@ -124,3 +124,57 @@ def test_stop(launcher):
     launcher.rc.ForwardM2.assert_any_call(launcher.address, 0)
     launcher.rc.ForwardM1.assert_any_call(launcher.address_2,0)
     launcher.rc.ForwardM2.assert_any_call(launcher.address_2, 0)
+
+
+def test_max_pitch_zero_increment(launcher):
+    # GIVEN
+    launcher.encoders_ready = 1
+
+    launcher.rc = MagicMock()
+    launcher.rc.ReadEncM1.return_value = (1, 355000)    # pitch increment = 0
+
+    # WHEN
+    launcher.max_pitch()
+
+    # THEN
+
+    calls = [call(launcher.address, launcher.pitch_speed_pulses, 0, 1),
+             call(launcher.address, 0, 0, 0)]
+    launcher.rc.SpeedDistanceM1.assert_has_calls(calls)
+    assert launcher.rc.SpeedDistanceM1.call_count == 2
+
+
+def test_max_pitch_higher_than_zero_increment(launcher):
+    # GIVEN
+    launcher.encoders_ready = 1
+
+    launcher.rc = MagicMock()
+    launcher.rc.ReadEncM1.return_value = (1, 2)     # pitch increment = 354998
+
+    # WHEN
+    launcher.max_pitch()
+
+    # THEN
+
+    calls = [call(launcher.address, launcher.pitch_speed_pulses, 354998, 1),
+             call(launcher.address, 0, 0, 0)]
+    launcher.rc.SpeedDistanceM1.assert_has_calls(calls)
+    assert launcher.rc.SpeedDistanceM1.call_count == 2
+
+
+def test_max_pitch_higher_than_zero_increment(launcher):
+    # GIVEN
+    launcher.encoders_ready = 1
+
+    launcher.rc = MagicMock()
+    launcher.rc.ReadEncM1.return_value = (1, 355020)    # pitch increment = -20
+
+    # WHEN
+    launcher.max_pitch()
+
+    # THEN
+
+    calls = [call(launcher.address, -launcher.pitch_speed_pulses, 20, 1),
+             call(launcher.address, 0, 0, 0)]
+    launcher.rc.SpeedDistanceM1.assert_has_calls(calls)
+    assert launcher.rc.SpeedDistanceM1.call_count == 2
