@@ -109,3 +109,18 @@ def test_set_launch_position_encoders_ready_launch_position_max(launcher):
              call(129, 0, 0, 0)]
     launcher.rc.SpeedDistanceM2.assert_has_calls(calls)
     assert launcher.rc.SpeedDistanceM2.call_count == 4
+
+
+def test_stop(launcher):
+    # GIVEN
+    launcher.rc.ForwardM1 = MagicMock(return_value=True)
+    launcher.rc.ForwardM2 = MagicMock(return_value=True)
+
+    # WHEN
+    launcher.stop()
+
+    # THEN
+    launcher.rc.ForwardM1.assert_any_call(launcher.address, 0)
+    launcher.rc.ForwardM2.assert_any_call(launcher.address, 0)
+    launcher.rc.ForwardM1.assert_any_call(launcher.address_2,0)
+    launcher.rc.ForwardM2.assert_any_call(launcher.address_2, 0)
