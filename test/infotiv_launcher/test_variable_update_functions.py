@@ -37,8 +37,22 @@ def test_change_lift_invalid(launcher, invalid_data):
 
 @pytest.mark.parametrize("data", [1, 130, 0, 129])
 def test_change_lift(launcher, data):
-        launcher.change_lift(data)
-        assert launcher.lift_ready == data
+    launcher.change_lift(data)
+    assert launcher.lift_ready == data
+
+
+@pytest.mark.parametrize("invalid_data", [-1, 180.1])
+def test_change_rotation_invalid(launcher, invalid_data):
+    with pytest.raises(Exception, match='Out of Bounds') as err:
+        launcher.change_rotation(invalid_data)
+        assert err.type is ValueError
+
+
+@pytest.mark.parametrize("valid_data", [0.0001, 1.5, 180.0])
+def test_change_rotation_valid(launcher, valid_data):
+    launcher.change_rotation(valid_data)
+    rotation_position_actual = valid_data
+    assert launcher.rotation_ready == rotation_position_actual
 
 
 @pytest.mark.parametrize("invalid_data", [-1, 11, 0])
