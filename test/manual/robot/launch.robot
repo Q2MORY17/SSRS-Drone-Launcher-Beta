@@ -49,7 +49,6 @@ Verify Function Is Called
     Process Should Be Stopped
     Should Contain                          ${result.stderr}  ${function}
 
-
 Launch Input
     [Arguments]                             ${number}
     Input Text                              name:launch_position  ${number}
@@ -73,6 +72,7 @@ Launch input-box w/ invalid negative input
     Alert Should Be Present                 text=Value should be between 0 and 111
     Verify Function Is Called               POST /app_launch_position HTTP/1.1
 
+
 #Input valid value should be between 0-111
 Launch input-box w/ invalid positive input
     [Tags]                                  INPUT
@@ -81,6 +81,7 @@ Launch input-box w/ invalid positive input
     Click Go
     Alert Should Be Present                 text=Value should be between 0 and 111
     Verify Function Is Called               POST /app_launch_position HTTP/1.1
+
 
 #Input valid value should be between 0-111
 Launch input-box w/ min valid input
@@ -98,6 +99,7 @@ Launch input-box w/ min+1 valid input
     Launch Input                            1
     Click Go
     Verify Function Is Called               POST /app_launch_position HTTP/1.1
+
 
 #Input valid value should be between 0-111
 Launch input-box w/ max-1 valid input
@@ -125,6 +127,7 @@ Functionable Button Backwards
     Given Encoders Reset
     When Press Button Backwards
     Then Verify Function Is Called          POST /app_launch_backwards HTTP/1.1
+
 
 Functionable Button Forwards
     [Documentation]                         Since there is no intended visible response after pressing button forwards, this testcase tests button function
