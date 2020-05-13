@@ -1,6 +1,6 @@
 """
 This code is being worked on @INFOTIV
-AIM: Separate backend and frontend and make the code more readable. 
+AIM: Separate backend and frontend and make the code more readable.
 CODER: Luan Mollakuqe
 """
 # Libraries
@@ -12,7 +12,7 @@ from enum import Enum
 class EncoderError(Exception):
     pass
 
-# Classes with commands for manual pitch/lift/launch/rotation functions used in the launcher. 
+# Classes with commands for manual pitch/lift/launch/rotation functions used in the launcher.
 class PitchCMD(Enum):
     up = 1
     down = 2
@@ -117,7 +117,7 @@ class Launcher:
                 pitch_objective = 0
             else:
                 pitch_objective = int(self.pitch_pulses / (self.pitch_length / pitch_position))
-                
+
             pitch_increment = pitch_objective - self.rc.ReadEncM1(self.address)[1]
 
             if pitch_increment >= 0:
@@ -156,7 +156,7 @@ class Launcher:
             # Checks conditions
             if rotation_position > self.lift_length or rotation_position < 0:
                 raise ValueError("out of bounds")
-                
+
             elif rotation_position == 0:
                 rotation_objective = 0
             else:
@@ -205,7 +205,7 @@ class Launcher:
                 lift_objective = 0
             else:
                 lift_objective = int(self.lift_pulses / (self.lift_length / lift_position))
-                
+
             lift_increment = lift_objective - self.rc.ReadEncM1(self.address_2)[1]
 
             if lift_increment >= 0:
@@ -234,7 +234,7 @@ class Launcher:
 # ---------------------------------------------------------------------------------
 # ------------------------ Launch functions--------------------------------------
 # ---------------------------------------------------------------------------------
-    
+
     def set_launch_position(self, launch_position):
         '''
         sets the launch position of the launcher by the given launch_position parameter.
@@ -299,7 +299,7 @@ class Launcher:
         self.rc.ForwardM2(self.address_2, 0)
 
     def max_pitch(self):
-        
+
         if self.encoder_ready_check():
             pitch_increment = self.pitch_pulses - self.rc.ReadEncM1(self.address)[1]
             if pitch_increment >= 0:
@@ -314,10 +314,10 @@ class Launcher:
 
     def min_lift(self):
         pass
-    
+
     def max_lift(self):
         pass
-    
+
 
 
     def home(self):
@@ -328,9 +328,9 @@ class Launcher:
 
         #example 1:
         self.encoders_ready = 1
-        
+
         #example 2:
-        
+
         pass
 
     def battery_voltage(self):
@@ -364,7 +364,7 @@ class Launcher:
         Sets the variables before preparing the launch.
 
             Args:
-        pitch_position      (int): desired pitch position between values x and y 
+        pitch_position      (int): desired pitch position between values x and y
         rotation_position   (int): desired rotation position between x and y
         lift_position       (int): desired lift position in between values x and y
         launch_position     (int): desired launch position in between values x and y
@@ -381,7 +381,8 @@ class Launcher:
         '''
         self.set_pitch_position(self.pitch_ready)
         self.set_rotation_position(self.rotation_ready)
-        self.set_lift_position(self.lift_position)
+        # Changed self.lift_position to self.lift_ready since there is no variable named lift_position
+        self.set_lift_position(self.lift_ready)
         self.set_launch_position(0)
 
     def launch(self):
@@ -445,5 +446,3 @@ class Launcher:
 
 
 launch = Launcher()
-
-
