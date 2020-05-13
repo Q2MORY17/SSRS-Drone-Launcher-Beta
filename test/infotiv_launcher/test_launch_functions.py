@@ -7,6 +7,7 @@ import pytest
 from unittest.mock import MagicMock, call
 import random
 import python.infotiv_launcher
+from python.infotiv_launcher import LaunchCMD
 
 
 @pytest.fixture()
@@ -240,3 +241,48 @@ def test_set_launch_variables_invalid_positions(launcher, invalid_pitch, invalid
     launcher.set_launch_variables(invalid_pitch, invalid_rotation, invalid_lift)
 
     # THEN FAILS
+
+
+# ---------------------------------------------------------------------------------
+# ------------------------ launch_control------------------------------------------
+# ---------------------------------------------------------------------------------
+def test_launch_control_LaunchCMD_up(launcher):
+    # GIVEN
+    launcher.encoders_ready = 1
+    launcher.rc = MagicMock()
+
+    # WHEN
+    launcher.rc.ForwardM2.return_value = True
+    launcher.launch_control(LaunchCMD(1))
+
+    # THEN
+    launcher.rc.ForwardM2.assert_called_with(launcher.address_2, launcher.launch_speed_manual)
+    launcher.rc.BackwardM2.assert_not_called()
+
+
+def test_launch_control_LaunchCMD_down(launcher):
+    # GIVEN
+    launcher.encoders_ready = 1
+    launcher.rc = MagicMock()
+
+    # WHEN
+    launcher.rc.BackwardM2.return_value = True
+    launcher.launch_control(LaunchCMD(2))
+
+    # THEN
+    launcher.rc.BackwardM2.assert_called_with(launcher.address_2, launcher.launch_speed_manual)
+    launcher.rc.ForwardM2.assert_not_called()
+
+
+def test_launch_control_LaunchCMD_stop(launcher):
+    # GIVEN
+    launcher.encoders_ready = 1
+    launcher.rc = MagicMock()
+
+    # WHEN
+    launcher.rc.ForwardM2.return_value = True
+    launcher.launch_control(LaunchCMD(3))
+
+    # THEN
+    launcher.rc.ForwardM2.assert_called_with(launcher.address_2, 0)
+    launcher.rc.BackwardM2.assert_not_called()
