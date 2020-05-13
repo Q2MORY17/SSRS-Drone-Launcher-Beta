@@ -111,7 +111,7 @@ class Launcher:
         '''
         if self.encoder_ready_check():
             # Checks conditions
-            if pitch_position > self.lift_length or pitch_position < 0:
+            if pitch_position > self.pitch_length or pitch_position < 0:
                 raise ValueError("out of bounds")
             elif pitch_position == 0:
                 pitch_objective = 0
