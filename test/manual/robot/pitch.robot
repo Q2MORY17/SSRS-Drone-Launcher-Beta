@@ -6,7 +6,7 @@
 #
 	
 *** Settings ***
-Documentation	Global documentation
+Documentation	Check functionality of buttons and input fields in the Pitch-section.
 Library		SeleniumLibrary
 Library		Process
 Library         OperatingSystem	
