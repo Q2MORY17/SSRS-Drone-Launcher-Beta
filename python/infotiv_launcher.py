@@ -84,7 +84,7 @@ class Launcher:
         self.launch_bottom=0               #Drone position at the back part of the capsule
         self.launch_connect=2190           #Belt position for touching the upper part
 
-        self.encoders_ready = 1            #At the beggining, the encoders are not ready
+        self.encoders_ready = 0            #At the beggining, the encoders are not ready
 
     def encoder_ready_check(self):
         '''
