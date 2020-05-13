@@ -47,7 +47,7 @@ def test_prepare_launch_function_calls_with_correct_parameters(dl):
     dl.prepare_launch()
 
     # Check if all the functions were called with the correct parameters
-    dl.set_pitch_position.assert_called_with(launcher.pitch_ready)
-    dl.set_rotation_position.assert_called_with(launcher.rotation_ready)
-    dl.set_lift_position.assert_called_once_with(launcher.lift_position)
+    dl.set_pitch_position.assert_called_with(dl.pitch_ready)
+    dl.set_rotation_position.assert_called_with(dl.rotation_ready)
+    dl.set_lift_position.assert_called_once_with(dl.lift_ready)
     dl.set_launch_position.assert_called_with(0)

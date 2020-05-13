@@ -1,6 +1,12 @@
-
+#
+#	Change all references of error code 500 to 200 when running
+#	test on a real system. Response code 500 is used as the development
+#	server can't find the resources. When connected to a pi the response
+#	should be 200 rather than 500.
+#
+	
 *** Settings ***
-Documentation	Global documentation
+Documentation	Check functionality of buttons and input fields in the Pitch-section.
 Library		SeleniumLibrary
 Library		Process
 Library         OperatingSystem	
