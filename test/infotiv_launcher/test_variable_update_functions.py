@@ -15,7 +15,7 @@ def launcher():
     print('\n**********End**********')
 
 
-@pytest.mark.parametrize("invalid_data", [(-1), 91])
+@pytest.mark.parametrize("invalid_data", [-1, 91])
 def test_change_pitch_invalid_data(launcher, invalid_data):
     with pytest.raises(ValueError) as err:
         launcher.change_pitch(invalid_data)
@@ -26,6 +26,19 @@ def test_change_pitch_invalid_data(launcher, invalid_data):
 def test_change_pitch_valid_data(launcher, valid_data):
     launcher.change_pitch(valid_data)
     assert launcher.pitch_ready == valid_data
+
+
+@pytest.mark.parametrize("invalid_data", [-0.01, -1, 130.01, 199])
+def test_change_lift_invalid(launcher, invalid_data):
+    with pytest.raises(Exception, match='Out of Bounds') as err:
+        launcher.change_lift(invalid_data)
+        assert err.type is ValueError
+
+
+@pytest.mark.parametrize("data", [1, 130, 0, 129])
+def test_change_lift(launcher, data):
+        launcher.change_lift(data)
+        assert launcher.lift_ready == data
 
 
 @pytest.mark.parametrize("invalid_data", [-1, 11, 0])
