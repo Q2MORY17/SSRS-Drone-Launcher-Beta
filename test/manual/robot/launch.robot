@@ -3,6 +3,7 @@ Documentation
 Library                                     SeleniumLibrary
 Library                                     Process
 Library                                     ./library/UrlLibrary.py
+Resource                                    ./../../keywords/keywords.robot
 Test Setup                                  Begin Web Test
 Test Teardown                               End Web Test
 
@@ -15,13 +16,6 @@ ${BROWSER} =                                headlesschrome
 #2. Locate the "python.exe" file in the Python 3 folder.
 #3. Copy and Paste the "python.exe" file within the Python 3 folder.
 #4. Rename the copied file to "python3" (or whatever you want the command to be).
-Begin Web Test
-    ${URL}=                                 Get Url
-    Start Process                           python3    ./python/dronelauncher_python.py    shell=True
-    Open Browser                            about:blank     ${BROWSER}
-    Maximize Browser Window
-    Go To                                   ${URL}
-
 End Web Test
     Close Browser
     Terminate All Processes
@@ -42,12 +36,6 @@ Press Button Backwards
 Press Button Forwards
     Click Button                            id:script_launch_forwards
     Sleep                                   1
-
-Verify Function Is Called
-    [Arguments]                             ${function}
-    ${result}                               Terminate Process
-    Process Should Be Stopped
-    Should Contain                          ${result.stderr}  ${function}
 
 Launch Input
     [Arguments]                             ${number}
