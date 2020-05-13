@@ -4,7 +4,7 @@ Documentation    Global documentation
 
 Library   SeleniumLibrary
 Library	    ./library/getip.py
-Library    §
+Library    Process
 Library    OperatingSystem
 Suite Setup    Begin Web Test
 Suite Teardown    End Web Test
