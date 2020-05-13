@@ -25,7 +25,6 @@ Begin Web Test
     Go To                       ${URL}
     Sleep                       3s
 #    Server Is Up
-    Click Element               xpath:/html/body/ul/li[4]/a
 
 End Web Test
     Close Browser
@@ -35,23 +34,20 @@ Server Is Up
     Page Should Contain  Pitch
     Click Button  xpath://button[@id="script_reset_encoders"]
 
-    User Expects The Lift To Increase
-	${target_string} =	Set Variable  POST /app_lift_up HTTP/1.1
-    Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
-    ${target_string} =	Set Variable  POST /app_lift_stop HTTP/1.1
-    Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
-
-    User Clicks Home Button
+User Clicks Home Button
 	Start Process  echo Resetting log... > .dronelauncher.log  shell=yes
 	Click Button	//*[@id="script_home"]
 
-	User Expects The Right Function Call
+User Expects The Right Function Call
 	${target_string} =	Set Variable  POST /app_home HTTP/1.1
     Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
-    ${target_string} =	Set Variable  POST /app_home HTTP/1.1
-    Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
 
-    *** Test Cases ***
+Check Log
+    [Arguments]	 ${target_string}  ${error_code}
+    ${logfile}  Get File  .dronelauncher.log
+    Should match  ${logfile}  *${target_string}*\"*${error_code}*
+
+*** Test Cases ***
 
 Home Button
 	[Documentation]		Clicking the Home button
