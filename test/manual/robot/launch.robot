@@ -125,3 +125,43 @@ Functionable Button Forwards
     Given Encoders Reset
     When Press Button Forwards
     Then Verify Function Is Called          POST /app_launch_forwards HTTP/1.1
+
+
+Launch input-box pressing arrow up
+    [Tags]                                  Arrows
+    Encoders Reset
+    Input Text                              name:launch_position        6
+    Press Keys                              name:launch_position        ARROW_UP    ARROW_UP    ARROW_UP
+    Textfield Value Should Be               name:launch_position        9
+    Click Go
+    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+
+
+Launch input-box pressing arrow up max
+    [Tags]                                  Arrows
+    Encoders Reset
+    Input Text                              name:launch_position        110
+    Press Keys                              name:launch_position        ARROW_UP    ARROW_UP    ARROW_UP    ARROW_UP    ARROW_UP
+    Textfield Value Should Be               name:launch_position        111
+    Click Go
+    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+
+
+Launch input-box pressing arrow down
+    [Tags]                                  Arrows
+    Encoders Reset
+    Input Text                              name:launch_position        4
+    Press Keys                              name:launch_position        ARROW_DOWN    ARROW_DOWN    ARROW_DOWN
+    Textfield Value Should Be               name:launch_position        1
+    Click Go
+    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+
+
+Launch input-box pressing arrow down max
+    [Tags]                                  Arrows
+    Encoders Reset
+    Input Text                              name:launch_position        2
+    Press Keys                              name:launch_position        ARROW_DOWN    ARROW_DOWN    ARROW_DOWN    ARROW_DOWN    ARROW_DOWN
+    Textfield Value Should Be               name:launch_position        0
+    Click Go
+    Verify Function Is Called               POST /app_launch_position HTTP/1.1
