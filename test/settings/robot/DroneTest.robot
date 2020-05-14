@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation  Dronelauncher tests regarding settings for the automatic use
-Resource   ./../../keywords/SSRS3keywords.robot    #Resources/keywords.robot
+Resource   ./../../keywords/SSRS3keywords.robot
 Library  SeleniumLibrary
 Library  Process
 Library  ./Library/UrlLibrary.py
