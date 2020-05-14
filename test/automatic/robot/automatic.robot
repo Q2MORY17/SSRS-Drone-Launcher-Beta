@@ -50,6 +50,10 @@ Press Button Standby
     Click Element                           id:script_standby
     Sleep                                   1
 
+Press Button Prepare
+    Click Element                           id:script_prepare
+    Sleep                                   1
+
 Press Button Stop
     Click Button                            id:script_stop
     Sleep                                   1
@@ -93,3 +97,10 @@ Functionable Button Standby
     Press Button Automatic
     Press Button Standby
     Verify Function Is Called               POST /app_standby HTTP/1.1
+
+
+Functionable Button Prepare
+    Encoders Reset
+    Press Button Automatic
+    Press Button Prepare
+    Verify Function Is Called               POST /app_prepare HTTP/1.1
