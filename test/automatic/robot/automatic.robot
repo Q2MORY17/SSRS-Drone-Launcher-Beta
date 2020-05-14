@@ -37,13 +37,25 @@ Encoders Reset
     Click Button                            id:script_reset_encoders
 
 Press Button Automatic
-    Click Element                           xpath://html/body/ul/li[3]/a
+    Click Element                           xpath://html[1]/body[1]/ul[1]/li[3]/a[1]
 
 Verify Automatic Loaded
     Page Should Contain Element             id:script_standby
 
 Press Button Mount
     Click Element                           id:script_mount
+    Sleep                                   1
+
+Press Button Standby
+    Click Element                           id:script_standby
+    Sleep                                   1
+
+Press Button Prepare
+    Click Element                           id:script_prepare
+    Sleep                                   1
+
+Press Button Launch
+    Click Element                           id:script_launch
     Sleep                                   1
 
 Press Button Stop
@@ -57,28 +69,49 @@ Verify Function Is Called
     Should Contain                          ${result.stderr}  ${function}
 
 *** Test Cases ***
-
 Battery Voltage Button Should Be Visible
     Gui Is Visible
     Gui Has Loaded
 
 
 Automatic Page Loads
-    [Tags]                              Automaticpage
+    [Tags]                                  Automaticpage
     Press Button Automatic
     Verify Automatic Loaded
 
 
 Functionable Button Mount
-    [Tags]                              ButtonMount
+    [Tags]                                  ButtonMount
     Encoders Reset
     Press Button Automatic
     Press Button Mount
-    Verify Function Is Called            POST /app_mount HTTP/1.1
+    Verify Function Is Called               POST /app_mount HTTP/1.1
+
 
 Stop All Functions
-    [Tags]                              Stop
+    [Tags]                                  Stop
     Encoders Reset
     Press Button Automatic
     Press Button Stop
-    Verify Function Is Called            POST /app_stop HTTP/1.1
+    Verify Function Is Called               POST /app_stop HTTP/1.1
+
+
+Functionable Button Standby
+    Encoders Reset
+    Press Button Automatic
+    Press Button Standby
+    Verify Function Is Called               POST /app_standby HTTP/1.1
+
+
+Functionable Button Prepare
+    Encoders Reset
+    Press Button Automatic
+    Press Button Prepare
+    Verify Function Is Called               POST /app_prepare HTTP/1.1
+
+
+Functionable Button Launch
+    Encoders Reset
+    Press Button Automatic
+    Press Button Launch
+    Verify Function Is Called               POST /app_launch HTTP/1.1

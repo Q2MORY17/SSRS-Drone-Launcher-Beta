@@ -18,7 +18,7 @@ def self():
     self = python.dronelauncher_python
     return self
 
-def test_function_rotate_right(self):
+def test_function_rotation_right(self):
     # GIVEN
     self.rc.ForwardM2 = MagicMock(return_value=True)
 
@@ -84,7 +84,7 @@ invalid_data_over_boundary = {181, -181}
 
 
 @pytest.mark.parametrize("invalid_data", invalid_data_over_boundary)
-def test_function_roatate_position_encoders_ready_with_invalid_value(self, invalid_data):
+def test_function_roatation_position_encoders_ready_with_invalid_value(self, invalid_data):
 
     # GIVEN
     self.encoders_ready = 1
@@ -93,7 +93,7 @@ def test_function_roatate_position_encoders_ready_with_invalid_value(self, inval
     with app.test_request_context('app_rotation_position', data={'rotation_position': invalid_data}):
         
     # THEN
-    assert self.function_rotation_position() == ('', 400)
+     assert self.function_rotation_position() == ('', 400)
 
 
 
