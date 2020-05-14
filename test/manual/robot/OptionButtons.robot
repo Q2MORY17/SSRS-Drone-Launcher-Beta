@@ -5,7 +5,7 @@ Library                 Process
 Library                 OperatingSystem
 Library                 ./Library/UrlLibrary.py
 Resource                ./../../keywords/keywords.robot
-Resource                ./../../keywords/OptionButtons_Keywords.robot
+Resource                ./../../keywords/SSRS3keywords.robot
 Test Setup              Begin web test
 Test Teardown           End web test
 
