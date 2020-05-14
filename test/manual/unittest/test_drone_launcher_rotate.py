@@ -93,7 +93,7 @@ def test_function_roatate_position_encoders_ready_with_invalid_value(self, inval
     with app.test_request_context('app_rotation_position', data={'rotation_position': invalid_data}):
         
     # THEN
-    assert self.function_rotation_position() == ('', 400)
+     assert self.function_rotation_position() == ('', 400)
 
 
 
