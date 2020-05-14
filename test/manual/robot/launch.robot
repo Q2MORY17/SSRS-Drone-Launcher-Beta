@@ -8,7 +8,7 @@ Test Setup                                  Begin Web Test
 Test Teardown                               End Web Test
 
 *** Variables ***
-${BROWSER} =                                headlesschrome
+${BROWSER} =                                chrome
 
 *** Keywords ***
 #If you want to run the program local and python3 command is not found
@@ -125,3 +125,13 @@ Functionable Button Forwards
     Given Encoders Reset
     When Press Button Forwards
     Then Verify Function Is Called          POST /app_launch_forwards HTTP/1.1
+
+
+Launch input-box pressing arrow up
+    [Tags]                                  Arrows
+    Encoders Reset
+    Input Text                              name:launch_position        6
+    Press Keys                              name:launch_position        ARROW_UP    ARROW_UP    ARROW_UP
+    Textfield Value Should Be               name:launch_position        9
+    Click Go
+    Verify Function Is Called               POST /app_launch_position HTTP/1.1
