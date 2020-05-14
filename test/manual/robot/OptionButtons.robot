@@ -5,7 +5,7 @@ Library                 Process
 Library                 OperatingSystem
 Library                 ./Library/UrlLibrary.py
 Resource                ./../../keywords/keywords.robot
-#Resource                ./../../keywords/OptionButtons_Keyword.robot
+Resource                ./../../keywords/OptionButtons_Keywords.robot
 Test Setup              Begin web test
 Test Teardown           End web test
 
@@ -26,24 +26,6 @@ ${APP_HOME}  app_home HTTP
 #   Sleep                       3s
 #   Go To                       ${URL}
 #   Sleep                       3s
-
-End Web Test
-    Close Browser
-    Terminate All Processes
-
-Server Is Up
-    Wait Until Page Contains Element  xpath://button[@id="script_pitch_up"]
-    Page Should Contain  Pitch
-    Click Button  xpath://button[@id="script_reset_encoders"]
-
-User Clicks Home Button
-	Click Button	//*[@id="script_home"]
-    Sleep           3
-
-Check Log
-    [Arguments]	 ${target_string}  ${error_code}
-    ${logfile}  Get File  .dronelauncher.log
-    Should match  ${logfile}  *${target_string}*\"*${error_code}*
 
 *** Test Cases ***
 Home Button
