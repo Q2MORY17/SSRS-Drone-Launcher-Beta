@@ -40,7 +40,8 @@ pipeline {
         dir("test/manual/robot") {
     		    sh 'resources/run_tests_headless.sh rotate.boundaries.robot'
     		}
-        sh 'robot -d test/results test/settings/robot/DroneTest.robot'
+        sh 'robot -d test/results --variable BROWSER:headlesschrome test/settings/robot/DroneTest.robot'
+        sh 'robot -d test/results --variable BROWSER:headlesschrome test/manual/robot/OptionButtons.robot'
       }
       post {
         always {
@@ -58,7 +59,9 @@ pipeline {
         sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_prepare_function.py'
         sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_standby_function.py'
         sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_launch_function.py'
-        sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py'
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py'
+        }
         sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_python.py'
         sh 'python3 -m pytest -v -s test/settings/unittest/test_drone_launcher_python.py'
       }
