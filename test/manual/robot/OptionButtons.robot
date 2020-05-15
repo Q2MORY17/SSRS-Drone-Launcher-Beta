@@ -3,7 +3,7 @@ Documentation           Dronelauncher tests regarding options for the automatic 
 Library                 SeleniumLibrary
 Library                 Process
 Library                 OperatingSystem
-Library                 ./Library/UrlLibrary.py
+Library                 ./library/UrlLibrary.py
 Resource                ./../../keywords/keywords.robot
 Resource                ./../../keywords/SSRS3keywords.robot
 Test Setup              Begin web test
