@@ -64,7 +64,18 @@ def test_function_lift_up_with_invalid_speed(self):
 
     # THEN
     self.rc.ForwardM1.assert_called_with(self.address_2, 127)
-    assert returnValue == ('', 204)
+    assert returnValue != ('', 204)
 
 
+def test_function_lift_down_with_invalid_speed(self):
+    # GIVEN
+    self.rc = MagicMock()
+
+    # WHEN
+    self.lift_speed_manual = 127
+    returnValue = self.function_lift_down()
+
+    # THEN
+    self.rc.BackwardM1.assert_called_with(self.address_2, 127)
+    assert returnValue != ('', 204)
 
