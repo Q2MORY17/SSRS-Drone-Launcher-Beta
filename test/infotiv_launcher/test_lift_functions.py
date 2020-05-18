@@ -14,6 +14,7 @@ from python.infotiv_launcher import LiftCMD
 def launcher():
     print('\n*********Start*********')
     launcher = python.infotiv_launcher.Launcher()
+    launcher.rc = MagicMock()
     yield launcher
     print('\n**********End**********')
 
@@ -64,7 +65,6 @@ def test_shows_correct_message_if_value_is_lower_than_min_value(launcher):
 def test_set_lift_position_zero_increment_negative(launcher):
     # GIVEN
     launcher.encoders_ready = 1
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM1.return_value = (1, 2, 2)
 
     # WHEN
@@ -79,7 +79,6 @@ def test_set_lift_position_zero_increment_negative(launcher):
 def test_set_lift_position_higher_than_zero_increment_positive(launcher):
     # GIVEN
     launcher.encoders_ready = 1
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM1.return_value = (1, 4, 2)
 
     # WHEN
@@ -94,7 +93,6 @@ def test_set_lift_position_higher_than_zero_increment_positive(launcher):
 def test_set_lift_position_max_increment_positive(launcher):
     # GIVEN
     launcher.encoders_ready = 1
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM1.return_value = (1, -1.5, 2)
 
     # WHEN
