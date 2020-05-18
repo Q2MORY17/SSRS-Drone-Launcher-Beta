@@ -19,6 +19,10 @@ User Clicks Reset Encoders Button
     Click Button    //*[@id="script_reset_encoders"]
     Sleep           3
 
+User Clicks Battery Voltage Button
+    Click Button    //*[@id="script_battery_voltage"]
+    Sleep           1
+
 Change Pitch Text Input
         [Arguments]                 ${input}
         Input Text                  xpath://*[@id="settings_launch"]/div[1]/input  ${input}
