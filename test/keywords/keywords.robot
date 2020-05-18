@@ -3,7 +3,7 @@ Verify Function Is Called
     [Arguments]                             ${function}
     ${result}                               Terminate Process
     Process Should Be Stopped
-    Should Contain                          ${result.stderr}  ${function}
+    Should Contain                          ${result.stderr}  POST /${function} HTTP/1.1
 
 Begin Web Test
     [Documentation]                         You need to import UrlLibrary.py inside the robot file that you working from
