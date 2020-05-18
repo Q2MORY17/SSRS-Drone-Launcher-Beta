@@ -1,10 +1,10 @@
 import pytest, os, sys, flask
 from unittest.mock import MagicMock, call
 
-sys.path.insert(0, "../../../python")
-#sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../../python")
+#sys.path.insert(0, "../../../python")
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../../python")
 
-import dronelauncher_python
+import python.dronelauncher_python
 
 
 app = flask.Flask(__name__)
@@ -12,7 +12,7 @@ app = flask.Flask(__name__)
 
 @pytest.fixture()
 def self():
-    self = dronelauncher_python
+    self = python.dronelauncher_python
     return self
 
 def test_function_pitch_up(self):
