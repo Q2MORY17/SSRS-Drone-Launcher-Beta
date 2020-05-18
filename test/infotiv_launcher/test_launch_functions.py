@@ -39,6 +39,7 @@ def test_set_launch_position_encoders_not_ready(launcher):
 @pytest.mark.parametrize("invalid_data", [(-1), 112])
 def test_set_launch_position_encoders_ready_launch_position_invalid_type_of_error(launcher, invalid_data):
     with pytest.raises(Exception, match='out of bounds') as err:
+        launcher.encoders_ready = 1
         launcher.set_launch_position(invalid_data)
     assert err.type is ValueError
 
@@ -46,6 +47,7 @@ def test_set_launch_position_encoders_ready_launch_position_invalid_type_of_erro
 @pytest.mark.parametrize("invalid_data", [(-1), 112])
 def test_set_launch_position_encoders_ready_launch_position_invalid_message(launcher, invalid_data):
     with pytest.raises(ValueError) as err:
+        launcher.encoders_ready = 1
         launcher.set_launch_position(invalid_data)
     err.match('out of bounds')
 
