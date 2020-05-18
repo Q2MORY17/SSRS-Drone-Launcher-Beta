@@ -10,7 +10,7 @@ Test Setup              Begin web test
 Test Teardown           End web test
 
 *** Variables ***
-${BROWSER}          firefox
+${BROWSER}          headlesschrome
 ${HOME}             app_home HTTP
 ${RESET_ENCODERS}   app_reset_encoders HTTP
 ${BATTERY_VOLTAGE}  app_battery_voltage HTTP
