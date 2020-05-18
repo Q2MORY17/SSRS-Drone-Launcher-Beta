@@ -6,6 +6,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "
 
 from unittest.mock import MagicMock, call
 import python.infotiv_launcher
+from python.infotiv_launcher import RotationCMD
 
 
 @pytest.fixture()
@@ -94,3 +95,36 @@ def test_set_rotation_position_max_increment_positive(launcher):
     calls = [call(128, 16000, 343056.5, 1), call(128, 0, 0, 0)]
     launcher.rc.SpeedDistanceM2.assert_has_calls(calls)
     assert launcher.rc.SpeedDistanceM2.call_count == 2
+
+
+def test_rotation_control_right(launcher):
+
+    launcher.rc = MagicMock()
+
+    launcher.rotation_control(RotationCMD(1))
+
+    launcher.rc.ForwardM1.assert_called_with(launcher.address_2, launcher.rotation_speed_manual)
+    launcher.rc.ForwardM2.assert_called_with(launcher.address_2, launcher.rotation_speed_manual)
+    launcher.rc.BackwardM1.assert_not_called()
+
+
+def test_rotation_control_left(launcher):
+
+    launcher.rc = MagicMock()
+
+    launcher.rotation_control(RotationCMD(2))
+
+    launcher.rc.BackwardM1.assert_called_with(launcher.address_2, launcher.rotation_speed_manual)
+    launcher.rc.BackwardM2.assert_called_with(launcher.address_2, launcher.rotation_speed_manual)
+    launcher.rc.ForwardM1.assert_not_called()
+
+
+def test_rotation_control_stop(launcher):
+
+    launcher.rc = MagicMock()
+
+    launcher.rotation_control(RotationCMD(3))
+
+    launcher.rc.ForwardM1.assert_called_with(launcher.address_2, 0)
+    launcher.rc.ForwardM2.assert_called_with(launcher.address_2, 0)
+    launcher.rc.BackwardM1.assert_not_called()

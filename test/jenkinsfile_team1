@@ -41,6 +41,13 @@ pipeline {
 		}
 	    }
 	}
+	stage('VideoWindow') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh videoWindowButtonTest.robot'
+		}
+	    }
+	}
 	stage('Lift') {
 	    steps {
 		dir("test/manual/robot") {
