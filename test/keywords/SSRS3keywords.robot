@@ -18,8 +18,3 @@ User Clicks Home Button
 User Clicks Reset Encoders Button
     Click Button    //*[@id="script_reset_encoders"]
     Sleep           3
-
-Check Log
-        ${log}=                     Get File    log.txt
-        log to console              ${log}
-        [Return]                    ${log}

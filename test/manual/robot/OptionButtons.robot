@@ -10,7 +10,7 @@ Test Setup              Begin web test
 Test Teardown           End web test
 
 *** Variables ***
-${BROWSER}          firefox
+${BROWSER}          headlesschrome
 ${HOME}             app_home HTTP
 ${RESET_ENCODERS}   app_reset_encoders HTTP
 
@@ -18,11 +18,11 @@ ${RESET_ENCODERS}   app_reset_encoders HTTP
 Home Button
     Given Server Is Up
     When User Clicks Home Button
-    ${log}=                 Check Log
-    Should contain               ${log}      POST /${HOME}/1.1
+    Then Verify Function Is Called        POST /${HOME}/1.1
+
 
 Reset Enconders Button
     Given Server Is Up
     When User Clicks Reset Encoders Button
-    ${log}=                 Check Log
-    Should contain              ${log}      POST /${RESET_ENCODERS}/1.1
+    Then Verify Function Is Called        POST /${RESET_ENCODERS}/1.1
+
