@@ -76,7 +76,7 @@ def test_function_pitch_position_encoders_not_ready(self):
     assert returnValue == ('', 403)
 
 
-invalid_data_over_boundary = {181, -181}
+invalid_data_over_boundary = {91, -1}
 @pytest.mark.parametrize("invalid_data", invalid_data_over_boundary)
 def test_function_pitch_position_encoders_ready_with_invalid_value(self, invalid_data):
 
