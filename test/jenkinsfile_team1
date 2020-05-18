@@ -1,0 +1,93 @@
+pipeline {
+    agent any
+    stages {
+	stage('Checkout') {
+	    steps {
+		git url:'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta', branch:'master'
+	    }
+	}
+	stage('Pitch') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh pitch.robot'
+		}
+	    }
+	}
+	stage('Max Min') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh MaxMin.robot'
+		}
+	    }
+	}
+	stage('Half Window') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh HalfWindow.robot'
+		}
+	    }
+	}
+	stage('Launch') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh launch.robot'
+		}
+	    }
+	}
+	stage('Launch Invalid') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh launch_invalid_inputs.robot'
+		}
+	    }
+	}
+	stage('VideoWindow') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh videoWindowButtonTest.robot'
+		}
+	    }
+	}
+	stage('Lift') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh lift.robot'
+		}
+	    }
+	}
+	stage('Position Window') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh positionWindow.robot'
+		}
+	    }
+	}
+	stage('Resize Window') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh resizeWindow.robot'
+		}
+	    }
+	}
+	stage('Rotate') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh rotate.robot'
+		}
+	    }
+	}
+	stage('Rotate Boundaries') {
+	    steps {
+		dir("test/manual/robot") {
+		    sh 'resources/run_tests_headless.sh rotate.boundaries.robot'
+		}
+	    }
+	}
+	// stage('Unit test') {
+	//     steps {
+	// 	sh 'cd test/manual/unittest/'
+	// 	sh 'python3 -m pytest -v -s test*.py'
+	//     }
+	// }
+    }
+}
