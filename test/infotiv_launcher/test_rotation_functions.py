@@ -51,17 +51,6 @@ def test_set_rotation_position_invalid_data_type_error(launcher, invalid_data):
     assert err.type is ValueError
 
 
-@pytest.mark.parametrize("invalid_data", [(-1), 131])
-def test_set_rotation_position_invalid_data_message(launcher, invalid_data):
-    # GIVEN
-    with pytest.raises(ValueError) as err:
-        launcher.encoders_ready = 1
-    # WHEN
-        launcher.set_rotation_position(invalid_data)
-    # THEN
-    err.match('out of bounds')
-
-
 def test_set_rotation_position_zero_increment_negative(launcher):
     # GIVEN
     launcher.encoders_ready = 1
