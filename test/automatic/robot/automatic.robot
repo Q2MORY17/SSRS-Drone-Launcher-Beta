@@ -54,6 +54,10 @@ Press Button Prepare
     Click Element                           id:script_prepare
     Sleep                                   1
 
+Press Button Launch
+    Click Element                           id:script_launch
+    Sleep                                   1
+
 Press Button Stop
     Click Button                            id:script_stop
     Sleep                                   1
@@ -104,3 +108,10 @@ Functionable Button Prepare
     Press Button Automatic
     Press Button Prepare
     Verify Function Is Called               POST /app_prepare HTTP/1.1
+
+
+Functionable Button Launch
+    Encoders Reset
+    Press Button Automatic
+    Press Button Launch
+    Verify Function Is Called               POST /app_launch HTTP/1.1

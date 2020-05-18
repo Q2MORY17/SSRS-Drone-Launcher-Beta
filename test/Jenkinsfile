@@ -1,0 +1,80 @@
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta.git'
+      }
+    }
+    stage('Robot') {
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'robot -d test/results test/manual/robot/launch_invalid_inputs.robot'
+        }
+		    sh 'robot -d test/results test/manual/robot/launch.robot'
+		    sh 'robot -d test/results test/automatic/robot/automatic.robot'
+        dir("test/manual/robot") {
+  		    sh 'resources/run_tests_headless.sh pitch.robot'
+  		  }
+        dir("test/manual/robot") {
+    		    sh 'resources/run_tests_headless.sh MaxMin.robot'
+    		}
+        dir("test/manual/robot") {
+    		    sh 'resources/run_tests_headless.sh HalfWindow.robot'
+    		}
+        dir("test/manual/robot") {
+    		    sh 'resources/run_tests_headless.sh videoWindowButtonTest.robot'
+    		}
+        dir("test/manual/robot") {
+    		    sh 'resources/run_tests_headless.sh lift.robot'
+    		}
+        dir("test/manual/robot") {
+    		    sh 'resources/run_tests_headless.sh positionWindow.robot'
+    		}
+        dir("test/manual/robot") {
+    		    sh 'resources/run_tests_headless.sh resizeWindow.robot'
+    		}
+        dir("test/manual/robot") {
+    		    sh 'resources/run_tests_headless.sh rotate.robot'
+    		}
+        dir("test/manual/robot") {
+    		    sh 'resources/run_tests_headless.sh rotate.boundaries.robot'
+    		}
+        sh 'robot -d test/results --variable BROWSER:headlesschrome test/settings/robot/DroneTest.robot'
+        sh 'robot -d test/results --variable BROWSER:headlesschrome test/manual/robot/OptionButtons.robot'
+      }
+      post {
+        always {
+          chuckNorris()
+        }
+      }
+    }
+    stage('Drone Launcher Unit Tests') {
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'python3 -m pytest -v -s test/manual/unittest/test_manual_launcher_python.py'
+        }
+        sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_mount_function.py'
+        sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_stop_function.py'
+        sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_prepare_function.py'
+        sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_standby_function.py'
+        sh 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_launch_function.py'
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py'
+        }
+        sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_python.py'
+        sh 'python3 -m pytest -v -s test/settings/unittest/test_drone_launcher_python.py'
+      }
+    }
+    stage('Infotiv Launcher Unit Tests') {
+      steps {
+        sh 'python3 -m pytest -v -s test/infotiv_launcher/test_automated_functions.py'
+        sh 'python3 -m pytest -v -s test/infotiv_launcher/test_launch_functions.py'
+        sh 'python3 -m pytest -v -s test/infotiv_launcher/test_lift_functions.py'
+        sh 'python3 -m pytest -v -s test/infotiv_launcher/test_pitch_functions.py'
+        sh 'python3 -m pytest -v -s test/infotiv_launcher/test_rotation_functions.py'
+        sh 'python3 -m pytest -v -s test/infotiv_launcher/test_variable_update_functions.py'
+      }
+    }
+  }
+}
