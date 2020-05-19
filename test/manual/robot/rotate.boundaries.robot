@@ -45,28 +45,28 @@ User Enters Value Under Min Value In Field
 	Click Button	//*[@id="script_rotation_position"]
 
 
-User Enters Value Max Exepted Value In Field
+User Enters Value Max Expected Value In Field
     [Arguments]	${input}
     Click Element	//*[@id="manual_rotation_buttons"]/div/input
 	Input Text      //*[@id="manual_rotation_buttons"]/div/input    ${input}
 	Click Button	//*[@id="script_rotation_position"]
 
 
-User Enters Value Min Exepted Value In Field
+User Enters Value Min Expected Value In Field
     [Arguments]	${input}
     Click Element	//*[@id="manual_rotation_buttons"]/div/input
 	Input Text      //*[@id="manual_rotation_buttons"]/div/input    ${input}
 	Click Button	//*[@id="script_rotation_position"]
 
 
-User Enters Value 100 degrees In Field
+User Enters Value 100 Degrees In Field
     [Arguments]	${input}
     Click Element	//*[@id="manual_rotation_buttons"]/div/input
 	Input Text      //*[@id="manual_rotation_buttons"]/div/input    ${input}
 	Click Button	//*[@id="script_rotation_position"]
 
 
-User Enters Value -100 degrees In Field
+User Enters Value -100 Degrees In Field
     [Arguments]	${input}
     Click Element	//*[@id="manual_rotation_buttons"]/div/input
 	Input Text      //*[@id="manual_rotation_buttons"]/div/input    ${input}
@@ -80,7 +80,7 @@ User Expects To Get A Error Messege
 Check Log
     [Arguments]	 ${target_string}  ${error_code}
     ${logfile}  Get File  .dronelauncher.log
-    Should match  ${logfile}  *${target_string}*\"*${error_code}*
+    Should Match  ${logfile}  *${target_string}*\"*${error_code}*
 
 
 User Expects The Rotation To Change With Code
@@ -90,7 +90,7 @@ User Expects The Rotation To Change With Code
 
 
 *** Test Cases ***
-Roatation Value over 180 degrees
+Rotation Value Over 180 Degrees
 	[Documentation]		Change Roatation value to over max value then press GO!
 	[Tags]			Roatateion over permited value
     Given Server Is Up
@@ -99,7 +99,7 @@ Roatation Value over 180 degrees
     And User Expects The Rotation To Change With Code   400
 
 
-Roatation Value under -180 degrees
+Rotation Value Under -180 Degrees
 	[Documentation]		Change Roatation value to under min value then press GO!
 	[Tags]			Roatateion under permited value
     Given Server Is Up
@@ -108,33 +108,33 @@ Roatation Value under -180 degrees
     And User Expects The Rotation To Change With Code   400
 
 
-Roatation Value 180 degrees
-	[Documentation]		Change Roatation value to max exepted value then press GO!
-	[Tags]			Roatateion_value 180 degrees
+Roatation Value 180 Degrees
+	[Documentation]		Change Roatation value to max expected value then press GO!
+	[Tags]			Rotation_value 180 degrees
     Given Server Is Up
-	When User Enters Value Max Exepted Value In Field   180
+	When User Enters Value Max Expected Value In Field   180
 	Then User Expects The Rotation To Change With Code   500
 
 
-Roatation Value -180 degrees
-	[Documentation]		Change Roatation value to min exepted value then press GO!
-	[Tags]			Roatateion_value -180 degrees
+Rotation Value -180 Degrees
+	[Documentation]		Change Rotation value to min expected value then press GO!
+	[Tags]			Rotation_value -180 degrees
     Given Server Is Up
-	When User Enters Value Min Exepted Value In Field   -180
+	When User Enters Value Min Expected Value In Field   -180
 	Then User Expects The Rotation To Change With Code   500
 
 
-Roatation Value 100 degrees
+Rotation Value 100 degrees
 	[Documentation]		Change Roatation value to 100 degrees then press GO!
-	[Tags]			Roatateion_value 100 degrees
+	[Tags]			Rotation_value 100 degrees
     Given Server Is Up
-	When User Enters Value 100 degrees In Field     100
+	When User Enters Value 100 Degrees In Field     100
 	Then User Expects The Rotation To Change With Code   500
 
 
-Roatation Value -100 degrees
-	[Documentation]		Change Roatation value to -100 degrees then press GO!
-	[Tags]			Roatateion_value -100 degrees
+Rotation Value -100 degrees
+	[Documentation]		Change Rotation value to -100 degrees then press GO!
+	[Tags]			Rotation_value -100 degrees
     Given Server Is Up
 	When User Enters Value -100 Degrees In Field    -100
 	Then User Expects The Rotation To Change With Code   500
