@@ -6,14 +6,26 @@ pipeline {
         git url:'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta', branch:'SSRS1-100'
       }
     }
-    stage('Robot') {
-      steps {
-
-          bat 'robot -d test/results test/manual/robot/rotate.robot'
-
-		    bat 'robot -d test/Results test/manual/robot/rotate.boundaries.robot'
-		    bat 'robot -d test/Results test/manual/robot/resizeWindow.robot'
-
+     stage('Rotate') {
+	    steps {
+		dir("test/manual/robot") {
+		    bat 'resources/run_tests_headless.sh rotate.robot'
+        }
+        }
+      }
+		    stage('Rotate.Boundaies') {
+	    steps {
+		dir("test/manual/robot") {
+		    bat 'resources/run_tests_headless.sh rotate.boundaries.robot'
+		}
+		}
+	  }
+		   stage('ResizeWindow') {
+	    steps {
+		dir("test/manual/robot") {
+		    bat 'resources/run_tests_headless.sh resizeWindow.robot'
+        }
+        }
       }
       post {
         always {
