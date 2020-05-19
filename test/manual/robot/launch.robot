@@ -4,46 +4,18 @@ Library                                     SeleniumLibrary
 Library                                     Process
 Library                                     ./library/UrlLibrary.py
 Resource                                    ./../../keywords/keywords.robot
+Resource                                    ./../../keywords/SSRS2_keywords.robot
 Test Setup                                  Begin Web Test
 Test Teardown                               End Web Test
 
-*** Variables ***
-${BROWSER} =                                headlesschrome
-
-*** Keywords ***
 #If you want to run the program local and python3 command is not found
 #1. Make sure the Python 3 folder is present in the PATH environment variable.
 #2. Locate the "python.exe" file in the Python 3 folder.
 #3. Copy and Paste the "python.exe" file within the Python 3 folder.
 #4. Rename the copied file to "python3" (or whatever you want the command to be).
-End Web Test
-    Close Browser
-    Terminate All Processes
 
-Gui Is Visible
-    Wait Until Page Contains Element        id=video
-
-Gui Has Loaded
-    Page Should Contain Element             id=script_battery_voltage
-
-Encoders Reset
-    Click Button                            id:script_reset_encoders
-
-Press Button Backwards
-    Click Button                            id:script_launch_backwards
-    Sleep                                   1
-
-Press Button Forwards
-    Click Button                            id:script_launch_forwards
-    Sleep                                   1
-
-Launch Input
-    [Arguments]                             ${number}
-    Input Text                              name:launch_position  ${number}
-
-Click Go
-    Click Button                            id:script_launch_position
-    Sleep                                   1
+*** Variables ***
+${BROWSER} =                                headlesschrome
 
 *** Test Cases ***
 Battery Voltage Button Should Be Visible
@@ -54,57 +26,51 @@ Battery Voltage Button Should Be Visible
 #Input valid value should be between 0-111
 Launch input-box w/ invalid negative input
     [Tags]                                  INPUT
-    Encoders Reset
-    Launch Input                            -1
-    Click Go
-    Alert Should Be Present                 text=Value should be between 0 and 111
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Launch Input & Press Go            -1
+    Then Alert Should Be Present            text=Value should be between 0 and 111
+         Verify Function Is Called          app_launch_position
 
 
 #Input valid value should be between 0-111
 Launch input-box w/ invalid positive input
     [Tags]                                  INPUT
-    Encoders Reset
-    Launch Input                            112
-    Click Go
-    Alert Should Be Present                 text=Value should be between 0 and 111
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Launch Input & Press Go            112
+    Then Alert Should Be Present            text=Value should be between 0 and 111
+         Verify Function Is Called          app_launch_position
 
 
 #Input valid value should be between 0-111
 Launch input-box w/ min valid input
     [Tags]                                  INPUT
-    Encoders Reset
-    Launch Input                            0
-    Click Go
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Launch Input & Press Go            0
+    Then Verify Function Is Called          app_launch_position
 
 
 #Input valid value should be between 0-111
 Launch input-box w/ min+1 valid input
     [Tags]                                  INPUT
-    Encoders Reset
-    Launch Input                            1
-    Click Go
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Launch Input & Press Go            1
+    Then Verify Function Is Called          app_launch_position
 
 
 #Input valid value should be between 0-111
 Launch input-box w/ max-1 valid input
     [Tags]                                  INPUT
-    Encoders Reset
-    Launch Input                            110
-    Click Go
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Launch Input & Press Go            110
+    Then Verify Function Is Called          app_launch_position
 
 
 #Input valid value should be between 0-111
 Launch input-box w/ max valid input
     [Tags]                                  INPUT
-    Encoders Reset
-    Launch Input                            111
-    Click Go
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Launch Input & Press Go            111
+    Then Verify Function Is Called          app_launch_position
 
 
 Functionable Button Backwards
@@ -114,7 +80,7 @@ Functionable Button Backwards
     [Tags]                                  ManualButton
     Given Encoders Reset
     When Press Button Backwards
-    Then Verify Function Is Called          POST /app_launch_backwards HTTP/1.1
+    Then Verify Function Is Called          app_launch_backwards
 
 
 Functionable Button Forwards
@@ -124,44 +90,32 @@ Functionable Button Forwards
     [Tags]                                  ManualButton
     Given Encoders Reset
     When Press Button Forwards
-    Then Verify Function Is Called          POST /app_launch_forwards HTTP/1.1
+    Then Verify Function Is Called          app_launch_forwards
 
 
 Launch input-box pressing arrow up
     [Tags]                                  Arrows
-    Encoders Reset
-    Input Text                              name:launch_position        6
-    Press Keys                              name:launch_position        ARROW_UP    ARROW_UP    ARROW_UP
-    Textfield Value Should Be               name:launch_position        9
-    Click Go
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Arrow Key Input & Press Go         6      ARROW_UP+ARROW_UP+ARROW_UP    9
+    Then Verify Function Is Called          app_launch_position
 
 
 Launch input-box pressing arrow up max
     [Tags]                                  Arrows
-    Encoders Reset
-    Input Text                              name:launch_position        110
-    Press Keys                              name:launch_position        ARROW_UP    ARROW_UP    ARROW_UP    ARROW_UP    ARROW_UP
-    Textfield Value Should Be               name:launch_position        111
-    Click Go
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Arrow Key Input & Press Go         110    ARROW_UP+ARROW_UP+ARROW_UP+ARROW_UP+ARROW_UP    111
+    Then Verify Function Is Called          app_launch_position
 
 
 Launch input-box pressing arrow down
     [Tags]                                  Arrows
-    Encoders Reset
-    Input Text                              name:launch_position        4
-    Press Keys                              name:launch_position        ARROW_DOWN    ARROW_DOWN    ARROW_DOWN
-    Textfield Value Should Be               name:launch_position        1
-    Click Go
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Arrow Key Input & Press Go         4    ARROW_DOWN+ARROW_DOWN+ARROW_DOWN     1
+    Then Verify Function Is Called          app_launch_position
 
 
 Launch input-box pressing arrow down max
     [Tags]                                  Arrows
-    Encoders Reset
-    Input Text                              name:launch_position        2
-    Press Keys                              name:launch_position        ARROW_DOWN    ARROW_DOWN    ARROW_DOWN    ARROW_DOWN    ARROW_DOWN
-    Textfield Value Should Be               name:launch_position        0
-    Click Go
-    Verify Function Is Called               POST /app_launch_position HTTP/1.1
+    Given Encoders Reset
+    When Arrow Key Input & Press Go         2    ARROW_DOWN+ARROW_DOWN+ARROW_DOWN+ARROW_DOWN+ARROW_DOWN     0
+    Then Verify Function Is Called          app_launch_position

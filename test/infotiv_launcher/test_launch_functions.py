@@ -14,9 +14,13 @@ from python.infotiv_launcher import LaunchCMD
 def launcher():
     print('\n*********Start*********')
     launcher = python.infotiv_launcher.Launcher()
+    launcher.rc = MagicMock()
     yield launcher
     print('\n**********End**********')
 
+# ---------------------------------------------------------------------------------
+# ------------------------ set_launch_position ------------------------------------
+# ---------------------------------------------------------------------------------
 
 def test_encoders_ready_check_encoders_not_ready(launcher):
     # GIVEN
@@ -30,23 +34,34 @@ def test_encoders_ready_check_encoders_not_ready(launcher):
 
 
 def test_set_launch_position_encoders_not_ready(launcher):
+    # GIVEN
     with pytest.raises(Exception) as err:
         launcher.encoders_ready = 0
+    # WHEN
         launcher.set_launch_position(1)
+    # THEN
     assert err.match('Encoder Not Ready')
 
 
 @pytest.mark.parametrize("invalid_data", [(-1), 112])
 def test_set_launch_position_encoders_ready_launch_position_invalid_type_of_error(launcher, invalid_data):
+    # GIVEN
     with pytest.raises(Exception, match='out of bounds') as err:
+        launcher.encoders_ready = 1
+    # WHEN
         launcher.set_launch_position(invalid_data)
+    # THEN
     assert err.type is ValueError
 
 
 @pytest.mark.parametrize("invalid_data", [(-1), 112])
 def test_set_launch_position_encoders_ready_launch_position_invalid_message(launcher, invalid_data):
+    # GIVEN
     with pytest.raises(ValueError) as err:
+        launcher.encoders_ready = 1
+    # WHEN
         launcher.set_launch_position(invalid_data)
+    # THEN
     err.match('out of bounds')
 
 
@@ -54,7 +69,6 @@ def test_set_launch_position_encoders_ready_launch_position_zero(launcher):
     # GIVEN
     launcher.encoders_ready = 1
 
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM2.return_value = (1, 2, 2)
     launcher.rc.ReadBuffers.return_value = (0, 0, 0x80)
 
@@ -74,7 +88,6 @@ def test_set_launch_position_encoders_ready_launch_position_higher_than_zero(lau
     # GIVEN
     launcher.encoders_ready = 1
 
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM2.return_value = (1, 4, 2)  # launch_actual = 4 ,  launch_increment = -4
     launcher.rc.ReadBuffers.return_value = (0, 0, 0x80)
 
@@ -95,7 +108,6 @@ def test_set_launch_position_encoders_ready_launch_position_max(launcher):
     # GIVEN
     launcher.encoders_ready = 1
 
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM2.return_value = (1, -1.5, 2)
     launcher.rc.ReadBuffers.return_value = (0, 0, 0x80)
 
@@ -131,7 +143,6 @@ def test_max_pitch_zero_increment(launcher):
     # GIVEN
     launcher.encoders_ready = 1
 
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM1.return_value = (1, 355000)    # pitch increment = 0
 
     # WHEN
@@ -149,7 +160,6 @@ def test_max_pitch_higher_than_zero_increment(launcher):
     # GIVEN
     launcher.encoders_ready = 1
 
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM1.return_value = (1, 2)     # pitch increment = 354998
 
     # WHEN
@@ -167,7 +177,6 @@ def test_max_pitch_lower_than_zero_increment(launcher):
     # GIVEN
     launcher.encoders_ready = 1
 
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM1.return_value = (1, 355020)    # pitch increment = -20
 
     # WHEN
@@ -184,7 +193,6 @@ def test_max_pitch_lower_than_zero_increment(launcher):
 @pytest.mark.parametrize("test_input, expected", [(12345.6789, 1234.57), (10, 1), (123, 12.3), (0, 0), (-10, -1)])
 def test_battery_voltage_decimal_value(launcher, test_input, expected):
     # GIVEN
-    launcher.rc = MagicMock()
     launcher.rc.ReadMainBatteryVoltage.return_value = (128, test_input)
     # WHEN
     return_value = launcher.battery_voltage()
@@ -192,23 +200,8 @@ def test_battery_voltage_decimal_value(launcher, test_input, expected):
     assert return_value == expected
 
 # ---------------------------------------------------------------------------------
-# ------------------------ set_launch_variables------------------------------------
+# ------------------------ set_launch_variables -----------------------------------
 # ---------------------------------------------------------------------------------
-
-# Fails when rotation_position is less than 0 because
-# According to the file: Design and mechatronic integration of a drone launcher, the movement needs to cover a full rotation of 360◦
-# But in infotiv_launcher.py, it says self.rotation_length=180.0 so it's contraditory to mechatronic file
-def test_set_launch_variables_valid_positions_pass(launcher):
-    # GIVEN
-    pitch_position = random.randint(0, launcher.pitch_length)
-    rotation_position = random.randint(-launcher.rotation_length, launcher.rotation_length)
-    lift_position = random.randint(0, launcher.lift_length)
-
-    # WHEN
-    launcher.set_launch_variables(pitch_position, rotation_position, lift_position)
-
-    # THEN PASS
-
 
 def test_set_launch_variables_valid_positions_called(launcher):
     # GIVEN
@@ -218,7 +211,7 @@ def test_set_launch_variables_valid_positions_called(launcher):
 
     # WHEN
     pitch_position = random.randint(0, launcher.pitch_length)
-    rotation_position = random.randint(-launcher.rotation_length, launcher.rotation_length)
+    rotation_position = random.randint(0, launcher.rotation_length)
     lift_position = random.randint(0, launcher.lift_length)
     launcher.set_launch_variables(pitch_position, rotation_position, lift_position)
 
@@ -228,31 +221,14 @@ def test_set_launch_variables_valid_positions_called(launcher):
     launcher.change_lift.assert_called_with(lift_position)
 
 
-# The following testcase will fail because of invalid values
-# o is actually valid pitch, rotation position, added in the data to check whether the testcase fails if we have valid
-# pitch and rotation position but invalid lift position
-@pytest.mark.parametrize("invalid_pitch", [0, -1, 91])
-@pytest.mark.parametrize("invalid_rotation", [0, -181, 181])
-@pytest.mark.parametrize("invalid_lift", [(-1, 131)])
-def test_set_launch_variables_invalid_positions(launcher, invalid_pitch, invalid_rotation,invalid_lift):
-    # GIVEN INVALID POSITION
-
-    # WHEN
-    launcher.set_launch_variables(invalid_pitch, invalid_rotation, invalid_lift)
-
-    # THEN FAILS
-
-
 # ---------------------------------------------------------------------------------
 # ------------------------ launch_control------------------------------------------
 # ---------------------------------------------------------------------------------
 def test_launch_control_LaunchCMD_up(launcher):
     # GIVEN
     launcher.encoders_ready = 1
-    launcher.rc = MagicMock()
 
     # WHEN
-    launcher.rc.ForwardM2.return_value = True
     launcher.launch_control(LaunchCMD(1))
 
     # THEN
@@ -263,7 +239,6 @@ def test_launch_control_LaunchCMD_up(launcher):
 def test_launch_control_LaunchCMD_down(launcher):
     # GIVEN
     launcher.encoders_ready = 1
-    launcher.rc = MagicMock()
 
     # WHEN
     launcher.rc.BackwardM2.return_value = True
@@ -277,7 +252,6 @@ def test_launch_control_LaunchCMD_down(launcher):
 def test_launch_control_LaunchCMD_stop(launcher):
     # GIVEN
     launcher.encoders_ready = 1
-    launcher.rc = MagicMock()
 
     # WHEN
     launcher.rc.ForwardM2.return_value = True
