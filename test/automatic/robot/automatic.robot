@@ -9,7 +9,7 @@ Test Setup                                  Begin Web Test
 Test Teardown                               End Web Test
 
 *** Variables ***
-${BROWSER} =                                chrome
+${BROWSER} =                                headlesschrome
 
 *** Keywords ***
 #If you want to run the program local and python3 command is not found
