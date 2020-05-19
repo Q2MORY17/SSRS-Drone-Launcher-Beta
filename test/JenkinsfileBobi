@@ -18,7 +18,7 @@ pipeline {
 	    steps {
 		dir("test/manual/robot") {
 		    bat 'robot -d test/results test/manual/robot/resizeWindowWithoutSh.robot'
-   
+
         }
         }
       }
@@ -31,4 +31,4 @@ pipeline {
       }
     }
 
-
+}
