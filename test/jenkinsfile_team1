@@ -83,6 +83,14 @@ pipeline {
 		}
 	    }
 	}
+	stage('Rotation Unit Test') {
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py'
+        }
+
+      }
+    }
 	// stage('Unit test') {
 	//     steps {
 	// 	sh 'cd test/manual/unittest/'

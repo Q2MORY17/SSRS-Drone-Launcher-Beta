@@ -1,0 +1,46 @@
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        git url:'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta', branch:'SSRS1-100'
+      }
+    }
+     stage('Rotate') {
+	    steps {
+		dir("test/manual/robot") {
+		    bat "/resources/run_tests_headless.sh rotate.robot"
+        }
+        }
+      }
+		    stage('Rotate.Boundaies') {
+	    steps {
+		dir("test/manual/robot") {
+		    bat '.\resources/run_tests_headless.sh rotate.boundaries.robot'
+		}
+		}
+	  }
+		   stage('ResizeWindow') {
+	    steps {
+		dir("test/manual/robot") {
+		    bat '.\resources/run_tests_headless.sh resizeWindow.robot'
+        }
+        }
+      }
+      }
+      post {
+        always {
+          chuckNorris()
+        }
+        }
+      }
+        stage('Rotation Unit Test') {
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          bat 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py'
+        }
+
+      }
+    }
+
+
