@@ -33,7 +33,7 @@ pipeline {
         }
       }
     }
-    stage('Unit test') {
+    stage('Rotation Unit Test') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           bat 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py'
