@@ -47,7 +47,7 @@ pipeline {
           sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py'
         }
         sh 'python3 -m pytest -v -s test/manual/unittest/test_dronelauncher_python.py'
-        sh 'python3 -m pytest -v -s test/settings/unittest/test_drone_launcher_python.py'
+        sh 'python3 -m pytest -v -s test/settings/unittest/test_dronelauncher_python.py'
       }
     }
     stage('Infotiv Launcher Unit Tests') {
