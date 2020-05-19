@@ -24,7 +24,7 @@ def test_function_max_pitch(self):
 
     # WHEN
     response = app_client.post('/app_max_pitch', content_type='multipart/form-data',
-                               data={'app_max_pitch': '200'})
+                               data={'app_max_pitch': '250'})
 
     # THEN
     assert response.status_code == 204
@@ -115,6 +115,7 @@ def test_function_min_pitch_encoders_not_ready(self):
 
     # THEN
     assert returnValue == ('', 403)
+
 
 def test_function_max_lift_encoders_not_ready(self):
     # GIVEN
