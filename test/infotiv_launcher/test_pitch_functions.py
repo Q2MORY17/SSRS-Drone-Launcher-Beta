@@ -115,7 +115,7 @@ def test_set_pitch_position_encoder_ready_valid_position_not_zero_increment_less
 # ---------------------------------------------------------------------------------
 # ----------------- pitch_control --------------------------------------------
 # ---------------------------------------------------------------------------------
-def test_pitch_control_PitchCMD_up(launcher):
+def test_pitch_control_up(launcher):
     # GIVEN
     launcher.encoders_ready = 1
 
@@ -127,7 +127,7 @@ def test_pitch_control_PitchCMD_up(launcher):
     launcher.rc.ForwardM1.assert_not_called()
 
 
-def test_pitch_control_PitchCMD_down(launcher):
+def test_pitch_control_down(launcher):
     # GIVEN
     launcher.encoders_ready = 1
 
@@ -139,7 +139,7 @@ def test_pitch_control_PitchCMD_down(launcher):
     launcher.rc.BackwardM1.assert_not_called()
 
 
-def test_pitch_control_PitchCMD_stop(launcher):
+def test_pitch_control_stop(launcher):
     # GIVEN
     launcher.encoders_ready = 1
 
