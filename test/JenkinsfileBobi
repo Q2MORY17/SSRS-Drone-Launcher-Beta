@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta'
+        git 'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta', branch:'SSRS1-100'
       }
     }
     stage('Robot') {
@@ -11,8 +11,8 @@ pipeline {
 
           bat 'robot -d test/results test/manual/robot/rotate.robot'
 
-		    bat 'robot -d test/results test/manual/robot/rotate.boundaries.robot'
-		    bat 'robot -d test/results test/manual/robot/resizeWindow.robot'
+		    bat 'robot -d test/Results test/manual/robot/rotate.boundaries.robot'
+		    bat 'robot -d test/Results test/manual/robot/resizeWindow.robot'
 
       }
       post {
