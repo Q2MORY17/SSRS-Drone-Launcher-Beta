@@ -15,31 +15,15 @@ pipeline {
 		    sh 'robot -d test/results test/automatic/robot/automatic.robot'
         dir("test/manual/robot") {
   		    sh 'resources/run_tests_headless.sh pitch.robot'
-  		  }
-        dir("test/manual/robot") {
-    		    sh 'resources/run_tests_headless.sh MaxMin.robot'
-    		}
-        dir("test/manual/robot") {
-    		    sh 'resources/run_tests_headless.sh HalfWindow.robot'
-    		}
-        dir("test/manual/robot") {
-    		    sh 'resources/run_tests_headless.sh videoWindowButtonTest.robot'
-    		}
-        dir("test/manual/robot") {
-    		    sh 'resources/run_tests_headless.sh lift.robot'
-    		}
-        dir("test/manual/robot") {
-    		    sh 'resources/run_tests_headless.sh positionWindow.robot'
-    		}
-        dir("test/manual/robot") {
-    		    sh 'resources/run_tests_headless.sh resizeWindow.robot'
-    		}
-        dir("test/manual/robot") {
-    		    sh 'resources/run_tests_headless.sh rotate.robot'
-    		}
-        dir("test/manual/robot") {
-    		    sh 'resources/run_tests_headless.sh rotate.boundaries.robot'
-    		}
+    		  sh 'resources/run_tests_headless.sh MaxMin.robot'
+    		  sh 'resources/run_tests_headless.sh HalfWindow.robot'
+    		  sh 'resources/run_tests_headless.sh videoWindowButtonTest.robot'
+    		  sh 'resources/run_tests_headless.sh lift.robot'
+    		  sh 'resources/run_tests_headless.sh positionWindow.robot'
+    		  sh 'resources/run_tests_headless.sh resizeWindow.robot'
+    		  sh 'resources/run_tests_headless.sh rotate.robot'
+    		  sh 'resources/run_tests_headless.sh rotate.boundaries.robot'
+        }
         sh 'robot -d test/results --variable BROWSER:headlesschrome test/settings/robot/DroneTest.robot'
         sh 'robot -d test/results --variable BROWSER:headlesschrome test/manual/robot/OptionButtons.robot'
       }
@@ -62,8 +46,8 @@ pipeline {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py'
         }
-        sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_python.py'
-        sh 'python3 -m pytest -v -s test/settings/unittest/test_drone_launcher_python.py'
+        sh 'python3 -m pytest -v -s test/manual/unittest/test_dronelauncher_python.py'
+        sh 'python3 -m pytest -v -s test/settings/unittest/test_dronelauncher_python.py'
       }
     }
     stage('Infotiv Launcher Unit Tests') {
