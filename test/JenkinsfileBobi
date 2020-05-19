@@ -1,0 +1,32 @@
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta'
+      }
+    }
+    stage('Robot') {
+      steps {
+
+          bat 'robot -d test/results test/manual/robot/rotate.robot
+		  bat 'robot -d test/results test/manual/robot/rotate.boundaries.robot
+		  bat 'robot -d test/results test/manual/robot/resizeWindow.robot
+
+      }
+      post {
+        always {
+          chuckNorris()
+        }
+      }
+    }
+    stage('Unit test') {
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py
+        }
+       
+      }
+    }
+  }
+}
