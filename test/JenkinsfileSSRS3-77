@@ -1,0 +1,21 @@
+pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        git url: 'https://github.com/Q2MORY17/SSRS-Drone-Launcher-Beta', branch: 'SSRS3-77'
+      }
+    }
+    stage('Robot Framework/Selenium tests') {
+      steps {
+        sh 'robot -d test/results test/settings/robot/DroneTest.robot'
+      }
+    }
+
+    stage('Unit tests') {
+      steps {
+        sh 'python3 -m pytest test/manual/unittest/test_dronelauncher_python.py'
+      }
+    }
+  }
+}
