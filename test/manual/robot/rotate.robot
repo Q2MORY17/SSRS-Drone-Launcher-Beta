@@ -92,9 +92,7 @@ Check Log
     Should match  ${logfile}  *${target_string}*\"*${error_code}*
 
 
-
 *** Test Cases ***
-
 
 
 Roatate To The Right
