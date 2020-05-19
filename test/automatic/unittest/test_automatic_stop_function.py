@@ -2,23 +2,16 @@ import os
 import sys
 
 from unittest.mock import MagicMock
-import pytest
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../../python")
 
-import python.dronelauncher_python
+import python.dronelauncher_python as dl
 
 
-@pytest.fixture()
-def dl():
-    print('\n*********Start*********')
-    dl = python.dronelauncher_python
+def test_function_stop():
+    # GIVEN
     dl.rc = MagicMock()
-    yield dl
-    print('\n**********End**********')
 
-
-def test_function_stop(dl):
     # WHEN
     returnValue = dl.function_stop()
 
