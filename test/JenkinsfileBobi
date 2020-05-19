@@ -24,10 +24,9 @@ pipeline {
     stage('Unit test') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          bat 'python3 -m pytest -v -s test/manual/unittest/
+          bat 'python3 -m pytest -v -s test/manual/unittest/test_drone_launcher_rotate.py'
         }
-        bat 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_mount_function.py'
-        bat 'python3 -m pytest -v -s test/automatic/unittest/test_automatic_stop_function.py'
+
       }
     }
   }
