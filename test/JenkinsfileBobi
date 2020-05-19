@@ -9,10 +9,10 @@ pipeline {
     stage('Robot') {
       steps {
 
-          bat 'robot -d test/results test/manual/robot/rotate.robot
+          bat 'robot -d test/results test/manual/robot/rotate.robot'
 
-		    bat 'robot -d test/results test/manual/robot/rotate.boundaries.robot
-		    bat 'robot -d test/results test/manual/robot/resizeWindow.robot
+		    bat 'robot -d test/results test/manual/robot/rotate.boundaries.robot'
+		    bat 'robot -d test/results test/manual/robot/resizeWindow.robot'
 
       }
       post {
