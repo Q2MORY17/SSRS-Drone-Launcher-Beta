@@ -42,7 +42,7 @@ User Clicks Button Rotation Left
 	Click Button	//*[@id="script_rotation_left"]
 
 
-User Enters Value In Field
+User Enters Value In feild
     [Arguments]	${input}
     Start Process  echo Resetting log... > .dronelauncher.log  shell=yes
 	Click Element	//*[@id="manual_rotation_buttons"]/div/input
