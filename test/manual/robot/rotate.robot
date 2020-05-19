@@ -42,7 +42,7 @@ User Clicks Button Rotation Left
 	Click Button	//*[@id="script_rotation_left"]
 
 
-User Enters Value In feild
+User Enters Value In Field
     [Arguments]	${input}
     Start Process  echo Resetting log... > .dronelauncher.log  shell=yes
 	Click Element	//*[@id="manual_rotation_buttons"]/div/input
@@ -50,13 +50,13 @@ User Enters Value In feild
     Click Button    //*[@id="script_rotation_position"]
 
 
-User presses up arrow in textfeild
+User Presses Up Arrow In Textfield
     Click Element	//*[@id="manual_rotation_buttons"]/div/input
     Press Keys  //*[@id="manual_rotation_buttons"]/div/input     ARROW_UP    ARROW_UP    ARROW_UP
     Click Button	//*[@id="script_rotation_position"]
 
 
-User presses down arrow in textfeild
+User Presses Down Arrow In Textfield
     Click Element	//*[@id="manual_rotation_buttons"]/div/input
     Press Keys  //*[@id="manual_rotation_buttons"]/div/input     ARROW_DOWN    ARROW_DOWN    ARROW_DOWN
     Click Button	//*[@id="script_rotation_position"]
@@ -76,7 +76,7 @@ User Expects The Rotor To Rotate To The Left
     Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
 
 
-User Expects The Pitch To Change With Code
+User Expects The Rotation To Change With Code
 	[Arguments]    ${error_code}
     ${target_string} =  Set Variable  POST /app_rotation_position HTTP/1.1
     Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  ${error_code}
@@ -95,41 +95,41 @@ Check Log
 *** Test Cases ***
 
 
-Roatate To The Right
-	[Documentation]		Clicking the Roatate to the Right
+Rotate To The Right
+	[Documentation]		Clicking the Rotate to the Right
 	[Tags]			Rotation_Right
     Given Server Is Up
 	When User Clicks Button Rotation Right
 	Then User Expects The Rotor To Rotate To The Right
 
 
-Roatate To The Left
-	[Documentation]		Clicking the Roatation_Left button
-	[Tags]			Roatate_Left
+Rotate To The Left
+	[Documentation]		Clicking the Rotation_Left button
+	[Tags]			Rotate_Left
     Given Server Is Up
 	When User Clicks Button Rotation Left
 	Then User Expects The Rotor To Rotate To The Left
 
 
 Rotation Value
-	[Documentation]		Change Roatation value then press GO!
-	[Tags]			Roatateion_value
+	[Documentation]		Change Rotation value then press GO!
+	[Tags]			Rotation_value
     Given Server Is Up
 	When User Enters Value In Field  23
-	Then User Expects The Pitch To Change With Code	500
+	Then User Expects The Rotation To Change With Code	500
 
 
-Rotation Value change manuly up
-	[Documentation]		Change Roatation value manualy by pressing upp arrow in textfield then press GO!
-	[Tags]			Roatateion_value manualy changing
+Rotation Value Change Manually Up
+	[Documentation]		Change Rotation value manually by pressing upp arrow in textfield then press GO!
+	[Tags]			Rotation_value manually changing
     Given Server Is Up
-	When User presses up arrow in textfeild
-	Then User Expects The Pitch To Change With Code    500
+	When User Presses Up Arrow In Textfeild
+	Then User Expects The Rotation To Change With Code    500
 
 
-Rotation Value change manuly down
-	[Documentation]		Change Roatation value manualy by pressing upp arrow in textfield then press GO!
-	[Tags]			Roatateion_value manualy changing
+Rotation Value Change Manually Down
+	[Documentation]		Change Rotation value manually by pressing down arrow in textfield then press GO!
+	[Tags]			Rotation_value manually changing
     Given Server Is Up
-	When User presses down arrow in textfeild
-	Then User Expects The Pitch To Change With Code  500
+	When User Presses Down Arrow In Textfield
+	Then User Expects The Rotation To Change With Code  500
