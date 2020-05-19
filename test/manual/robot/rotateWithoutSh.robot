@@ -3,6 +3,7 @@ Documentation       Global documentation
 Library             SeleniumLibrary
 Library             Process
 Library             ./library/UrlLibrary.py
+Library              OperatingSystem
 Resource            ./../../keywords/keywords.robot
 Resource            ./../../keywords/SSRS2_keywords.robot
 Resource            ./../../keywords/BobiKeywords.robot
@@ -16,7 +17,7 @@ Test Teardown       End Web Test
 #4. Rename the copied file to "python3" (or whatever you want the command to be).
 
 *** Variables ***
-${BROWSER} =    headlesschrome
+${BROWSER} =    chrome
 
 *** Test Cases ***
 
@@ -28,7 +29,6 @@ Roatate To The Right
     When User Clicks Button Rotation Right
     Then Verify Function Is Called      app_rotation_right
 
-
 Roatate To The Left
     [Documentation]		Clicking the Roatation_Left button
     [Tags]                                  Roatate_Left
@@ -37,12 +37,12 @@ Roatate To The Left
     Then Verify Function Is Called      app_rotation_left
 
 
-Rotation Value##########################
+Rotation Value
 	[Documentation]		Change Roatation value then press GO!
 	[Tags]			Roatateion_value
     Given Encoders Reset
     When User Enters Value In Field  23
-    Then Verify Function Is Called          app_launch_position
+    Then Verify Function Is Called          app_rotation_position
 
 
 Rotation Value change manuly up
@@ -50,7 +50,7 @@ Rotation Value change manuly up
 	[Tags]			Roatateion_value manualy changing
     Given Encoders Reset
     When User presses up arrow in textfeild
-    Then Verify Function Is Called          app_launch_position
+    Then Verify Function Is Called          app_rotation_position
 
 
 Rotation Value change manuly down
@@ -58,6 +58,6 @@ Rotation Value change manuly down
 	[Tags]			Roatateion_value manualy changing
     Given Encoders Reset
     When User presses down arrow in textfeild
-    Then Verify Function Is Called          app_launch_position
+    Then Verify Function Is Called          app_rotation_position
 
 
