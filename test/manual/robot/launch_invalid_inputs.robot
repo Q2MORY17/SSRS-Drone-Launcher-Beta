@@ -19,14 +19,14 @@ ${BROWSER} =                                headlesschrome
 #4. Rename the copied file to "python3" (or whatever you want the command to be).
 Begin Web Test
     ${URL}=                                 Get Url
-    Start Process                           python3    ./python/dronelauncher_python.py    shell=True
+#    Start Process                           python3    ../python/dronelauncher_python.py    shell=True
     Open Browser                            about:blank     ${BROWSER}
     Maximize Browser Window
     Go To                                   ${URL}
 
 End Web Test
     Close Browser
-    Terminate All Processes
+#    Terminate All Processes
 
 Encoders Reset
     Click Button                            id:script_reset_encoders
