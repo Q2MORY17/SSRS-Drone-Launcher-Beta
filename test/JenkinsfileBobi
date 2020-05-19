@@ -9,7 +9,7 @@ pipeline {
      stage('Rotate') {
 	    steps {
 		dir("test/manual/robot") {
-		    bat "resources/run_tests_headless.sh rotate.robot"
+		    bat "/resources/run_tests_headless.sh rotate.robot"
         }
         }
       }
