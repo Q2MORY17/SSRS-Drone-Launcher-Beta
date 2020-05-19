@@ -31,8 +31,8 @@ pipeline {
         always {
           chuckNorris()
         }
+        }
       }
-
         stage('Rotation Unit Test') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -42,4 +42,4 @@ pipeline {
       }
     }
   }
-
+}
