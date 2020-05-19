@@ -1,22 +1,18 @@
 import os
 import sys
-
-import flask
 import pytest
+from unittest.mock import MagicMock, call
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../../python")
 
-from unittest.mock import MagicMock, call
-
 import python.dronelauncher_python
-
-app = flask.Flask(__name__)
 
 
 @pytest.fixture()
 def dl():
     print('\n*********Start*********')
     dl = python.dronelauncher_python
+    dl.rc = MagicMock()
     yield dl
     print('\n**********End**********')
 
@@ -30,7 +26,6 @@ def test_encoders_not_ready(dl):
 def test_encoders_ready_launch_increment_higher_than_zero(dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
     dl.rc.ReadEncM2.return_value = (1, -2)   # launch_actual = -2, launch_increment= 2
 
     # WHEN
@@ -51,7 +46,6 @@ def test_encoders_ready_launch_increment_higher_than_zero(dl):
 def test_encoders_ready_launch_increment_lower_than_zero(dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
     dl.rc.ReadEncM2.return_value = (1, 10)   # launch_actual = 10, launch_increment= -10
 
     # WHEN
@@ -72,7 +66,6 @@ def test_encoders_ready_launch_increment_lower_than_zero(dl):
 def test_encoders_ready_launch_increment_zero(dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
     dl.rc.ReadEncM2.return_value = (1, 0)   # launch_actual = 0, launch_increment= 0
 
     # WHEN
