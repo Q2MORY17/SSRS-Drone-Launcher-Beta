@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation
+Documentation                               Testing launch button and backwards/forwards in manual
 Library                                     SeleniumLibrary
 Library                                     Process
 Library                                     ./library/UrlLibrary.py
@@ -8,11 +8,12 @@ Resource                                    ./../../keywords/SSRS2_keywords.robo
 Test Setup                                  Begin Web Test
 Test Teardown                               End Web Test
 
-#If you want to run the program local and python3 command is not found
-#1. Make sure the Python 3 folder is present in the PATH environment variable.
-#2. Locate the "python.exe" file in the Python 3 folder.
-#3. Copy and Paste the "python.exe" file within the Python 3 folder.
-#4. Rename the copied file to "python3" (or whatever you want the command to be).
+#If you want to run the program locally and python3 command is not found
+#1. Check that you in fact do have python 3 installed by typing python --version in terminal
+#2. Make sure that you have a PATH that points to your python folder in environment variables
+#3. Locate the "python.exe" file in your python folder
+#4. Copy the python.exe file, then paste it in the same folder again (it will get another name)
+#5. Rename the copied file to "python3", and now you can run python3 in terminal
 
 *** Variables ***
 ${BROWSER} =                                headlesschrome
@@ -29,7 +30,7 @@ Launch input-box w/ invalid negative input
     Given Encoders Reset
     When Launch Input & Press Go            -1
     Then Alert Should Be Present            text=Value should be between 0 and 111
-         Verify Function Is Called          app_launch_position
+    Then Verify Function Is Called          app_launch_position
 
 
 #Input valid value should be between 0-111
@@ -38,7 +39,7 @@ Launch input-box w/ invalid positive input
     Given Encoders Reset
     When Launch Input & Press Go            112
     Then Alert Should Be Present            text=Value should be between 0 and 111
-         Verify Function Is Called          app_launch_position
+    Then Verify Function Is Called          app_launch_position
 
 
 #Input valid value should be between 0-111
