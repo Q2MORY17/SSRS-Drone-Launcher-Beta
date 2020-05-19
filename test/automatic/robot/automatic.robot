@@ -3,11 +3,13 @@ Documentation
 Library                                     SeleniumLibrary
 Library                                     Process
 Library                                     ./library/UrlLibrary.py
+Resource                                    ./../../keywords/keywords.robot
+Resource                                    ./../../keywords/SSRS2_keywords.robot
 Test Setup                                  Begin Web Test
 Test Teardown                               End Web Test
 
 *** Variables ***
-${BROWSER} =                                headlesschrome
+${BROWSER} =                                chrome
 
 *** Keywords ***
 #If you want to run the program local and python3 command is not found
@@ -16,28 +18,9 @@ ${BROWSER} =                                headlesschrome
 #3. Copy and Paste the "python.exe" file within the Python 3 folder.
 #4. Rename the copied file to "python3" (or whatever you want the command to be).
 
-Begin Web Test
-    ${URL}=                                 Get Url
-    Start Process                           python3    ./python/dronelauncher_python.py    shell=True
-    Open Browser                            about:blank     ${BROWSER}
-    Maximize Browser Window
-    Go To                                   ${URL}
-
-End Web Test
-    Close Browser
-    Terminate All Processes
-
-Gui Is Visible
-    Wait Until Page Contains Element        id:video
-
-Gui Has Loaded
-    Page Should Contain Element             id:script_battery_voltage
-
-Encoders Reset
-    Click Button                            id:script_reset_encoders
 
 Press Button Automatic
-    Click Element                           xpath://html[1]/body[1]/ul[1]/li[3]/a[1]
+    Click Element                           xpath://a[contains(text(),'Automatic')]
 
 Verify Automatic Loaded
     Page Should Contain Element             id:script_standby
@@ -62,11 +45,6 @@ Press Button Stop
     Click Button                            id:script_stop
     Sleep                                   1
 
-Verify Function Is Called
-    [Arguments]                             ${function}
-    ${result}                               Terminate Process
-    Process Should Be Stopped
-    Should Contain                          ${result.stderr}  ${function}
 
 *** Test Cases ***
 Battery Voltage Button Should Be Visible
@@ -85,7 +63,7 @@ Functionable Button Mount
     Encoders Reset
     Press Button Automatic
     Press Button Mount
-    Verify Function Is Called               POST /app_mount HTTP/1.1
+    Verify Function Is Called              app_mount
 
 
 Stop All Functions
@@ -93,25 +71,25 @@ Stop All Functions
     Encoders Reset
     Press Button Automatic
     Press Button Stop
-    Verify Function Is Called               POST /app_stop HTTP/1.1
+    Verify Function Is Called               app_stop
 
 
 Functionable Button Standby
     Encoders Reset
     Press Button Automatic
     Press Button Standby
-    Verify Function Is Called               POST /app_standby HTTP/1.1
+    Verify Function Is Called               app_standby
 
 
 Functionable Button Prepare
     Encoders Reset
     Press Button Automatic
     Press Button Prepare
-    Verify Function Is Called               POST /app_prepare HTTP/1.1
+    Verify Function Is Called               app_prepare
 
 
 Functionable Button Launch
     Encoders Reset
     Press Button Automatic
     Press Button Launch
-    Verify Function Is Called               POST /app_launch HTTP/1.1
+    Verify Function Is Called               app_launch
