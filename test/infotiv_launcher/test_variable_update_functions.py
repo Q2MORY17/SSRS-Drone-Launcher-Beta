@@ -15,7 +15,11 @@ def launcher():
     print('\n**********End**********')
 
 
-@pytest.mark.parametrize("invalid_data", [-1, 91])
+# ---------------------------------------------------------------------------------
+# ------------------------ Variable update functions-------------------------------
+# ---------------------------------------------------------------------------------
+
+@pytest.mark.parametrize("invalid_data", [-0.01, -1, 90.1, 91])
 def test_change_pitch_invalid_data(launcher, invalid_data):
     with pytest.raises(ValueError) as err:
         launcher.change_pitch(invalid_data)
@@ -51,8 +55,7 @@ def test_change_rotation_invalid(launcher, invalid_data):
 @pytest.mark.parametrize("valid_data", [0.0001, 1.5, 180.0])
 def test_change_rotation_valid(launcher, valid_data):
     launcher.change_rotation(valid_data)
-    rotation_position_actual = valid_data
-    assert launcher.rotation_ready == rotation_position_actual
+    assert launcher.rotation_ready == valid_data
 
 
 @pytest.mark.parametrize("invalid_data", [-1, 11, 0])
@@ -89,3 +92,4 @@ def test_change_acceleration_valid(launcher, valid_data):
     launcher.change_acceleration(valid_data)
     acceleration_actual = valid_data * 13400
     assert launcher.launch_acceleration == acceleration_actual
+

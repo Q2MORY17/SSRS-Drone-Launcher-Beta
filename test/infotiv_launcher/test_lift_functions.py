@@ -1,10 +1,11 @@
 import os
 import sys
 import pytest
+from unittest.mock import MagicMock, call
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../python")
 
-from unittest.mock import MagicMock, call
+
 import python.infotiv_launcher
 from python.infotiv_launcher import LiftCMD
 
@@ -13,6 +14,7 @@ from python.infotiv_launcher import LiftCMD
 def launcher():
     print('\n*********Start*********')
     launcher = python.infotiv_launcher.Launcher()
+    launcher.rc = MagicMock()
     yield launcher
     print('\n**********End**********')
 
@@ -63,8 +65,6 @@ def test_shows_correct_message_if_value_is_lower_than_min_value(launcher):
 def test_set_lift_position_zero_increment_negative(launcher):
     # GIVEN
     launcher.encoders_ready = 1
-
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM1.return_value = (1, 2, 2)
 
     # WHEN
@@ -79,8 +79,6 @@ def test_set_lift_position_zero_increment_negative(launcher):
 def test_set_lift_position_higher_than_zero_increment_positive(launcher):
     # GIVEN
     launcher.encoders_ready = 1
-
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM1.return_value = (1, 4, 2)
 
     # WHEN
@@ -95,8 +93,6 @@ def test_set_lift_position_higher_than_zero_increment_positive(launcher):
 def test_set_lift_position_max_increment_positive(launcher):
     # GIVEN
     launcher.encoders_ready = 1
-
-    launcher.rc = MagicMock()
     launcher.rc.ReadEncM1.return_value = (1, -1.5, 2)
 
     # WHEN
@@ -113,33 +109,39 @@ def test_set_lift_position_max_increment_positive(launcher):
 # ---------------------------------------------------------------------------------
 
 def test_lift_control_right(launcher):
-
+    # GIVEN
     launcher.rc = MagicMock()
 
+    # WHEN
     launcher.lift_control(LiftCMD(1))
 
+    # THEN
     launcher.rc.ForwardM1.assert_called_with(launcher.address_2, launcher.lift_speed_manual)
     launcher.rc.ForwardM1.assert_called_with(launcher.address_2, launcher.lift_speed_manual)
     launcher.rc.BackwardM1.assert_not_called()
 
 
 def test_lift_control_left(launcher):
-
+    # GIVEN
     launcher.rc = MagicMock()
 
+    # WHEN
     launcher.lift_control(LiftCMD(2))
 
+    # THEN
     launcher.rc.BackwardM1.assert_called_with(launcher.address_2, launcher.lift_speed_manual)
     launcher.rc.BackwardM1.assert_called_with(launcher.address_2, launcher.lift_speed_manual)
     launcher.rc.ForwardM1.assert_not_called()
 
 
 def test_lift_control_stop(launcher):
-
+    # GIVEN
     launcher.rc = MagicMock()
 
+    # WHEN
     launcher.lift_control(LiftCMD(3))
 
+    # THEN
     launcher.rc.ForwardM1.assert_called_with(launcher.address_2, 0)
     launcher.rc.ForwardM1.assert_called_with(launcher.address_2, 0)
     launcher.rc.BackwardM1.assert_not_called()

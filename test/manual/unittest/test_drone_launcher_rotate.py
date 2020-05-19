@@ -48,7 +48,7 @@ def test_function_rotation_right_with_invalid_speed(self):
     self.rc = MagicMock()
 
     # WHEN
-    self.rotation_speed_manual = 16
+    self.rotation_speed_manual = 12888
     returnValue = self.function_rotation_right()
 
     # THEN

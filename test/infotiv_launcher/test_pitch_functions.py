@@ -8,158 +8,144 @@ from python.infotiv_launcher import EncoderError,PitchCMD
 import random
 
 
+@pytest.fixture()
+def launcher():
+    print('\n*********Start*********')
+    launcher = python.infotiv_launcher.Launcher()
+    launcher.rc = MagicMock()
+    yield launcher
+    print('\n**********End**********')
+
+
 # ---------------------------------------------------------------------------------
 # ----------------- set_pitch_position --------------------------------------------
 # ---------------------------------------------------------------------------------
 
-@pytest.fixture()
-def dl():
-    print('\n*********Start*********')
-    dl = python.infotiv_launcher.Launcher()
-    yield dl
-    print('\n**********End**********')
+
+def test_encoder_default_value(launcher):
+    assert launcher.encoders_ready == 0,"The default value should be 0"
 
 
-def test_encoder_default_value(dl):
-    assert dl.encoders_ready == 0,"The default value should be 0"
-
-
-def test_set_pitch_position_encoder_not_ready(dl):
+def test_set_pitch_position_encoder_not_ready(launcher):
     # GIVEN
-    dl.encoders_ready = 0
+    launcher.encoders_ready = 0
 
     # WHEN
     with pytest.raises(EncoderError) as excinfo:
         pitch_position=random.randint(-100,111)
-        dl.set_pitch_position(pitch_position)
+        launcher.set_pitch_position(pitch_position)
 
     # THEN
     assert "Encoder Not Ready" in str(excinfo.value)
 
 
-# 91 fails because there is something wrong with one code "pitch_position > self.lift_length should be pitch_position > self.pitch_length"
-
-invalid_position ={-1,91}
-@pytest.mark.parametrize("pitch_position",invalid_position)
-def test_set_pitch_position_encoder_ready_invalid_position(dl,pitch_position):
+@pytest.mark.parametrize("invalid_position", [-1,91])
+def test_set_pitch_position_encoder_ready_invalid_position(launcher,invalid_position):
     # GIVEN
-    dl.encoders_ready = 1
-    dl.rc = MagicMock()
+    launcher.encoders_ready = 1
 
     # WHEN
     with pytest.raises(ValueError) as excinfo:
-        dl.rc.ReadEncM1.return_value = (1, 1, 0)
-        dl.rc.ReadEncM2.return_value = (1, 0, 0)
-        dl.set_pitch_position(pitch_position)
+        launcher.set_pitch_position(invalid_position)
 
     # THEN
     assert "out of bounds" in str(excinfo.value)
 
 
-def test_set_pitch_position_encoder_ready_position_zero_increment_not_less_than_zero(dl):
+def test_set_pitch_position_encoder_ready_position_zero_increment_not_less_than_zero(launcher):
     # GIVEN
-    dl.encoders_ready = 1
-    dl.rc = MagicMock()
+    launcher.encoders_ready = 1
 
     # WHEN
-    dl.rc.ReadEncM1.return_value = (1, 0, 0)
-    dl.set_pitch_position(0)
+    launcher.rc.ReadEncM1.return_value = (1, 0, 0)
+    launcher.set_pitch_position(0)
 
     # THEN
-    callsM1 = [call(0x80, 7000, 0, 1),
-               call(0x80, 0, 0, 0)
+    callsM1 = [call(launcher.address, launcher.pitch_speed_pulses, 0, 1),
+               call(launcher.address, 0, 0, 0)
                ]
-    dl.rc.SpeedDistanceM1.assert_has_calls(callsM1)
+    launcher.rc.SpeedDistanceM1.assert_has_calls(callsM1)
 
 
-def test_set_pitch_position_encoder_ready_position_zero_increment_less_than_zero(dl):
+def test_set_pitch_position_encoder_ready_position_zero_increment_less_than_zero(launcher):
     # GIVEN
-    dl.encoders_ready = 1
-    dl.rc = MagicMock()
+    launcher.encoders_ready = 1
 
     # WHEN
-    dl.rc.ReadEncM1.return_value = (1,1,0)
-    dl.set_pitch_position(0)
+    launcher.rc.ReadEncM1.return_value = (1,1,0)
+    launcher.set_pitch_position(0)
 
     # THEN
-    callsM1 = [call(0x80, -7000, 1, 1),
-               call(0x80, 0, 0, 0)
+    callsM1 = [call(launcher.address, -launcher.pitch_speed_pulses, 1, 1),
+               call(launcher.address, 0, 0, 0)
                ]
-    dl.rc.SpeedDistanceM1.assert_has_calls(callsM1)
+    launcher.rc.SpeedDistanceM1.assert_has_calls(callsM1)
 
 
-def test_set_pitch_position_encoder_ready_valid_position_not_zero_increment_not_less_than_zero(dl):
+def test_set_pitch_position_encoder_ready_valid_position_not_zero_increment_not_less_than_zero(launcher):
     # GIVEN
-    dl.encoders_ready = 1
-    dl.rc = MagicMock()
+    launcher.encoders_ready = 1
 
     # WHEN
-    dl.rc.ReadEncM1.return_value = (1, 0, 0)
-    dl.set_pitch_position(45)
+    launcher.rc.ReadEncM1.return_value = (1, 0, 0)
+    launcher.set_pitch_position(45)
 
     # THEN
-    callsM1 = [call(0x80, 7000, 177500, 1),
-               call(0x80, 0, 0, 0)
+    callsM1 = [call(launcher.address, launcher.pitch_speed_pulses, 177500, 1),
+               call(launcher.address, 0, 0, 0)
                ]
-    dl.rc.SpeedDistanceM1.assert_has_calls(callsM1)
+    launcher.rc.SpeedDistanceM1.assert_has_calls(callsM1)
 
 
-def test_set_pitch_position_encoder_ready_valid_position_not_zero_increment_less_than_zero(dl):
+def test_set_pitch_position_encoder_ready_valid_position_not_zero_increment_less_than_zero(launcher):
     # GIVEN
-    dl.encoders_ready = 1
-    dl.rc = MagicMock()
+    launcher.encoders_ready = 1
 
     # WHEN
-    dl.rc.ReadEncM1.return_value = (1, 35501, 0)
-    dl.set_pitch_position(9)
+    launcher.rc.ReadEncM1.return_value = (1, 35501, 0)
+    launcher.set_pitch_position(9)
 
     # THEN
-    callsM1 = [call(0x80, -7000, 1, 1),
-               call(0x80, 0, 0, 0)
+    callsM1 = [call(launcher.address, -launcher.pitch_speed_pulses, 1, 1),
+               call(launcher.address, 0, 0, 0)
                ]
-    dl.rc.SpeedDistanceM1.assert_has_calls(callsM1)
+    launcher.rc.SpeedDistanceM1.assert_has_calls(callsM1)
 
 
 # ---------------------------------------------------------------------------------
 # ----------------- pitch_control --------------------------------------------
 # ---------------------------------------------------------------------------------
-def test_pitch_control_PitchCMD_up(dl):
+def test_pitch_control_up(launcher):
     # GIVEN
-    dl.encoders_ready = 1
-    dl.rc = MagicMock()
+    launcher.encoders_ready = 1
 
     # WHEN
-    dl.rc.BackwardM1.return_value = True
-    dl.pitch_control(PitchCMD(1))
+    launcher.pitch_control(PitchCMD(1))
 
     # THEN
-    dl.rc.BackwardM1.assert_called_with(dl.address, dl.pitch_speed_manual)
-    dl.rc.ForwardM1.assert_not_called()
+    launcher.rc.BackwardM1.assert_called_with(launcher.address, launcher.pitch_speed_manual)
+    launcher.rc.ForwardM1.assert_not_called()
 
 
-def test_pitch_control_PitchCMD_down(dl):
+def test_pitch_control_down(launcher):
     # GIVEN
-    dl.encoders_ready = 1
-    dl.rc = MagicMock()
+    launcher.encoders_ready = 1
 
     # WHEN
-    dl.rc.ForwardM1.return_value = True
-    dl.pitch_control(PitchCMD(2))
+    launcher.pitch_control(PitchCMD(2))
 
     # THEN
-    dl.rc.ForwardM1.assert_called_with(dl.address, dl.pitch_speed_manual)
-    dl.rc.BackwardM1.assert_not_called()
+    launcher.rc.ForwardM1.assert_called_with(launcher.address, launcher.pitch_speed_manual)
+    launcher.rc.BackwardM1.assert_not_called()
 
 
-def test_pitch_control_PitchCMD_stop(dl):
+def test_pitch_control_stop(launcher):
     # GIVEN
-    dl.encoders_ready = 1
-    dl.rc = MagicMock()
+    launcher.encoders_ready = 1
 
     # WHEN
-    dl.rc.ForwardM1.return_value = True
-    dl.pitch_control(PitchCMD(3))
+    launcher.pitch_control(PitchCMD(3))
 
     # THEN
-    dl.rc.ForwardM1.assert_called_with(dl.address, 0)
-    dl.rc.BackwardM1.assert_not_called()
+    launcher.rc.ForwardM1.assert_called_with(launcher.address, 0)
+    launcher.rc.BackwardM1.assert_not_called()

@@ -6,48 +6,45 @@ from unittest.mock import MagicMock
 import python.infotiv_launcher
 
 
-
-
-
 # ---------------------------------------------------------------------------------
-# ------------------------ Standby-------------------------------------
+# ------------------------ Standby-------------------------------------------------
 # ---------------------------------------------------------------------------------
 @pytest.fixture()
-def dl():
+def launcher():
     print('\n*********Start*********')
-    dl = python.infotiv_launcher.Launcher()
-    yield dl
+    launcher = python.infotiv_launcher.Launcher()
+    yield launcher
     print('\n**********End**********')
 
-def test_standby(dl):
+def test_standby(launcher):
     # GIVEN
-    dl.set_pitch_position = MagicMock()
-    dl.set_rotation_position = MagicMock()
-    dl.set_lift_position = MagicMock()
-    dl.set_launch_position = MagicMock()
+    launcher.set_pitch_position = MagicMock()
+    launcher.set_rotation_position = MagicMock()
+    launcher.set_lift_position = MagicMock()
+    launcher.set_launch_position = MagicMock()
 
     # WHEN
-    dl.standby()
+    launcher.standby()
 
     # THEN
-    dl.set_pitch_position.assert_called_with(0)
-    dl.set_rotation_position.assert_called_with(0)
-    dl.set_lift_position.assert_called_once_with(0)
-    dl.set_launch_position.assert_called_with(0)
+    launcher.set_pitch_position.assert_called_with(0)
+    launcher.set_rotation_position.assert_called_with(0)
+    launcher.set_lift_position.assert_called_once_with(0)
+    launcher.set_launch_position.assert_called_with(0)
 
 
-def test_prepare_launch_function_calls_with_correct_parameters(dl):
-    # Mock all the functions inside prepare_launch
-    dl.set_pitch_position = MagicMock()
-    dl.set_rotation_position = MagicMock()
-    dl.set_lift_position = MagicMock()
-    dl.set_launch_position = MagicMock()
+def test_prepare_launch_function_calls_with_correct_parameters(launcher):
+    # GIVEN
+    launcher.set_pitch_position = MagicMock()
+    launcher.set_rotation_position = MagicMock()
+    launcher.set_lift_position = MagicMock()
+    launcher.set_launch_position = MagicMock()
 
-    # Use the prepare_launch function to run all the function calls
-    dl.prepare_launch()
+    # WHEN
+    launcher.prepare_launch()
 
-    # Check if all the functions were called with the correct parameters
-    dl.set_pitch_position.assert_called_with(dl.pitch_ready)
-    dl.set_rotation_position.assert_called_with(dl.rotation_ready)
-    dl.set_lift_position.assert_called_once_with(dl.lift_ready)
-    dl.set_launch_position.assert_called_with(0)
+    # THEN
+    launcher.set_pitch_position.assert_called_with(launcher.pitch_ready)
+    launcher.set_rotation_position.assert_called_with(launcher.rotation_ready)
+    launcher.set_lift_position.assert_called_once_with(launcher.lift_ready)
+    launcher.set_launch_position.assert_called_with(0)
