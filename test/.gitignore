@@ -4,3 +4,4 @@
 *.pyc
 \#*
 .dronelauncher.log
+results/**
