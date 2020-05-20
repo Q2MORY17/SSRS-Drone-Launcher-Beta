@@ -5,11 +5,11 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "
 from unittest.mock import MagicMock, call
 import python.dronelauncher_python
 
-#DONE
 @pytest.fixture()
 def dl():
     print('\n*********Start*********')
     dl = python.dronelauncher_python
+    dl.rc = MagicMock()
     yield dl
     print('\n**********End**********')
 
@@ -20,7 +20,6 @@ def test_function_standby_encoders_not_ready(dl):
 def test_function_standby_encoders_ready_all_increment_not_less_than_zero(dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
 
     # WHEN
     dl.rc.ReadEncM1.return_value=(1,0,0)
@@ -49,7 +48,6 @@ def test_function_standby_encoders_ready_all_increment_not_less_than_zero(dl):
 def test_function_standby_encoders_ready_all_increment_less_than_zero(dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
 
     # WHEN
     dl.rc.ReadEncM1.return_value=(1,1,0)
@@ -80,7 +78,6 @@ def test_function_standby_encoders_ready_all_increment_less_than_zero(dl):
 def test_function_standby_encoders_ready_pitch_and_lift_increment_not_less_than_zero_and_rotate_and_launch_less_than_zero(dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
 
     # WHEN
     dl.rc.ReadEncM1.return_value = (1,0,0)
@@ -110,7 +107,6 @@ def test_function_standby_encoders_ready_pitch_and_lift_increment_less_than_zero
             dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
 
     # WHEN
     dl.rc.ReadEncM1.return_value = (1,1,0)

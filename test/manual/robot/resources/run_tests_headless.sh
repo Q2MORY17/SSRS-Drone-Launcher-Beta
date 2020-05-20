@@ -4,7 +4,7 @@ IP=$(python3 ./library/getip.py)
 PORT=5000
 URL="http://$IP:$PORT"
 BROWSER="headlesschrome"
-OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
+OPTS="-T -v URL:$URL -v BROWSER:$BROWSER -d results"
 LOG=.dronelauncher.log
 
 #
@@ -33,7 +33,7 @@ if [ $# -eq 0 ]; then           #If argumentlist is empty, run all tests.
     
     if [ -x "$(command -v firefox)" ]; then
 	BROWSER="headlessfirefox"
-	OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
+	OPTS="-T -v URL:$URL -v BROWSER:$BROWSER -d results"
 	
 	for i in *.robot             
 	do
@@ -50,7 +50,7 @@ else                            # Run tests provided by arguments.
     # Check if firefox installed on unixbased systems
     if [ -x "$(command -v firefox)" ]; then
 	BROWSER="headlessfirefox"
-	OPTS="-v URL:$URL -v BROWSER:$BROWSER -d results"
+	OPTS="-T -v URL:$URL -v BROWSER:$BROWSER -d results"
 	for i in $@
 	do
 	    robot $OPTS $i

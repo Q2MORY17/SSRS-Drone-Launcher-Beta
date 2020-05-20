@@ -1,22 +1,15 @@
 import os
 import sys
-
-import flask
 import pytest
-
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/../../python")
-
 from unittest.mock import MagicMock, call
-
 import python.dronelauncher_python
-
-app = flask.Flask(__name__)
-
 
 @pytest.fixture()
 def dl():
     print('\n*********Start*********')
     dl = python.dronelauncher_python
+    dl.rc = MagicMock()
     yield dl
     print('\n**********End**********')
 
@@ -30,7 +23,6 @@ def test_encoders_not_ready(dl):
 def test_encoders_ready_pitch_increment_higher_than_zero_rotation_increment_lower_than_zero(dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
     dl.rc.ReadEncM1.return_value = (1, 2, 5)  # pitch_actual = 2  #pitch_increment= 354998  #lift_incr= -2
     dl.rc.ReadEncM2.return_value = (1, 1, 8)  # rotation_increment = -1   #launch_increment= -1
 
@@ -58,7 +50,6 @@ def test_encoders_ready_pitch_increment_higher_than_zero_rotation_increment_lowe
 def test_encoders_ready_pitch_increment_lower_than_zero_rotation_increment_higher_than_zero(dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
     dl.rc.ReadEncM1.return_value = (1, 360000, 5)  # pitch_actual = 360000  #pitch_increment= -5000 #lift_incr= -360000
     dl.rc.ReadEncM2.return_value = (1, -1, 8)  # rotation_increment = 1   #launch_increment= 1
 
@@ -86,7 +77,6 @@ def test_encoders_ready_pitch_increment_lower_than_zero_rotation_increment_highe
 def test_encoders_ready_lift_increment_higher_than_zero(dl):
     # GIVEN
     dl.encoders_ready = 1
-    dl.rc = MagicMock()
     dl.rc.ReadEncM1.return_value = (1, -2, 5)  # pitch_actual = -2  #pitch_increment= 355002  #lift_incr= 2
     dl.rc.ReadEncM2.return_value = (1, -10, 8)  # rotation_increment = 10   #launch_increment= 10
 
