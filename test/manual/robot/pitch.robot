@@ -10,24 +10,48 @@ Documentation	Check functionality of buttons and input fields in the Pitch-secti
 Library		SeleniumLibrary
 Library		Process
 Library         OperatingSystem	
-Suite Setup	Begin Web Test
-Suite Teardown	End Web Test
+Library         ./library/UrlLibrary.py
+#Resource        ./../../keywords/keywords.robot
+#Resource        ./../../keywords/SSRS2_keywords.robot
+#Resource        ./../../keywords/BobiKeywords.robot
+Test Setup	Begin Web Test
+Test Teardown	End Web Test
 
 
 *** Variables ***
 ${BROWSER} =	firefox
-${URL} =   	http://192.168.0.4:5000
-${PORT} =	5000
-${logfile}  	Get File  .dronelauncher.log
+#${URL} =   	http://192.168.0.4:5000
+#${PORT} =	5000
+#${logfile}  	Get File  .dronelauncher.log
 
 
 *** Keywords ***
-Begin Web Test
-    Open Browser  ${URL}  ${BROWSER}
-    Maximize Browser Window
+# Begin Web Test
+#     Open Browser  ${URL}  ${BROWSER}
+#     Maximize Browser Window
 
+# End Web Test
+#     Close Browser
 End Web Test
     Close Browser
+    Terminate All Processes
+
+Encoders Reset
+    Click Button                            id:script_reset_encoders
+
+Verify Function Is Called
+    [Arguments]                             ${function}
+    ${result}                               Terminate Process
+    Process Should Be Stopped
+    Should Contain                          ${result.stderr}  POST /${function} HTTP/1.1
+
+Begin Web Test
+    [Documentation]                         You need to import UrlLibrary.py inside the robot file that you working from
+    ${URL}=                                 Get Url
+    Start Process                           python3   ./python/dronelauncher_python.py    shell=True
+    Open Browser                            about:blank     ${BROWSER}
+    Maximize Browser Window
+    Go To                                   ${URL}
 
 Server Is Up 
     Wait Until Page Contains Element  xpath://button[@id="script_pitch_up"]
@@ -36,6 +60,9 @@ Server Is Up
 
 User Clicks Button Pitch Up
     Start Process  echo Resetting log... > .dronelauncher.log  shell=yes
+    Click Button  xpath://button[@id="script_pitch_up"]
+
+User Clicks Button Pitch Up2
     Click Button  xpath://button[@id="script_pitch_up"]
 
 User Clicks Button Pitch Down
@@ -76,6 +103,13 @@ Check Log
 
 
 *** Test Cases ***
+
+asdf
+	[Documentation]
+	[Tags]	asdf
+	Given Encoders Reset
+	When User Clicks Button Pitch Up2
+	Then Verify Function Is Called	 app_pitch_up
 
 Pitch Up
     [Documentation]  Clicking the pitch up button
