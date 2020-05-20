@@ -1,4 +1,4 @@
-*** Settings ***
+x*** Settings ***
 
 Documentation    Global documentation
 
@@ -18,7 +18,7 @@ Test Teardown    End Web Test
 
 *** Variables ***
 
-${BROWSER} =		headlesschrome
+${BROWSER} =		headlessfirefox
 
 
 *** Keywords ***
