@@ -15,11 +15,9 @@ pipeline {
 
 		   stage('ResizeWindow') {
 	    steps {
-		dir("test/manual/robot") {
-		    bat 'robot -d test/results test/manual/robot/resizeWindowWithoutSh.robot'
 
-        }
-        }
+		    bat 'robot -d test/results test/manual/robot/resizeWindowWithoutSh.robot'
+           }
       }
         stage('Rotation Unit Test') {
       steps {
