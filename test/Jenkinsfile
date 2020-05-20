@@ -9,14 +9,13 @@ pipeline {
     stage('Robot') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          sh 'robot -d test/results test/manual/robot/launch_invalid_inputs.robot'
+	    sh 'robot -d test/results test/manual/robot/launch_invalid_inputs.robot'
+	    sh 'robot -d test/results test/manual/robot/resizeWindowWithoutSh.robot'		
         }
-		    sh 'robot -d test/results test/manual/robot/launch.robot'
-		    sh 'robot -d test/results test/automatic/robot/automatic.robot'
-  		    sh 'robot -d test/results test/manual/robot/pitch.robot'
-  		    sh 'robot -d test/results test/manual/robot/rotateWithoutSh.robot'		
-  		    sh 'robot -d test/results test/manual/robot/resizeWindowWithoutSh.robot'		
-		
+	    sh 'robot -d test/results test/manual/robot/launch.robot'
+	    sh 'robot -d test/results test/automatic/robot/automatic.robot'
+	    sh 'robot -d test/results test/manual/robot/pitch.robot'
+	    sh 'robot -d test/results test/manual/robot/rotateWithoutSh.robot'		
         dir("test/manual/robot") {
     		  sh 'resources/run_tests_headless.sh MaxMin.robot'
     		  sh 'resources/run_tests_headless.sh HalfWindow.robot'
