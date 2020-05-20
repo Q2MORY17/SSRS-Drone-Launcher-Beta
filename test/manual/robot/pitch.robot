@@ -6,102 +6,113 @@
 #
 	
 *** Settings ***
-Documentation	Check functionality of buttons and input fields in the Pitch-section.
+Documentation	Check functionality of buttons and input fields.
 Library		SeleniumLibrary
 Library		Process
-Library         OperatingSystem	
-Suite Setup	Begin Web Test
-Suite Teardown	End Web Test
+Library         ./library/UrlLibrary.py
+Resource        ./../../keywords/keywords.robot
+Resource        ./../../keywords/SSRS2_keywords.robot
+Resource        ./../../keywords/BobiKeywords.robot
+Test Setup	Begin Web Test
+Test Teardown	End Web Test
 
 
 *** Variables ***
-${BROWSER} =	firefox
-${URL} =   	http://192.168.0.4:5000
-${PORT} =	5000
-${logfile}  	Get File  .dronelauncher.log
+${BROWSER} =	headlesschrome
 
 
 *** Keywords ***
-Begin Web Test
-    Open Browser  ${URL}  ${BROWSER}
-    Maximize Browser Window
-
-End Web Test
-    Close Browser
-
 Server Is Up 
     Wait Until Page Contains Element  xpath://button[@id="script_pitch_up"]
     Page Should Contain  Pitch
     Click Button  xpath://button[@id="script_reset_encoders"]
 
 User Clicks Button Pitch Up
-    Start Process  echo Resetting log... > .dronelauncher.log  shell=yes
     Click Button  xpath://button[@id="script_pitch_up"]
 
 User Clicks Button Pitch Down
-    Start Process  echo Resetting log... > .dronelauncher.log  shell=yes
     Click Button  xpath://button[@id="script_pitch_down"]
 
 User Enters Value In Field
     [Arguments]	${input}
-    Start Process  echo Resetting log... > .dronelauncher.log  shell=yes
     Click Element  xpath://input[@class="form-2" and @name="pitch_position"]
     Input Text  xpath://input[@class="form-2" and @name="pitch_position"]  ${input}
     Click Button  xpath://button[@id="script_pitch_position"]
 
+Check Function Halts
+    [Arguments]  ${function}
+    ${response_code} =  Set Variable  500
+    Check Log  ${function}  ${response_code}
+
 User Expects The Pitch To Increase
-    ${target_string} =	Set Variable  POST /app_pitch_up HTTP/1.1
-    Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
-    ${target_string} =	Set Variable  POST /app_pitch_stop HTTP/1.1
-    Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
+    ${function} =	Set Variable  app_pitch_up
+    ${response_code} =  Set Variable  500
+    Check Log  ${function}  ${response_code}
 	
 User Expects The Pitch To Decrease
-    ${target_string} =  Set Variable  POST /app_pitch_down HTTP/1.1
-    Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
-    ${target_string} =  Set Variable  POST /app_pitch_stop HTTP/1.1
-    Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  500
+    ${function} =	Set Variable  app_pitch_down
+    ${response_code} =  Set Variable  500
+    Check Log  ${function}  ${response_code}
 
 User Expects The Pitch To Change With Code
-    [Arguments]    ${error_code}
-    ${target_string} =  Set Variable  POST /app_pitch_position HTTP/1.1
-    Wait Until Keyword Succeeds  6x  200ms  Check Log  ${target_string}  ${error_code}
+    [Arguments]    ${response_code}
+    ${function} =  Set Variable  app_pitch_position
+    Check Log  ${function}  ${response_code}
 
 Then User Expects An Error Message
     Alert Should Be Present  action=ACCEPT
 
 Check Log
-    [Arguments]	 ${target_string}  ${error_code}
-    ${logfile}  Get File  .dronelauncher.log
-    Should match  ${logfile}  *${target_string}*\"*${error_code}*
+    [Arguments]	 ${function}  ${response_code}  
+    sleep  1	# Because chrome & headlesschrome fail otherwise
+    ${output}  Terminate Process
+    ${asdf} =  Set Variable  ${output.stderr}
+    Process Should Be Stopped
+    Should Match  ${output.stderr}  *POST /${function}*\"*${response_code}*
 
 
 *** Test Cases ***
-
 Pitch Up
-    [Documentation]  Clicking the pitch up button
+    [Documentation]  Clicking the "Pitch up"-button.
     [Tags]  pitch_up
-    Given Server Is Up
-    When User Clicks Button Pitch Up 
-    Then User Expects The Pitch To Increase
+    Given Server Is Up 
+    When User Clicks Button Pitch Up
+    User Expects The Pitch To Increase
 	
 Pitch Down
-    [Documentation]  Clicking the pitch down button
+    [Documentation]  Clicking the "pitch down"-button
     [Tags]  pitch_down
     Given Server Is Up
     When User Clicks Button Pitch Down
     Then User Expects The Pitch To Decrease
 
-Pitch Value
-    [Documentation]  Change pitch value arbitrarily
-    [Tags]  pitch_value
+Pitch Value: Below 0 
+    [Documentation]  Change pitch to arbitrary value 
+    [Tags]  pitch_below_0
     Given Server Is Up
     When User Enters Value In Field  -1
     Then User Expects An Error Message
-    User Expects The Pitch To Change With Code	400
+    And User Expects The Pitch To Change With Code	400
+	
+Pitch Value: Above 0	
+    [Documentation]  Change pitch to arbitrary value 
+    [Tags]  pitch_above_0
+    Given Server Is Up
     When User Enters Value In Field  1
-    User Expects The Pitch To Change With Code	500
+    Then User Expects The Pitch To Change With Code	500
+	
+Pitch Value: Below 90		
+    [Documentation]  Change pitch to arbitrary value 
+    [Tags]  pitch_below_90
+    Given Server Is Up	
     When User Enters Value In Field  89
-    User Expects The Pitch To Change With Code	500
+    Then User Expects The Pitch To Change With Code	500
+	
+Pitch Value: Above 90
+    [Documentation]  Change pitch to arbitrary value 
+    [Tags]  pitch_above_90
+    Given Server Is Up	
     When User Enters Value In Field  91
-    User Expects The Pitch To Change With Code	400
     Then User Expects An Error Message
+    And User Expects The Pitch To Change With Code	400
+
