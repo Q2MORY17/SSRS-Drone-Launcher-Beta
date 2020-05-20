@@ -1,4 +1,4 @@
-x*** Settings ***
+*** Settings ***
 
 Documentation    Global documentation
 
