@@ -8,31 +8,16 @@ pipeline {
     }
      stage('Rotate') {
 	    steps {
-		dir("test/manual/robot") {
-		    bat "/resources/run_tests_headless.sh rotate.robot"
-        }
+		    bat 'robot -d test/results test/manual/robot/rotateWithoutSh.robot'
+
         }
       }
-		    stage('Rotate.Boundaies') {
-	    steps {
-		dir("test/manual/robot") {
-		    bat '.\resources/run_tests_headless.sh rotate.boundaries.robot'
-		}
-		}
-	  }
+
 		   stage('ResizeWindow') {
 	    steps {
-		dir("test/manual/robot") {
-		    bat '.\resources/run_tests_headless.sh resizeWindow.robot'
-        }
-        }
-      }
-      }
-      post {
-        always {
-          chuckNorris()
-        }
-        }
+
+		    bat 'robot -d test/results test/manual/robot/resizeWindowWithoutSh.robot'
+           }
       }
         stage('Rotation Unit Test') {
       steps {
@@ -43,4 +28,5 @@ pipeline {
       }
     }
 
-
+}
+}

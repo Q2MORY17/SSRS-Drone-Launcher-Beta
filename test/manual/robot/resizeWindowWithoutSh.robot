@@ -18,7 +18,7 @@ Test Teardown    End Web Test
 
 *** Variables ***
 
-${BROWSER} =		headlessfirefox
+${BROWSER} =		firefox
 
 
 *** Keywords ***
@@ -31,9 +31,11 @@ Begin Web Test
     Open Browser                            about:blank     ${BROWSER}
     Maximize Browser Window
     Go To                                   ${URL}
-    Open Browser	${URL}  	${BROWSER}
 
 
+End Web Test
+    Close Browser
+    Terminate All Processes
 
 User Sets Resolution To 1920*1200
 
@@ -111,11 +113,6 @@ User Expects Window To Set The Wanted Size And All Buttons Are Visible
    Page Should Contain Element      //*[@id="script_pitch_up"]
 
    Page Should Contain Element      //*[@id="script_min_lift"]
-
-
-End Web Test
-
-	Close Browser
 
 
 Server Is Up
