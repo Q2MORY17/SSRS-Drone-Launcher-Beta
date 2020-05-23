@@ -20,6 +20,7 @@ Max pitch                #test case for the Max position
 	[Tags]				 max_pitch
 	Display Page
 	User Click Button Max pitch
+	Verify Function is called            app_max_pitch
 
 
 
@@ -28,6 +29,7 @@ Min pitch                   #test case for the Min position
 	[Tags]					min_pitch
 	Display Page
 	User Click Button Min pitch
+	Verify Function is called            app_min_pitch
     
 
 Max lift                   			  	   #test case for the  Max lift position
@@ -35,11 +37,12 @@ Max lift                   			  	   #test case for the  Max lift position
 	[Tags]					max_lift
 	Display Page
 	User Click Button Max lift
+	Verify Function is called            app_max_lift
 	
 Min lift                          	    #test case for the Min lift position
     [Documentation]         Clicking the Positions Min lift
 	[Tags]					min_lift
 	Display Page
 	User Click Button Min lift
-    
-   
+	Verify Function is called            app_min_lift
+
