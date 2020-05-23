@@ -18,8 +18,9 @@ ${BROWSER} =        headlessfirefox
 Max pitch                #test case for the Max position
     [Documentation]      Clicking the Positions Max pitch
 	[Tags]				 max_pitch
+	Display Page
 	User Click Button Max pitch
-    Display Page
+
 
 
 Min pitch                   #test case for the Min position
@@ -30,13 +31,13 @@ Min pitch                   #test case for the Min position
     
 
 Max lift                   			  	   #test case for the  Max lift position
-    [Documentation]     	Clicking the Positions Max pitch
+    [Documentation]     	Clicking the Positions Max lift
 	[Tags]					max_lift
 	Display Page
 	User Click Button Max lift
 	
 Min lift                          	    #test case for the Min lift position
-    [Documentation]         Clicking the Positions Min pitch
+    [Documentation]         Clicking the Positions Min lift
 	[Tags]					min_lift
 	Display Page
 	User Click Button Min lift
